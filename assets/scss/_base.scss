@@ -1,0 +1,9 @@
+#top-bar {
+  background-color: $black100;
+  color: $grey100;
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+  }
+}

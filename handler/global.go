@@ -8,7 +8,7 @@ import (
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(baseTemplate("home.tmpl"))
-	t.ExecuteTemplate(w, "base", nil)
+	t.ExecuteTemplate(w, "main", nil)
 }
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +18,7 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 func baseTemplate(contentTmpl string) (*template.Template, error) {
 	return template.ParseFiles(
 		"templates/header.tmpl",
-		"templates/base.tmpl",
+		"templates/main.tmpl",
 		"templates/footer.tmpl",
 		"templates/scripts.tmpl",
 		"templates/styles.tmpl",

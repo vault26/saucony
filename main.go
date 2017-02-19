@@ -22,6 +22,6 @@ func main() {
 	r.NotFoundHandler = http.HandlerFunc(handler.NotFound)
 
 	portname := fmt.Sprintf(":%v", *port)
-	fmt.Println("Server is runngin on", portname)
+	fmt.Println("Server is running on", portname)
 	log.Fatal(http.ListenAndServe(portname, r))
 }
