@@ -1,0 +1,6 @@
+package: github.com/ekkapob/saucony
+import:
+- package: github.com/gorilla/mux
+  version: v1.3.0
+- package: github.com/namsral/flag
+  version: v1.7.4-pre

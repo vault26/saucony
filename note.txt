@@ -1,0 +1,27 @@
+Dependencies
+------------
+  - github.com/mattes/migrate
+  - github.com/Masterminds/glide
+
+Migration
+---------
+mg (aliased to) migrate -url postgres://saucony_admin:xxxx@localhost:5432/saucony?sslmode=disable -path ./db/migrations
+
+$ mg create create_some_table
+$ mg up
+$ mg down
+$ mg migrate +1
+$ mg migrate -1
+
+
+Product Explanation
+===================
+Model (1..*) Products
+
+Model
+-----
+  - features e.g. New Arrivals, Best Sellers
+  - types e.g. Running, Originals
+  - subtypes e.g. Neutral, Trail
+  - images are for overview product list page
+
