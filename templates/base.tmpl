@@ -1,0 +1,13 @@
+{{define "base"}}
+<html>
+  <head>
+    {{template "styles"}}
+  </head>
+  <body>
+    {{template "header"}}
+    {{template "content" .}}
+    {{template "footer"}}
+    {{template "scripts"}}
+  </body>
+</html>
+{{end}}

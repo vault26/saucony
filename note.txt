@@ -2,6 +2,11 @@ Dependencies
 ------------
   - github.com/mattes/migrate
   - github.com/Masterminds/glide
+  - github.com/codegangsta/gin (live reload)
+
+Run
+---
+$ gin (then browser locahost:3000)
 
 Migration
 ---------
