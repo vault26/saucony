@@ -2,10 +2,83 @@
 <div id="top-bar">
   <div class="container">
     <ul>
-      <li><b>(662) 123-3456</b></li>
-      <li>ารบ้าน</li>
-      <li>(662) 123-3456</li>
+      <li>(66)2 182-0619</li>
+      <li><img src="/assets/images/logos/line_logo.png"
+        alt="Saucony Line">SAUCONY</li>
+      <li><a href="https://www.instagram.com/saucony/" target="_blank">
+          <img src="/assets/images/logos/instagram_logo.png"
+          alt="Saucony Instagram">SAUCONY</a></li>
     </ul>
   </div>
 </div>
+<nav>
+  <div class="main container">
+    <span class="site-logo">
+      <a href="/">
+        {{template "saucony-logo"}}
+      </a>
+    </span>
+    <ul class="hidden-md-down">
+      <li>
+        <div class="main-menu">
+          <div class="menu-wrapper">
+            <div><b>MEN</b></div>
+            <div>ผู้ชาย</div>
+            <div class="menu-arrow"></div>
+          </div>
+          {{template "men-submenu"}}
+        </div>
+      </li>
+      <li>
+        <div class="main-menu">
+          <div class="menu-wrapper">
+            <div><b>WOMEN</b></div>
+            <div>ผู้หญิง</div>
+            <div class="menu-arrow"></div>
+          </div>
+          {{template "women-submenu"}}
+        </div>
+      </li>
+      <li>
+        <div class="main-menu">
+          <div class="menu-wrapper">
+            <div><b>HISTORY</b></div>
+            <div>ประวิติ</div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="main-menu">
+          <div class="menu-wrapper">
+            <div><b>TECHNOLOGY</b></div>
+            <div>เทคโนโลยี</div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="main-menu">
+          <div class="menu-wrapper">
+            <div><b>SALE</b></div>
+            <div>สินค้าลดราคา</div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="main-menu">
+          <div class="menu-wrapper">
+            <div><b>STORE</b></div>
+            <div>จุดจำหน่าย</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <form action="" class=hidden-sm-down>
+      <div class="input-group search-input">
+        <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
+        <input type="text" class="form-control" placeholder="Search products">
+      </div>
+    </form>
+  </div>
+</nav>
 {{end}}
+

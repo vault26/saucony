@@ -1,0 +1,149 @@
+#top-bar {
+  letter-spacing: 1px;
+  height: 35px;
+  background-color: $black100;
+  color: $grey100;
+  font-size: 10px;
+  ul {
+    height: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    li {
+      padding-left: 1.5em;
+      img {
+        width: 22px;
+        margin-right: 5px;
+      }
+    }
+  }
+  a {
+    color: $grey100;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+nav {
+  background-color: $grey200;
+  box-shadow: 0 0 5px $grey300;
+  position: relative;
+  .main.container {
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+    position: initial;
+  }
+  ul {
+    color: $black100;
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    li {
+      text-align: center;
+      b {
+        font-size: 15px;
+      }
+      .main-menu {
+        display: flex;
+        height: 100px;
+        justify-content: center;
+        flex-direction: column;
+        &:hover, &:focus {
+          color: $red100;
+        }
+        &:hover {
+          cursor: pointer;
+          .submenu, .menu-arrow {
+            color: initial;
+            display: block;
+          }
+        }
+      }
+    }
+    .menu-wrapper {
+      position: relative;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 1em;
+      @media (max-width: 1199px) {
+        margin: 0 0.5em;
+      }
+    }
+    .menu-arrow {
+      display: none;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid white;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -20px;
+    }
+  }
+}
+
+nav {
+  .submenu {
+    z-index: 10;
+    display: none;
+    cursor: default;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 100px;
+    background-color: white;
+    .container {
+      width: 75%;
+      @media (max-width: 1199px) {
+        width: initial;
+      }
+    }
+    section {
+      letter-spacing: 1px;
+      line-height: 1.8em;
+      text-align: left;
+      .eng {
+        font-size: 12px;
+      }
+      .menu {
+        line-height: 0.8em;
+        flex-direction: column;
+        align-items: flex-start;
+        a {
+          font-size: 15px;
+          &:hover {
+            color: $red100;
+          }
+        }
+      }
+    }
+  }
+}
+
+.search-input {
+  * {
+    &:first-child {
+      padding: 0 0.35em;
+    }
+    background-color: white;
+    border: none;
+    padding-left: 0;
+    padding-right: 0.5em;
+    &[type="text"] {
+      width: 9em;
+    }
+    &::placeholder {
+      color: $grey100;
+    }
+  }
+}

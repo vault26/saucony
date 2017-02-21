@@ -1,0 +1,158 @@
+#hero {
+  .promo {
+    background-image: url("http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw10ece4d5/content/seasonal-content/homepage/2017/02/home-primary-20170215-freedom-update-1.jpg");
+    height: 500px;
+  }
+}
+
+#card-menu {
+  letter-spacing: 1px;
+  background-color: $grey400;
+  font-size: 20px;
+  margin-top: 4em;
+  margin-bottom: 4em;
+  .container {
+    @media (min-width: 1200px) {
+      width: 70%;
+    }
+  }
+  .card {
+    border: none;
+    border-radius: 0;
+    margin-top: -1.5em;
+    margin-bottom: -1.5em;
+    .eng {
+      font-size: 0.7em;
+    }
+    .btn {
+      align-self: center;
+      font-size: 0.8em;
+    }
+    .details {
+      min-height: 3.5em
+    }
+  }
+  .bg-img {
+    margin-bottom: 1em;
+    height: 320px;
+  }
+  .product-img {
+    background-image: url("/assets/images/home_product.jpg");
+  }
+  .history-img {
+    background-image: url("/assets/images/history.jpg");
+  }
+  .technology-img {
+    background-image: url("/assets/images/technology.jpg");
+  }
+}
+
+#hot-product-title {
+  margin-top: 6em;
+  position: relative;
+  .red-bar {
+    height: 5px;
+    background-color: $red100;
+    margin-left: -50%;
+  }
+  .title {
+    h1 {
+      margin: 0;
+      display: inline-block;
+    }
+  }
+}
+#hot-product-gender-title {
+  letter-spacing: 1px;
+  box-shadow: -1px 5px 5px 0px $grey400;
+  padding-bottom: 0.5em;
+  .gender {
+    font-size: 1.8em;
+    h2 {
+      display: inline-block;
+    }
+    a {
+      font-size: 0.7em;
+    }
+  }
+}
+#hot-products {
+  .product-img {
+    background-image: url("http://img.wolverineworldwide.com/is/image/WolverineWorldWide/S20355-3_1?wid=790&hei=657&fmt=jpeg&qlt=80,0&op_sharpen=0&resMode=bilin&op_usm=0.5,1.0,8,0&iccEmbed=0&printRes=72");
+    margin-top: 1em;
+    height: 160px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: -1em;
+  }
+  .row.no-gutter {
+    & > [class^="col-"] {
+      padding-bottom: 2em;
+      &:first-child {
+        border-right: 1px solid $grey400;
+      }
+    }
+  }
+  .product-list {
+    text-align: center;
+    .btn {
+      margin-top: 1em;
+      padding: 0.25em 2em;
+    }
+    .message {
+      position: absolute;
+      right: 2em;
+      top: 2em;
+      font-size: 0.8em;
+      color: $red100;
+    }
+  }
+}
+
+#sale {
+  background-image: url("/assets/images/product_sale.jpg");
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .details {
+    height: 60%;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 3em 0;
+  }
+  b {
+    font-size: 3em;
+    letter-spacing: 0.2em;
+    color: $red100;
+  }
+  .content {
+    font-size: 2em;
+  }
+}
+
+#socials {
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5em;
+    a {
+      &:hover {
+        color: $red200;
+        h2 {
+          color: $red200;
+        }
+      }
+      &:focus {
+        text-decoration: none;
+      }
+    }
+    h2 {
+      color: $red100;
+    }
+    img {
+      width: 30px;
+    }
+  }
+}

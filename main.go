@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/ekkapob/saucony/handler"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/namsral/flag"
 )
@@ -21,7 +23,9 @@ func main() {
 	r.HandleFunc("/", handler.Home)
 	r.NotFoundHandler = http.HandlerFunc(handler.NotFound)
 
+	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
+
 	portname := fmt.Sprintf(":%v", *port)
 	fmt.Println("Server is running on", portname)
-	log.Fatal(http.ListenAndServe(portname, r))
+	log.Fatal(http.ListenAndServe(portname, loggedRouter))
 }

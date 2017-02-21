@@ -3,18 +3,93 @@ body.font {
   b {
     font-family: interstate-bold, thaisans-neue-bold;
   }
-}
-
-#top-bar {
-  background-color: $black100;
-  color: $grey100;
-  font-size: 12px;
-  ul {
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
-    li {
-      padding-left: 1em;
-    }
+  .fit-text {
+    font-family: interstate-bold-condensed;
+    letter-spacing: 2px;
   }
 }
+
+a {
+  color: initial;
+  &:hover {
+    text-decoration: none;
+    color: initial;
+  }
+}
+
+.bg-img {
+  background-size: cover;
+  background-position: center;
+}
+
+.lts-1 {
+  letter-spacing: 1px;
+}
+
+.lts-2 {
+  letter-spacing: 2px;
+}
+
+.lts-3 {
+  letter-spacing: 3px;
+}
+.btn {
+  border: none;
+  border-radius: 0;
+  letter-spacing: 2px;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+.btn-primary {
+  background-color: black;
+  color: white;
+  &:hover {
+    background-color: $red100;
+  }
+}
+.btn-red {
+  background-color: $red100;
+  color: white;
+  &:hover {
+    color: white;
+    background-color: $red200;
+  }
+}
+.btn-grey {
+  background-color: $grey400;
+  &:hover {
+    background-color: $grey100;
+  }
+}
+
+a.underline {
+  color: $grey300;
+  text-decoration: underline;
+  &:hover {
+    color: $red100;
+  }
+}
+.row.no-gutter {
+  margin-right: 0;
+  margin-left: 0;
+  & > [class^="col-"],
+  & > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.back-to-top {
+  text-align: center;
+  margin: 3em 0;
+  a {
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+  }
+  i {
+    color: $red100;
+    font-size: 1.8em;
+  }
+}
+

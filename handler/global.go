@@ -22,6 +22,9 @@ func baseTemplate(contentTmpl string) (*template.Template, error) {
 		"templates/footer.tmpl",
 		"templates/scripts.tmpl",
 		"templates/styles.tmpl",
+		"templates/partials.tmpl",
+		"templates/men_submenu.tmpl",
+		"templates/women_submenu.tmpl",
 		fmt.Sprintf("templates/%v", contentTmpl),
 	)
 }

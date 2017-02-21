@@ -1,8 +1,10 @@
-hash: 2b6f24dbaa10de7a20c4c5d6dff446bb41728ef91bef6363c5c2037ac764a13b
-updated: 2017-02-19T10:19:22.770025288+07:00
+hash: d44ab4344123370d2be7fe3284e9c963e0052268a4ba80f7da0388d5823bfdc4
+updated: 2017-02-23T14:29:01.733152165+07:00
 imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/handlers
+  version: 3a5767ca75ece5f7f1440b1d16975247f8d8b221
 - name: github.com/gorilla/mux
   version: 392c28fe23e1c45ddba891b0320b3b5df220beea
 - name: github.com/namsral/flag
