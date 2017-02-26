@@ -69,7 +69,8 @@ a.underline {
     color: $red100;
   }
 }
-.row.no-gutter {
+
+@mixin no-gutter() {
   margin-right: 0;
   margin-left: 0;
   & > [class^="col-"],
@@ -77,6 +78,11 @@ a.underline {
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+
+.row.no-gutter {
+  @include no-gutter();
 }
 
 .back-to-top {
@@ -94,4 +100,5 @@ a.underline {
     margin-bottom: 0.25em;
   }
 }
+
 
