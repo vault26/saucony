@@ -1,7 +1,7 @@
 body.font {
-  font-family: interstate-regular, thaisans-neue-regular, "Helvetica Neue", Arial, sans-serif;
+  font-family: interstate-regular, kanit-light, "Helvetica Neue", Arial, sans-serif;
   b {
-    font-family: interstate-bold, thaisans-neue-bold;
+    font-family: interstate-bold, kanit-semibold;
   }
   .fit-text {
     font-family: interstate-bold-condensed;
@@ -82,6 +82,7 @@ a.underline {
 .back-to-top {
   text-align: center;
   margin: 3em 0;
+  font-size: 0.8em;
   a {
     text-decoration: none;
     display: inline-block;
@@ -89,7 +90,8 @@ a.underline {
   }
   i {
     color: $red100;
-    font-size: 1.8em;
+    font-size: 1.9em;
+    margin-bottom: 0.25em;
   }
 }
 
