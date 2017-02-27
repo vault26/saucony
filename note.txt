@@ -31,3 +31,11 @@ Model
   - subtypes e.g. Neutral, Trail
   - images are for overview product list page
 
+Deploy (goapp -> app name set at /etc/supervisor/conf.d/goapp.conf)
+======
+$ go install
+$ sudo supervisorctl reload
+
+(check status / log)
+$ sudo supervisorctl status goapp
+$ sudo supervisorctl tail goapp

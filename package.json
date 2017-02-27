@@ -15,7 +15,7 @@
     "pump": "^1.0.2"
   },
   "scripts": {
-    "start": "gin & gulp",
+    "start": "gin -p 4000  & gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
