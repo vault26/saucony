@@ -39,3 +39,4 @@ gulp.task('js:watch', () => {
 });
 
 gulp.task('default', ['sass', 'js', 'sass:watch', 'js:watch']);
+gulp.task('build', ['sass', 'js']);
