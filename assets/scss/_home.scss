@@ -2,6 +2,9 @@
   .promo {
     background-image: url("http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw10ece4d5/content/seasonal-content/homepage/2017/02/home-primary-20170215-freedom-update-1.jpg");
     height: 500px;
+    @media (max-width: 991px) {
+      height: 300px;
+    }
   }
 }
 
@@ -11,7 +14,17 @@
   font-size: 20px;
   margin-top: 4em;
   margin-bottom: 4em;
+  @media (max-width: 575px) {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
   .container {
+    @media (max-width: 575px) {
+      padding: 0;
+      .row {
+        @include no-gutter();
+      }
+    }
     @media (min-width: 1200px) {
       width: 70%;
     }
@@ -21,20 +34,46 @@
     border-radius: 0;
     margin-top: -1.5em;
     margin-bottom: -1.5em;
-    .eng {
-      font-size: 0.7em;
-    }
+    font-size: 0.8em;
     .btn {
       align-self: center;
       font-size: 0.8em;
     }
     .details {
-      min-height: 3.5em
+      min-height: 4.5em;
+      padding: 0 0.5em;
+    }
+    @media (max-width: 575px) {
+      margin-top: initial;
+      margin-bottom: initial;
+      h5 {
+        position: absolute;
+        top: 1em;
+        width: 100%;
+        left: 0;
+        color: white;
+        font-size: 2em;
+        letter-spacing: 5px;
+      }
+      .info {
+        position: absolute;
+        bottom: 1.5em;
+        width: 100%;
+        .details {
+          color: white;
+          min-height: initial;
+          margin-bottom: 1em;
+        }
+      }
     }
   }
   .bg-img {
     margin-bottom: 1em;
     height: 320px;
+    @media (max-width: 575px) {
+      margin-bottom: initial;
+      height: 450px;
+    }
   }
   .product-img {
     background-image: url("/assets/images/home_product.jpg");
@@ -45,6 +84,29 @@
   .technology-img {
     background-image: url("/assets/images/technology.jpg");
   }
+  @media (max-width: 575px) {
+    .history, .technology {
+      width: 50%;
+      .bg-img {
+        width: 100%;
+        height: 250px;
+      }
+      h5 {
+        top: initial;
+        bottom: -2em;
+        font-size: 0.9em;
+        letter-spacing: 2px;
+        color: black;
+      }
+      .info {
+        text-align: right;
+        bottom: 0.5em;
+        .details {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }
 
 #hot-product-title {
@@ -54,6 +116,8 @@
     height: 5px;
     background-color: $red100;
     margin-left: -50%;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
   }
   .title {
     h1 {
@@ -61,21 +125,41 @@
       display: inline-block;
     }
   }
+  @media (max-width: 575px) {
+    h1 {
+      font-size: 2em;
+    }
+    h4 {
+      font-size: 1.5em;
+    }
+  }
 }
 #hot-product-gender-title {
   letter-spacing: 1px;
   box-shadow: -1px 5px 5px 0px $grey400;
   padding-bottom: 0.5em;
-  .gender {
-    font-size: 1.8em;
-    h2 {
-      display: inline-block;
-    }
-    a {
-      font-size: 0.7em;
-    }
+}
+
+.gender {
+  font-size: 1.25em;
+  & > [class^="col-"] {
+  }
+  h2 {
+    display: inline-block;
+  }
+  a {
+    font-size: 0.7em;
+  }
+  .bar-separator {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    box-shadow: -1px 5px 5px 0px $grey400;
+    height: 5px;
   }
 }
+
+
 #hot-products {
   .product-img {
     background-image: url("http://img.wolverineworldwide.com/is/image/WolverineWorldWide/S20355-3_1?wid=790&hei=657&fmt=jpeg&qlt=80,0&op_sharpen=0&resMode=bilin&op_usm=0.5,1.0,8,0&iccEmbed=0&printRes=72");
@@ -86,11 +170,18 @@
     background-repeat: no-repeat;
     margin-bottom: -1em;
   }
-  .row.no-gutter {
-    & > [class^="col-"] {
-      padding-bottom: 2em;
-      &:first-child {
-        border-right: 1px solid $grey400;
+  @media (max-width: 575px) {
+    [class^="col-"] {
+      position: initial;
+    }
+  }
+  @media (min-width: 576px) {
+    .row.no-gutter {
+      & > [class^="col-"] {
+        padding-bottom: 2em;
+        &:first-child {
+          border-right: 1px solid $grey400;
+        }
       }
     }
   }
@@ -98,7 +189,7 @@
     text-align: center;
     .btn {
       margin-top: 1em;
-      padding: 0.25em 2em;
+      font-size: 0.8em;
     }
     .message {
       position: absolute;
@@ -106,6 +197,12 @@
       top: 2em;
       font-size: 0.8em;
       color: $red100;
+    }
+  }
+  .btn-primary {
+    font-size: 0.9em;
+    @media (max-width: 575px) {
+      margin-top: 3em;
     }
   }
 }
@@ -127,7 +224,7 @@
     color: $red100;
   }
   .content {
-    font-size: 2em;
+    font-size: 1.5em;
   }
 }
 
