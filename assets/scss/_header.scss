@@ -79,6 +79,11 @@ nav {
       b {
         font-size: 1.1em;
       }
+      &:hover {
+        & > a {
+          color: $red100;
+        }
+      }
       @media (max-width: 1199px) {
         margin: 0 0.5em;
       }
@@ -121,6 +126,7 @@ nav {
       background-color: white;
       border-top: 3px solid $red200;
       box-shadow: 1px 2px 1px $grey200;
+      z-index: 10;
       .container {
         padding-top: 5px;
         ul {

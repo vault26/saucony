@@ -1,12 +1,28 @@
-hash: d44ab4344123370d2be7fe3284e9c963e0052268a4ba80f7da0388d5823bfdc4
-updated: 2017-02-23T14:29:01.733152165+07:00
+hash: 9a05917b41e81c19d0391d62d857b735efc99b401d99d1d8e803c4ef99613b74
+updated: 2017-03-08T08:15:23.592654186+07:00
 imports:
+- name: github.com/golang/glog
+  version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
+- name: github.com/google/uuid
+  version: 064e2069ce9c359c118179501254f67d7d37ba24
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/handlers
   version: 3a5767ca75ece5f7f1440b1d16975247f8d8b221
 - name: github.com/gorilla/mux
   version: 392c28fe23e1c45ddba891b0320b3b5df220beea
+- name: github.com/jinzhu/inflection
+  version: 1c35d901db3da928c72a72d8458480cc9ade058f
+- name: github.com/leekchan/accounting
+  version: a35854c075934d6aa1a6c1ab3ea8a82ee0dc1a93
 - name: github.com/namsral/flag
   version: 71ceffbeb0ba60fccc853971bb3ed4d7d90bfd04
+- name: gopkg.in/pg.v5
+  version: 2246060a2a43f8282ad53295d56d780dbc930b7f
+  subpackages:
+  - internal
+  - internal/parser
+  - internal/pool
+  - orm
+  - types
 testImports: []

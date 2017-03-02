@@ -1,0 +1,151 @@
+#product-directory {
+  .text-bg-img {
+    height: 150px;
+    &::after {
+      background-image: url(/assets/images/product_sale.jpg);
+    }
+  }
+  #product-list {
+    background-color: $grey400;
+    .row.products {
+      @include grid-gutter(3);
+      @media (max-width: 575px) {
+        @include grid-gutter(15);
+      }
+    }
+    .card {
+      line-height: 1.35em;
+      border-radius: 0;
+      border: none;
+      padding: 1.5em 2em 2em;
+      border-top: 1px solid $grey400;
+      box-shadow: 0 1px 2px 0px $grey100;
+      margin-bottom: 0.25em;
+    }
+    section.card {
+      margin-bottom: 1em;
+      padding-bottom: 1.5em;
+    }
+    section.top {
+      b {
+        padding-right: 0.5em;
+      }
+      .links {
+        font-size: 0.8em;
+      }
+      .gender {
+        .checkbox-link {
+          display: inline-block;
+          h5 {
+            margin-bottom: 2px;
+          }
+          input[type="checkbox"] {
+            &:checked {
+              & + label {
+                &:hover {
+                  color: $red100;
+                }
+                color: initial;
+                border-bottom: 5px solid $red100;
+              }
+            }
+          }
+        }
+      }
+    }
+    section.size {
+      ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 0.7em;
+        flex-wrap: wrap;
+        li .checkbox-link {
+          border: 1px solid $grey400;
+          min-width: 3em;
+          margin: 1px;
+          display: inline-block;
+          input[type="checkbox"] {
+            &:checked {
+              & + label {
+                background-color: $red100;
+                color: white;
+              }
+            }
+          }
+          label {
+            width: 100%;
+            padding: 0.5em;
+          }
+          &:hover {
+            color: $red100;
+          }
+        }
+      }
+    }
+    section.type {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.8em;
+        line-height: 1.5em;
+      }
+    }
+    .checkbox-link {
+      label {
+        cursor: pointer;
+        margin: 0;
+        &:hover {
+          color: $red100;
+        }
+      }
+      input[type="checkbox"] {
+        display: none;
+        &:checked {
+          & + label {
+            color: $red100;
+          }
+        }
+      }
+    }
+  }
+  .products {
+    .card {
+      text-align: center;
+      margin-bottom: 5px;
+      padding-bottom: 1.5em;
+    }
+    .product {
+      .image {
+        height: 130px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .title {
+        font-size: 13px;
+        letter-spacing: 1px;
+        overflow: hidden;
+      }
+      .price {
+        font-size: 0.7em;
+      }
+      .btn-secondary {
+        font-size: 0.7em;
+        letter-spacing: 1px;
+        background-color: $grey200;
+        align-self: center;
+        color: $grey300;
+      }
+    }
+  }
+  .no-products-found {
+    text-align: center;
+    line-height: 2em;
+    margin-top: 3em;
+    font-size: 1.5em;
+  }
+}
+

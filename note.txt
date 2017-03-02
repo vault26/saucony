@@ -5,6 +5,10 @@ Dependencies
     (if missing 'gcc', do => $ apt-get install build-essential)
   - github.com/codegangsta/gin (live reload)
 
+for debugger
+https://github.com/derekparker/delve
+$ brew install go-delve/delve/delve
+
 Run
 ---
 $ gin (then browser locahost:3000)
@@ -22,10 +26,9 @@ $ mg migrate -1
 
 Product Explanation
 ===================
-Model (1..*) Products
+Product:
+  Model, Name, Gender, Color = KEYS
 
-Model
------
   - features e.g. New Arrivals, Best Sellers
   - types e.g. Running, Originals
   - subtypes e.g. Neutral, Trail
@@ -39,3 +42,24 @@ $ sudo supervisorctl reload
 (check status / log)
 $ sudo supervisorctl status goapp
 $ sudo supervisorctl tail goapp
+
+Image resize
+============
+W x H: 972 x 450(base)
+JPEG, Quality: 55/100
+Size < 100KB
+
+Nginx - Static file by Nginx
+============================
+path to config:
+ - /usr/local/etc/nginx/servers/default (Mac)
+ - /etc/nginx/sites-enabled/default (Ubuntu)
+
+Mac OS
+------
+Stop & Start
+$ sudo nginx -s stop && sudo ngix
+
+Ubuntu
+------
+$ sudo systemctl restart nginx

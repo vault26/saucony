@@ -22,7 +22,7 @@
     @media (max-width: 575px) {
       padding: 0;
       .row {
-        @include no-gutter();
+        @include grid-gutter(0);
       }
     }
     @media (min-width: 1200px) {

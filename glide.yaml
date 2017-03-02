@@ -6,3 +6,11 @@ import:
   version: v1.7.4-pre
 - package: github.com/gorilla/handlers
   version: v1.2
+- package: github.com/google/uuid
+  version: "0.2"
+- package: gopkg.in/pg.v5
+  version: v5.3.3
+- package: github.com/leekchan/accounting
+  version: v0.2
+- package: github.com/golang/glog
+- package: github.com/jinzhu/inflection

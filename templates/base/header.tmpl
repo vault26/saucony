@@ -29,8 +29,10 @@
       <li>
         <div class="main-menu">
           <div class="menu-wrapper">
-            <div><b>MEN</b></div>
-            <div>ผู้ชาย</div>
+            <a href="/products?gender%5B%5D=M">
+              <div><b>MEN</b></div>
+              <div>ผู้ชาย</div>
+            </a>
             <div class="menu-arrow"></div>
           </div>
           {{template "men-submenu"}}
@@ -39,8 +41,10 @@
       <li>
         <div class="main-menu">
           <div class="menu-wrapper">
-            <div><b>WOMEN</b></div>
-            <div>ผู้หญิง</div>
+            <a href="/products?gender%5B%5D=W">
+              <div><b>WOMEN</b></div>
+              <div>ผู้หญิง</div>
+            </a>
             <div class="menu-arrow"></div>
           </div>
           {{template "women-submenu"}}

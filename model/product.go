@@ -1,0 +1,45 @@
+package model
+
+import (
+	"fmt"
+	"net/url"
+	"time"
+
+	"github.com/golang/glog"
+)
+
+type Product struct {
+	ID             int
+	Model          string
+	ModelPath      string
+	Details        string
+	Color          string
+	Gender         string
+	Features       []string `pg:",array"`
+	Types          []string `pg:",array"`
+	Subtypes       []string `pg:",array"`
+	Sizes          []string `pg:",array"`
+	PrimaryImage   string
+	Images         []string `pg:",array"`
+	Price          float64
+	Discount       float64
+	CreatedAt      time.Time
+	LastModifiedAt time.Time
+}
+
+// URL constructor for a product
+// pattern: /products/{lowercase product.model}?gender={product gender}&color={product color}
+// Query path is escaped
+func (p Product) URL() string {
+	path := fmt.Sprint("/products/", url.PathEscape(p.ModelPath))
+	u, err := url.Parse(path)
+	if err != nil {
+		glog.Error(err)
+	}
+	values := url.Values{
+		"gender": []string{p.Gender},
+		"color":  []string{p.Color},
+	}
+	u.RawQuery = values.Encode()
+	return u.String()
+}
