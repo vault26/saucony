@@ -21,19 +21,19 @@ func (db *DB) Products(params map[string][]string) (products []model.Product) {
 	return products
 }
 
-func (db *DB) Product(params map[string]string) (product model.Product) {
-	query := db.Model(&product)
+func (db *DB) Product(params map[string]string) (products []model.Product) {
+	query := db.Model(&products)
 	if params["color"] != "" {
 		query.Where("color = ?", params["color"])
 	}
 	if params["gender"] != "" {
 		query.Where("gender = ?", params["gender"])
 	}
-	err := query.Where("model_path = ?", params["model_path"]).First()
+	err := query.Where("model_path = ?", params["model_path"]).Select()
 	if err != nil {
 		glog.Error(err)
 	}
-	return product
+	return products
 }
 
 func paramsValue(params map[string][]string, key string) ([]string, bool) {

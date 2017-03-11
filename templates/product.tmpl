@@ -1,3 +1,9 @@
+{{define "title"}}
+  {{with $product := index .ProductMap .Query.Color}}
+    {{.Model}} | Saucony Thailand
+  {{end}}
+{{end}}
+
 {{define "content"}}
 <div id="product">
   <div class="container">
@@ -5,19 +11,120 @@
       <ul>
         <li><a href="/products?gender%5B%5D=M&amp;gender%5B%5D=W"><b>PRODUCTS</b> สินค้าทั้งหมด</a></li>
         <li>&gt;</li>
-        <li><a href="/products?gender%5B%5D=M"><b>MEN</b></a></li>
+        <li class="gender">
+          <a href="/products/{{.Query.Gender}}"><b>{{.Query.Gender}}</b></a>
+        </li>
         <li>&gt;</li>
-        <li><b>KINETA REPLAY</b></li>
+        {{with $product := index .ProductMap .Query.Color}}
+          <li><b>{{.Model}}</b></li>
+        {{end}}
       </ul>
     </div>
   </div>
   <div class="container">
     <div class="row mt-5">
-      <div class="col-sm-7">photo</div>
-      <div class="col-sm-5">
-        <h2 class="fit-text">KINETA REPLAY</h2>
+      <div class="col-sm-7">
+        <div class="row">
+          <div class="col-sm-2">
+            {{range $key, $value := .ProductMap}}
+              {{$primaryProduct := eq $value.ID $.Query.ProductId}}
+              {{$productPrimaryImage := $value.PrimaryRemoteImage}}
+              <ul id="side-images-{{$value.ID}}"
+                class="side-images {{if $primaryProduct}}active{{end}}">
+                {{range $value.RemoteImages}}
+                  <li class="{{if eq $productPrimaryImage .}}selected{{end}}">
+                    <div class="img-container">
+                      {{/*
+                        show other primary images as they've already been
+                        loaded to product colors
+                        */}}
+                      {{if or $primaryProduct (eq $productPrimaryImage .)}}
+                        <div class="bg-img" data-img="{{.}}"
+                          style="background-image:url({{remoteImageUrl . 1200}})">
+                        </div>
+                      {{else}}
+                        <div class="bg-img" data-img="{{.}}"
+                          data-img-url="background-image:url({{remoteImageUrl . 1200}})"></div>
+                      {{end}}
+                    </div>
+                  </li>
+                {{end}}
+              </ul>
+            {{end}}
+          </div>
+          <div class="col-sm-10 main-image">
+            <div class="px-3">
+              {{with $product := index .ProductMap .Query.Color}}
+                <div class="bg-img"
+                     data-img="{{.PrimaryRemoteImage}}"
+                    style="background-image:url({{remoteImageUrl .PrimaryRemoteImage 1200}})"></div>
+              {{end}}
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="col-sm-5">
+        <div class="details">
+          {{with $product := index .ProductMap .Query.Color}}
+            <h4 class="fit-text">{{.Model}}</h4>
+            {{if eq $.Query.Gender "men"}}
+              <div class="gender">MEN'S SHOES | รองเท้าผู้ชาย</div>
+            {{else}}
+              <div class="gender">WOMEN'S SHOES | รองเท้าผู้หญิง</div>
+            {{end}}
+            <div class="price"><b>{{money .Price 0 ""}} บาท</b></div>
+          {{end}}
+          <div class="other-colors">
+            <div class="text fit-text">
+              <span>COLORS: </span>
+              <span class="selected-color">{{.Query.Color}}<span>
+            </div>
+            <ul class="mt-2">
+              {{range $key, $value := .ProductMap}}
+                <li data-product-id="{{.ID}}" data-color="{{.Color}}"
+                  class="{{if eq .Color $.Query.Color}}selected{{end}}">
+                  <div class="image-container">
+                    <div class="bg-img" data-img="{{.PrimaryRemoteImage}}"
+                      style="background-image: url({{remoteImageUrl .PrimaryRemoteImage 1200}})"></div>
+                  </div>
+                </li>
+              {{end}}
+            </ul>
+          </div>
+          <div class="sizes">
+            <div class="text fit-text">
+              <span>SIZE: </span>
+              <span class="selected-size">-</span>
+            </div>
+            {{range $key, $value := .ProductMap}}
+              {{$primaryProduct := eq $value.ID $.Query.ProductId}}
+              <ul id="size-{{$value.ID}}" class="mt-2 {{if $primaryProduct}}active{{end}}">
+                {{range .Sizes}}
+                  <li data-size="{{.}}">
+                    <div>{{.}}</div>
+                  </li>
+                {{end}}
+              </ul>
+            {{end}}
+          </div>
+          <div class="add-to-cart mt-4">
+            <a href="#" class="fit-text btn btn-red">ADD TO CART</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="image bg-img" style="background-image: url(/assets/images/products/3daff729-3004-473a-bc65-3b81c5db7505-S10318-2_1.jpg)"></div>
+  </div>
+
+  <div class="container mt-5">
+    <div id="info">
+      <hr>
+      {{with $product := index .ProductMap .Query.Color}}
+        <h4 class="fit-text">{{.Model}} DETAILS</h4>
+      {{end}}
+    </div>
+  </div>
+
 </div>
 {{end}}

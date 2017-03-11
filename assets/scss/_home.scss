@@ -115,7 +115,7 @@
   .red-bar {
     height: 5px;
     background-color: $red100;
-    margin-left: -50%;
+    margin-left: -100%;
     margin-top: 0.25em;
     margin-bottom: 0.25em;
   }
@@ -139,26 +139,6 @@
   box-shadow: -1px 5px 5px 0px $grey400;
   padding-bottom: 0.5em;
 }
-
-.gender {
-  font-size: 1.25em;
-  & > [class^="col-"] {
-  }
-  h2 {
-    display: inline-block;
-  }
-  a {
-    font-size: 0.7em;
-  }
-  .bar-separator {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    box-shadow: -1px 5px 5px 0px $grey400;
-    height: 5px;
-  }
-}
-
 
 #hot-products {
   .product-img {

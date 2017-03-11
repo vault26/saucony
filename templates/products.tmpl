@@ -5,7 +5,8 @@
       <div class="container">
         <div class="crumb pt-3">
           <ul>
-            <li><a href="/products?gender%5B%5D=M&amp;gender%5B%5D=W"><b>PRODUCTS</b> สินค้าทั้งหมด</a></li>
+            <li><a
+                href="/products?gender%5B%5D=M&amp;gender%5B%5D=W"><b>PRODUCTS</b> สินค้าทั้งหมด</a></li>
           </ul>
         </div>
         <h2 class="fit-text mt-5">ALL PRODUCTS</h2>
@@ -152,9 +153,9 @@
                 <div class="col-sm-4">
                   <div class="card product">
                     <a href="{{.URL}}">
-                      {{if .PrimaryImage}}
+                      {{if .PrimaryRemoteImage}}
                         <div class="image bg-img"
-                          style="background-image: url(/assets/images/products/{{.PrimaryImage}})"></div>
+                             style="background-image: url({{remoteImageUrl .PrimaryRemoteImage 500}})"></div>
                       {{else}}
                         <div class="image bg-img"
                           style="background-image: url(/assets/images/products/missing.jpg)"></div>
@@ -162,7 +163,6 @@
                     </a>
                     <div class="fit-text title truncate"><b>{{.Model}}</b></div>
                     <div class="price mt-2">{{money .Price 0 " THB"}}</div>
-                    <a class="btn btn-secondary mt-3" href="#">ข้อมูลสินค้า</a>
                   </div>
                 </div>
               {{end}}

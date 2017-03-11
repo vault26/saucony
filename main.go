@@ -8,6 +8,8 @@ import (
 
 	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
+	"github.com/ekkapob/saucony/handler/home"
+	"github.com/ekkapob/saucony/handler/product"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/namsral/flag"
@@ -31,9 +33,10 @@ func main() {
 	// r.PathPrefix("/assets/").Handler(
 	// 	http.StripPrefix("/assets", http.FileServer(http.Dir("./assets"))),
 	// )
-	r.HandleFunc("/", handler.Home(db))
-	r.HandleFunc("/products", handler.Products(db))
-	r.HandleFunc("/products/{model_path}", handler.Product(db))
+	r.HandleFunc("/", home.Home(db))
+	r.HandleFunc("/products", product.Index(db))
+	r.HandleFunc("/products/{gender:men|women}", product.Gender)
+	r.HandleFunc("/products/{gender:men|women}/{model_path}", product.Show(db))
 	r.NotFoundHandler = http.HandlerFunc(handler.NotFound)
 
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)

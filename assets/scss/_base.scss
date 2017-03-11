@@ -124,6 +124,10 @@ a.underline {
 .crumb {
   font-size: 0.8em;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  @media (max-width: 575px) {
+    font-size: 0.7em;
+  }
   ul {
     list-style: none;
     margin: 0;
