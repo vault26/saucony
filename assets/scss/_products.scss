@@ -17,7 +17,7 @@
       line-height: 1.35em;
       border-radius: 0;
       border: none;
-      padding: 4em 2em 2em;
+      padding: 1.2em;
       border-top: 1px solid $grey400;
       box-shadow: 0 1px 2px 0px $grey100;
       margin-bottom: 0.25em;
@@ -111,36 +111,68 @@
         }
       }
     }
-  }
-  .products {
-    .card {
-      text-align: center;
-      margin-bottom: 5px;
-      padding-bottom: 1.5em;
+
+    .products {
+      .card {
+        text-align: center;
+        padding: 4em 2em 2em;
+        margin-bottom: 5px;
+        padding-bottom: 1.5em;
+      }
+      .product {
+        .image {
+          height: 150px;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .title {
+          font-size: 13px;
+          letter-spacing: 1px;
+          overflow: hidden;
+        }
+        .price {
+          font-size: 0.7em;
+        }
+        .btn-secondary {
+          font-size: 0.7em;
+          letter-spacing: 1px;
+          background-color: $grey200;
+          align-self: center;
+          color: $grey300;
+        }
+      }
     }
-    .product {
-      .image {
-        height: 150px;
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
-      .title {
-        font-size: 13px;
-        letter-spacing: 1px;
-        overflow: hidden;
-      }
-      .price {
-        font-size: 0.7em;
-      }
-      .btn-secondary {
-        font-size: 0.7em;
-        letter-spacing: 1px;
-        background-color: $grey200;
-        align-self: center;
-        color: $grey300;
-      }
-    }
   }
+  // .products {
+  //   .card {
+  //     text-align: center;
+  //     padding: 4em 2em 2em;
+  //     margin-bottom: 5px;
+  //     padding-bottom: 1.5em;
+  //   }
+  //   .product {
+  //     .image {
+  //       height: 150px;
+  //       background-size: contain;
+  //       background-repeat: no-repeat;
+  //     }
+  //     .title {
+  //       font-size: 13px;
+  //       letter-spacing: 1px;
+  //       overflow: hidden;
+  //     }
+  //     .price {
+  //       font-size: 0.7em;
+  //     }
+  //     .btn-secondary {
+  //       font-size: 0.7em;
+  //       letter-spacing: 1px;
+  //       background-color: $grey200;
+  //       align-self: center;
+  //       color: $grey300;
+  //     }
+  //   }
+  // }
   .no-products-found {
     text-align: center;
     line-height: 2em;
