@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
@@ -6,16 +7,21 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var pump = require('pump');
 var plumber = require('gulp-plumber');
+var argv = require('yargs').argv;
+
+var config = {
+  development: !argv.production
+};
 
 gulp.task('sass', () => {
   return gulp.src('./assets/scss/main.scss')
-    .pipe(sourcemaps.init())
+    .pipe(gulpif(config.development, sourcemaps.init()))
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'compressed'
     }).on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(sourcemaps.write('.'))
+    .pipe(gulpif(config.development, sourcemaps.write('.')))
     .pipe(gulp.dest('./assets/css'));
 });
 
@@ -26,10 +32,10 @@ gulp.task('sass:watch', () => {
 gulp.task('js', (cb) => {
   pump([
     gulp.src('./assets/js/src/**/*.js'),
-    sourcemaps.init(),
+    gulpif(config.development, sourcemaps.init()),
     concat('main.js'),
     uglify(),
-    sourcemaps.write('.'),
+    gulpif(config.development, sourcemaps.write('.')),
     gulp.dest('./assets/js')
   ], cb);
 });

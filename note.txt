@@ -68,3 +68,7 @@ Postgres setting
 ================
 https://www.cyberciti.biz/faq/howto-add-postgresql-user-account/
 notes: when login to postgres, need to $ sudo -i -u {user} first
+
+Gulp
+====
+$ gulp build --production
