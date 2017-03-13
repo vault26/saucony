@@ -30,6 +30,7 @@ func main() {
 	flag.Parse()
 
 	r := mux.NewRouter()
+	r.StrictSlash(true)
 	// r.PathPrefix("/assets/").Handler(
 	// 	http.StripPrefix("/assets", http.FileServer(http.Dir("./assets"))),
 	// )

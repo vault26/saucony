@@ -1,7 +1,6 @@
 package product
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 
@@ -39,7 +38,6 @@ func Show(db database.DB) handler.HandleFunc {
 		for _, product := range products {
 			productMap[product.Color] = product
 		}
-		fmt.Println(productMap)
 		data := ShowProduct{
 			productMap,
 			ShowQuery{

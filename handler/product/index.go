@@ -3,6 +3,7 @@ package product
 import (
 	"html/template"
 	"net/http"
+	"net/url"
 
 	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
@@ -24,6 +25,8 @@ type IndexQuery struct {
 
 func Index(db database.DB) handler.HandleFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		indexRedirect(w, r)
+
 		r.ParseForm()
 		params := make(map[string][]string)
 		params["sizes"] = r.Form["size[]"]
@@ -45,5 +48,15 @@ func Index(db database.DB) handler.HandleFunc {
 			db.Products(params),
 		}
 		t.ExecuteTemplate(w, "main", data)
+	}
+}
+
+func indexRedirect(w http.ResponseWriter, r *http.Request) {
+	queryMap := r.URL.Query()
+	if len(queryMap) == 0 {
+		values := &url.Values{
+			"gender[]": []string{"M", "W"},
+		}
+		http.Redirect(w, r, "/products?"+values.Encode(), http.StatusMovedPermanently)
 	}
 }
