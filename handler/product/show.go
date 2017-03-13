@@ -37,6 +37,10 @@ func Show(db database.DB) handler.HandleFunc {
 		productMap := make(map[string]model.Product)
 		for _, product := range products {
 			productMap[product.Color] = product
+			// pick a color when color query is not present
+			if color == "" {
+				color = product.Color
+			}
 		}
 		data := ShowProduct{
 			productMap,

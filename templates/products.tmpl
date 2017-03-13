@@ -17,6 +17,7 @@
       <div class="row filters">
         <div class="col-sm-3">
           <form action="/products#product-list">
+            <input type="hidden" name="query" value="{{.QueryText}}">
             <section class="top card">
               <div class="gender">
                 <div class="checkbox-link">
@@ -146,6 +147,11 @@
           </form>
         </div>
         <div class="col-sm-9">
+          {{with .QueryText}}
+            <div class="search-text fit-text mt-1 mb-3">
+              RESULTS FOR <span class="text ml-2 mt-1">{{.}}</span>
+            </div>
+          {{end}}
           <div class="row products">
             {{with .Products}}
               {{range .}}

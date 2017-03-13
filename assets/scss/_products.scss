@@ -31,7 +31,7 @@
         padding-right: 0.5em;
       }
       .links {
-        font-size: 0.8em;
+        font-size: 0.75em;
       }
       .gender {
         .checkbox-link {
@@ -109,6 +109,22 @@
             color: $red100;
           }
         }
+      }
+    }
+    .search-text {
+      display: flex;
+      align-items: baseline;
+      color: $grey300;
+      .text {
+        padding-bottom: 0.25em;
+        color: $black100;
+        word-break: break-all;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: underline;
+        width: 35%;
+        display: inline-block;
       }
     }
 

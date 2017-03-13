@@ -1,23 +1,28 @@
 package database
 
 import (
+	"fmt"
+	"regexp"
+	"strings"
+
 	"github.com/ekkapob/saucony/model"
 	"github.com/golang/glog"
 	pg "gopkg.in/pg.v5"
+	"gopkg.in/pg.v5/orm"
 )
 
 func (db *DB) Products(params map[string][]string) (products []model.Product) {
 	query := db.Model(&products)
+	if queryText, ok := paramsValue(params, "query"); ok {
+		setProductSearchQuery(query, queryText[0])
+	}
 	if genders, ok := paramsValue(params, "genders"); ok {
 		query.Where("gender IN (?)", pg.In(genders))
 	}
 	if sizes, ok := paramsValue(params, "sizes"); ok {
 		query.Where("sizes && ?", pg.Array(sizes))
 	}
-	err := query.Order("model").Select()
-	if err != nil {
-		glog.Error(err)
-	}
+	logError(query.Order("model").Select())
 	return products
 }
 
@@ -29,11 +34,23 @@ func (db *DB) Product(params map[string]string) (products []model.Product) {
 	if params["gender"] != "" {
 		query.Where("gender = ?", params["gender"])
 	}
-	err := query.Where("model_path = ?", params["model_path"]).Select()
-	if err != nil {
-		glog.Error(err)
-	}
+	logError(query.Where("model_path = ?", params["model_path"]).Select())
 	return products
+}
+
+func setProductSearchQuery(query *orm.Query, queryText string) {
+	queryText = prepareSearchQuery(queryText)
+	query.Where("color ~* (?)", queryText)
+	query.WhereOr("model ~* (?)", queryText)
+}
+
+// Output to pattern (A|B|C) from "A B C"
+func prepareSearchQuery(queryText string) string {
+	reg := regexp.MustCompile(`/s+`)
+	queryText = reg.ReplaceAllString(queryText, " ")
+	queryText = strings.Trim(queryText, " ")
+	queryText = strings.Replace(queryText, " ", "|", -1)
+	return fmt.Sprint("(", queryText, ")")
 }
 
 func paramsValue(params map[string][]string, key string) ([]string, bool) {
@@ -41,4 +58,10 @@ func paramsValue(params map[string][]string, key string) ([]string, bool) {
 		return value, true
 	}
 	return nil, false
+}
+
+func logError(err error) {
+	if err != nil {
+		glog.Error(err)
+	}
 }

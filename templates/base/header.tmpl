@@ -83,10 +83,13 @@
         </div>
       </li>
     </ul>
-    <form action="" class=hidden-sm-down>
+    <form action="/products" method="get" class=hidden-sm-down>
       <div class="input-group search-input">
-        <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-        <input type="text" class="form-control" placeholder="Search products">
+        <div class="input-group-addon">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <input type="text" class="form-control" name="query"
+          placeholder="Search products">
       </div>
     </form>
     <div id="mobile-menu" class="ml-4 hidden-lg-up">
