@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+type GlobalTemplateData struct {
+	QueryText string
+	Title     string
+}
+
 type HandleFunc func(http.ResponseWriter, *http.Request)
 
 func NotFound(w http.ResponseWriter, r *http.Request) {

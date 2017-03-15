@@ -14,14 +14,14 @@ type TemplateRender struct {
 	ShoeSizes []string
 }
 type IndexQuery struct {
+	handler.GlobalTemplateData
 	// for template rendering
-	T         TemplateRender
-	Genders   []string
-	Sections  []string
-	Sizes     []string
-	Types     []string
-	QueryText string
-	Products  []model.Product
+	T        TemplateRender
+	Genders  []string
+	Sections []string
+	Sizes    []string
+	Types    []string
+	Products []model.Product
 }
 
 func Index(db database.DB) handler.HandleFunc {
@@ -61,6 +61,10 @@ func productIndexTemplateData(
 	}
 
 	return IndexQuery{
+		handler.GlobalTemplateData{
+			queryText,
+			"All Products",
+		},
 		TemplateRender{
 			shoeSizes,
 		},
@@ -68,7 +72,6 @@ func productIndexTemplateData(
 		queryMap["sections"],
 		queryMap["sizes"],
 		queryMap["types"],
-		queryText,
 		products,
 	}
 }

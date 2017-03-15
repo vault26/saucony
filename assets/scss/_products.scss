@@ -123,8 +123,14 @@
         overflow: hidden;
         text-overflow: ellipsis;
         text-decoration: underline;
-        width: 35%;
+        width: 40%;
         display: inline-block;
+      }
+      i {
+        cursor: pointer;
+        &:hover {
+          color: $red100;
+        }
       }
     }
 

@@ -18,6 +18,7 @@ type ShowQuery struct {
 }
 
 type ShowProduct struct {
+	handler.GlobalTemplateData
 	ProductMap map[string]model.Product
 	Query      ShowQuery
 }
@@ -43,6 +44,9 @@ func Show(db database.DB) handler.HandleFunc {
 			}
 		}
 		data := ShowProduct{
+			handler.GlobalTemplateData{
+				Title: productMap[color].Model,
+			},
 			productMap,
 			ShowQuery{
 				productMap[color].ID,

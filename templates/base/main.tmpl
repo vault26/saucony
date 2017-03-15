@@ -4,11 +4,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
     {{template "styles"}}
-    <title>{{block "title" .}}Saucony Thailand{{end}}</title>
+    <title>
+      {{if .Title}}
+        {{.Title}} | Saucony Thailand
+      {{else}}
+        Saucony Thailand
+      {{end}}
+    </title>
   </head>
   <body>
     <a name="top"></a>
-    {{template "header"}}
+    {{template "header" .}}
     {{template "content" .}}
     {{template "footer"}}
     {{template "scripts"}}
