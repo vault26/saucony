@@ -1,5 +1,5 @@
-hash: 9a05917b41e81c19d0391d62d857b735efc99b401d99d1d8e803c4ef99613b74
-updated: 2017-03-08T08:15:23.592654186+07:00
+hash: 1eee21efb953999bb48d73cd1868b95c3510e88e4f69794d052897fbc362901b
+updated: 2017-03-16T23:06:05.602169455+07:00
 imports:
 - name: github.com/golang/glog
   version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
@@ -11,6 +11,8 @@ imports:
   version: 3a5767ca75ece5f7f1440b1d16975247f8d8b221
 - name: github.com/gorilla/mux
   version: 392c28fe23e1c45ddba891b0320b3b5df220beea
+- name: github.com/gorilla/sessions
+  version: ca9ada44574153444b00d3fd9c8559e4cc95f896
 - name: github.com/jinzhu/inflection
   version: 1c35d901db3da928c72a72d8458480cc9ade058f
 - name: github.com/leekchan/accounting

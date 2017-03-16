@@ -146,14 +146,18 @@
           }
           &.selected {
             background-color: $grey300;
-            // background-color: $red100;
             color: white;
           }
         }
       }
+      .error {
+        display: none;
+        color: $red100;
+      }
     }
     .add-to-cart {
       .btn {
+        font-size: 0.9em;
         display: block;
       }
     }

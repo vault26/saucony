@@ -14,3 +14,7 @@ import:
   version: v0.2
 - package: github.com/golang/glog
 - package: github.com/jinzhu/inflection
+- package: github.com/gorilla/sessions
+  version: v1.1
+- package: github.com/gorilla/securecookie
+  version: v1.1

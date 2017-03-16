@@ -113,5 +113,48 @@
     </div>
   </div>
 </nav>
+<script>
+  console.log({{.Cart.Products}});
+</script>
+<div id="cart">
+  {{template "cart-products" .}}
+</div>
 {{end}}
+
+{{define "cart-products"}}
+  <div class="products {{if gt (len .Cart.Products) 0}}with-items{{end}}">
+    <a href="#">
+      <div class="cart-wrapper">
+        {{template "shopping-cart"}}
+        <div class="number-wrapper">
+          <div>{{.Cart.Total}}</div>
+        </div>
+      </div>
+    </a>
+    <div class="cart-items">
+      <div class="menu-arrow background"></div>
+      <div class="menu-arrow"></div>
+      <div class="p-2">สินค้าในตระกร้า ({{.Cart.Total}})</div>
+      <hr>
+      <div class="item-list">
+        {{range .Cart.Products}}
+          <div class="row no-gutter pt-1 px-3">
+            <div class="col-sm-5 p-1">
+              <div class="image bg-img" style="background-image: url({{remoteImageUrl .Product.PrimaryRemoteImage nil}})"></div>
+            </div>
+            <div class="col-sm-7 product-info">
+              <div class="fit-text truncate">{{.Product.Model}}</div>
+              <div>
+                <span class="amount truncate">ไซส์: {{.Size}}&nbsp;&nbsp;</span>
+                <span class="amount truncate">จำนวน: {{.Quantity}}</span>
+              </div>
+            </div>
+          </div>
+        {{end}}
+      </div>
+      <a href="#" class="fit-text mt-1 check-out text-right p-2">CHECK OUT&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+  </div>
+{{end}}
+
 

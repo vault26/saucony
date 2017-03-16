@@ -77,6 +77,9 @@ a.primary {
     color: white;
     background-color: $red200;
   }
+  &:focus {
+    color: white;
+  }
 }
 .btn-grey {
   background-color: $grey400;

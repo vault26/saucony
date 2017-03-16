@@ -1,8 +1,10 @@
 package database
 
 import (
+	"errors"
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/ekkapob/saucony/model"
@@ -26,7 +28,7 @@ func (db *DB) Products(params map[string][]string) (products []model.Product) {
 	return products
 }
 
-func (db *DB) Product(params map[string]string) (products []model.Product) {
+func (db *DB) ModelProducts(params map[string]string) (products []model.Product) {
 	query := db.Model(&products)
 	if params["color"] != "" {
 		query.Where("color = ?", params["color"])
@@ -36,6 +38,20 @@ func (db *DB) Product(params map[string]string) (products []model.Product) {
 	}
 	logError(query.Where("model_path = ?", params["model_path"]).Select())
 	return products
+}
+
+func (db *DB) Product(params map[string]string) (product *model.Product, err error) {
+	if params["id"] != "" {
+		id, err := strconv.Atoi(params["id"])
+		if err != nil {
+			return nil, errors.New("no ID provided")
+		}
+		product = &model.Product{ID: id}
+		if err := db.Select(&product); err != nil {
+			return nil, errors.New("not found")
+		}
+	}
+	return product, nil
 }
 
 func setProductSearchQuery(query *orm.Query, queryText string) {

@@ -1,22 +1,21 @@
 package product
 
 import (
-	"html/template"
 	"net/http"
 	"net/url"
 
-	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
+	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
 )
 
-type TemplateRender struct {
+type IndexHelper struct {
 	ShoeSizes []string
 }
-type IndexQuery struct {
-	handler.GlobalTemplateData
-	// for template rendering
-	T        TemplateRender
+
+type Products struct {
+	model.Tpl
+	T        IndexHelper
 	Genders  []string
 	Sections []string
 	Sizes    []string
@@ -24,59 +23,46 @@ type IndexQuery struct {
 	Products []model.Product
 }
 
-func Index(db database.DB) handler.HandleFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		indexRedirect(w, r)
-		query := r.URL.Query().Get("query")
+func Index(w http.ResponseWriter, r *http.Request) {
+	redirectWithGenders(w, r)
+	db := helper.GetDB(r)
+	cart := helper.GetCart(r)
 
-		r.ParseForm()
-		queryMap := make(map[string][]string)
-		queryMap["genders"] = r.Form["gender[]"]
-		queryMap["sections"] = r.Form["section[]"]
-		queryMap["sizes"] = r.Form["size[]"]
-		queryMap["types"] = r.Form["gender[]"]
-		if query == "" {
-			queryMap["query"] = r.Form["query"]
-		} else {
-			queryMap["query"] = []string{query}
-		}
-
-		t := template.Must(handler.BaseTemplate("products.tmpl", productsFuncMap()))
-		templateData := productIndexTemplateData(queryMap, db.Products(queryMap))
-		t.ExecuteTemplate(w, "main", templateData)
+	r.ParseForm()
+	queryMap := make(map[string][]string)
+	queryMap["genders"] = r.Form["gender[]"]
+	queryMap["sections"] = r.Form["section[]"]
+	queryMap["sizes"] = r.Form["size[]"]
+	queryMap["types"] = r.Form["gender[]"]
+	query := r.URL.Query().Get("query")
+	if query == "" {
+		queryMap["query"] = r.Form["query"]
+	} else {
+		queryMap["query"] = []string{query}
 	}
+
+	td := &Products{
+		T: IndexHelper{
+			[]string{
+				"5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5",
+				"10", "10.5", "11", "11.5", "12", "12.5", "13",
+			},
+		},
+		Genders:  queryMap["genders"],
+		Sections: queryMap["sections"],
+		Sizes:    queryMap["sizes"],
+		Types:    queryMap["types"],
+		Products: db.Products(queryMap),
+	}
+	td.Title = "All Products"
+	td.QueryText = query
+	td.Cart = cart
+
+	t := handler.BaseTemplate("products.tmpl", nil)
+	t.ExecuteTemplate(w, "main", td)
 }
 
-func productIndexTemplateData(
-	queryMap map[string][]string,
-	products []model.Product) IndexQuery {
-
-	shoeSizes := []string{
-		"5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5",
-		"9", "9.5", "10", "10.5", "11", "11.5", "12", "12.5", "13",
-	}
-	var queryText string
-	if data := queryMap["query"]; data != nil {
-		queryText = data[0]
-	}
-
-	return IndexQuery{
-		handler.GlobalTemplateData{
-			queryText,
-			"All Products",
-		},
-		TemplateRender{
-			shoeSizes,
-		},
-		queryMap["genders"],
-		queryMap["sections"],
-		queryMap["sizes"],
-		queryMap["types"],
-		products,
-	}
-}
-
-func indexRedirect(w http.ResponseWriter, r *http.Request) {
+func redirectWithGenders(w http.ResponseWriter, r *http.Request) {
 	queryMap := r.URL.Query()
 	if len(queryMap) == 0 {
 		values := &url.Values{

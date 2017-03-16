@@ -8,6 +8,7 @@ import (
 	"github.com/golang/glog"
 )
 
+// Database model
 type Product struct {
 	ID                 int
 	Model              string

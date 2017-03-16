@@ -1,0 +1,110 @@
+#cart {
+  display: inline-block;
+  position: fixed;
+  right: 5%;
+  top: 170px;
+  z-index: 5;
+  transition: top 0.5s;
+  &.stick-top {
+    top: 20px;
+  }
+  .products {
+    height: 60px;
+    .cart-wrapper {
+      padding: 12px;
+      background-color: white;
+      border-radius: 50%;
+      z-index: 5;
+      box-shadow: 0px 2px 5px 0px $grey300;
+      .number-wrapper {
+        display: none;
+      }
+      svg {
+        fill: $grey100;
+      }
+    }
+
+    .cart-items {
+      display: none;
+      position: absolute;
+      width: 310px;
+      right: -15px;
+      top: 4.5em;
+      background-color: white;
+      font-size: 0.9em;
+      border-radius: 2px;
+      box-shadow: 0px 2px 5px 0px $grey300;
+      .item-list {
+        max-height: 300px;
+        overflow: scroll;
+      }
+      .row {
+        padding-bottom: 0.25em;
+        margin-bottom: 0.25em;
+        border-bottom: 1px solid $grey200;
+      }
+      hr {
+        margin: 0;
+      }
+      .image {
+        height: 60px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .product-info {
+        font-size: 0.9em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: right;
+        .amount {
+          font-size: 0.9em;
+        }
+      }
+      .check-out {
+        display: block;
+        color: $red100;
+      }
+      .menu-arrow {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 12px solid white;
+        position: absolute;
+        bottom: 0;
+        top: -12px;
+        right: 30px;
+        &.background {
+          border-bottom: 12px solid $grey100;
+        }
+      }
+    }
+
+    &.with-items{
+      .number-wrapper {
+        display: block;
+        position: absolute;
+        background-color: $red100;
+        padding: 1px 7px;
+        border-radius: 15px;
+        color: white;
+        font-size: 0.8em;
+        top: -8px;
+        right: -5px;
+        min-width: 1.5em;
+      }
+      svg {
+        fill: $black100;
+      }
+      &:hover {
+        .cart-items {
+          display: block;
+          @media (max-width: 575px) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

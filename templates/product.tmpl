@@ -101,9 +101,16 @@
                 {{end}}
               </ul>
             {{end}}
+            <div class="error mt-2 animated bounceIn">Please select the size กรุณาเลือกขนาดรองเท้า</div>
           </div>
           <div class="add-to-cart mt-4">
-            <a href="#" class="fit-text btn btn-red">ADD TO CART</a>
+            <a id="add-to-cart-btn" href="#" class="btn btn-red">
+              {{if .AlreadyInCart}}
+                <span>อยู่ในตระกร้าสินค้าแล้ว&nbsp;</span><span class="fit-text">ADD MORE?</span>
+              {{else}}
+                <div class="fit-text">ADD TO CART</div>
+              {{end}}
+            </a>
           </div>
         </div>
       </div>
