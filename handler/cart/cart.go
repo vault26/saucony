@@ -10,7 +10,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func Products(w http.ResponseWriter, r *http.Request) {
+type Response struct {
+	Error string `json:"error,omitempty"`
+}
+
+func Orders(w http.ResponseWriter, r *http.Request) {
 	cart := helper.GetCart(r)
 	td := model.Tpl{Cart: cart}
 	t := handler.BaseTemplate("", nil)
@@ -18,7 +22,15 @@ func Products(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "cart-products", td)
 }
 
-func AddProduct(w http.ResponseWriter, r *http.Request) {
+func CheckoutOrders(w http.ResponseWriter, r *http.Request) {
+	cart := helper.GetCart(r)
+	td := model.Tpl{Cart: cart}
+	t := handler.BaseTemplate("checkout.tmpl", nil)
+	w.Header().Set("Content-Type", "text/plain")
+	t.ExecuteTemplate(w, "checkout-orders", td)
+}
+
+func AddOrder(w http.ResponseWriter, r *http.Request) {
 	db := helper.GetDB(r)
 	session := helper.GetSession(r)
 	decoder := json.NewDecoder(r.Body)
@@ -47,6 +59,38 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+func DeleteOrder(w http.ResponseWriter, r *http.Request) {
+	session := helper.GetSession(r)
+	size := r.URL.Query().Get("size")
+	vars := mux.Vars(r)
+	productID := vars["product_id"]
+	err := session.RemoveProductFromCart(w, r, productID, size)
+	if err != nil {
+		formatError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func AdjustOrder(w http.ResponseWriter, r *http.Request) {
+	session := helper.GetSession(r)
+	decoder := json.NewDecoder(r.Body)
+	request := struct {
+		Operator string
+		Size     string
+		Quantity int
+	}{}
+	decoder.Decode(&request)
+	vars := mux.Vars(r)
+	productID := vars["product_id"]
+
+	err := session.AdjustOrder(w, r, productID, request)
+	if err != nil {
+		formatError(w, err)
+		return
+	}
+}
+
 func productSizeAvailable(product *model.Product, requestSize string) bool {
 	for _, size := range product.Sizes {
 		if requestSize == size {
@@ -54,4 +98,11 @@ func productSizeAvailable(product *model.Product, requestSize string) bool {
 		}
 	}
 	return false
+}
+
+func formatError(w http.ResponseWriter, err error) {
+	js, _ := json.Marshal(Response{Error: err.Error()})
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusUnprocessableEntity)
+	w.Write(js)
 }

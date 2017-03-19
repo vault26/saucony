@@ -1,0 +1,21 @@
+.alertify {
+  .dialog {
+    .danger-msg {
+      color: $red100;
+    }
+    nav {
+      button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button) {
+        padding: 0;
+        .alert-btn {
+          &.danger {
+            color: $red100;
+            &:hover {
+              background-color: $red100;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

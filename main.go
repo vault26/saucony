@@ -9,6 +9,7 @@ import (
 	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/handler/cart"
+	"github.com/ekkapob/saucony/handler/checkout"
 	mw "github.com/ekkapob/saucony/handler/middleware"
 	"github.com/ekkapob/saucony/handler/page"
 	"github.com/ekkapob/saucony/handler/product"
@@ -39,16 +40,28 @@ func main() {
 	r := mux.NewRouter()
 	r.StrictSlash(true)
 	r.NotFoundHandler = http.HandlerFunc(handler.NotFound)
+
+	// Page
 	r.HandleFunc("/", mw.PublicPage(publicParams, page.Home))
 
+	// Products
 	r.HandleFunc("/products", mw.PublicPage(publicParams, product.Index))
 	r.HandleFunc("/products/{gender:men|women}", product.Gender)
 	r.HandleFunc("/products/{gender:men|women}/{model_path}",
 		mw.PublicPage(publicParams, product.Show))
 
-	r.HandleFunc("/cart/products/{product_id}",
-		mw.PublicPage(publicParams, cart.AddProduct)).Methods("POST")
-	r.HandleFunc("/cart/products", mw.PublicPage(publicParams, cart.Products))
+	// Cart
+	r.HandleFunc("/cart/orders/{product_id}",
+		mw.PublicPage(publicParams, cart.AddOrder)).Methods("POST")
+	r.HandleFunc("/cart/orders/{product_id}",
+		mw.PublicPage(publicParams, cart.DeleteOrder)).Methods("DELETE")
+	r.HandleFunc("/cart/orders/{product_id}",
+		mw.PublicPage(publicParams, cart.AdjustOrder)).Methods("PUT")
+	r.HandleFunc("/cart/orders", mw.PublicPage(publicParams, cart.Orders))
+	r.HandleFunc("/cart/checkout_orders", mw.PublicPage(publicParams, cart.CheckoutOrders))
+
+	// Checkout
+	r.HandleFunc("/checkout", mw.PublicPage(publicParams, checkout.Index))
 
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
 

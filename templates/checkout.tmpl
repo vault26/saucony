@@ -1,0 +1,98 @@
+{{define "content"}}
+<div id="checkout">
+  <div class="bg-img page-bg">
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-xl-10 offset-xl-1">
+          <h2>
+            <span class="fit-text">SHOPPING CART</span>
+            <small>ตระกร้าสินค้า</small>
+          </h2>
+          <div id="checkout-orders">
+            {{template "checkout-orders" .}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{end}}
+
+{{define "checkout-orders"}}
+<table id="shopping-cart" class="cart table fit-text mt-4">
+  <thead class="fit-text">
+    <tr>
+      <th>PRODUCT DETAIILS</th>
+      <th>PRICE</th>
+      <th>QUANTITY</th>
+      <th>TOTAL</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="no-products">
+      <td class="empty py-5" colspan="5">
+        <div>NO PRODUCTS <span class="thai">ไม่มีสินค้าในตระกร้า</span></div>
+      </td>
+    </tr>
+    {{range .Cart.Products}}
+      <tr class="products">
+        <td class="product-details">
+          <div class="row no-gutter">
+            <div class="col-sm-3">
+              <div class="bg-img" data-img="{{.PrimaryRemoteImage}}"
+                                  style="background-image:url({{remoteImageUrl .PrimaryRemoteImage nil}}"></div>
+            </div>
+            <div class="col-sm-9 details">
+              <div class="name my-1">{{.Model}}
+                {{if eq .Gender "M"}}
+                  <span class="gender-pill men">MEN</span>
+                {{else}}
+                  <span class="gender-pill women">WOMEN</span>
+                {{end}}
+              </div>
+              <div class="my-1 sub-details"><small>COLOR:</small>
+                {{.Color}} <small>SIZE: </small>{{.Size}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td><span class="price-per-product">{{money .Price 0 ""}}</span><small> THB</small></td>
+        <td class="order-line-quantity">
+          <a class="remove" href="#" data-product-id="{{.ID}}"
+            data-product-size="{{.Size}}">
+            <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+          </a>
+          <span class="quantity">{{.Quantity}}</span>
+          <a class="add" href="#" data-product-id="{{.ID}}"
+            data-product-size="{{.Size}}">
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+          </a>
+        </td>
+        <td class="total-order-line">
+          <div>
+            <span class="price">{{money .Total 0 ""}}</span>
+            <small> THB</small>
+          </div>
+        </td>
+        <td class="remove">
+          <a data-product-id="{{.ID}}"
+              data-product-size="{{.Size}}" href="#">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+    {{end}}
+    <tr class="order-total">
+      <td class="price text-right" colspan="3">ORDER TOTAL <span class="thai">ราคาสินค้าทั้งหมด</span></td>
+      <td class="total">{{money .Cart.OrderTotal 0 ""}} <small>THB</small></td>
+      <td></td>
+    </tr>
+
+  </tbody>
+</table>
+{{end}}
+
+{{define "cart-products"}}
+<span style="display:none"></span>
+{{end}}

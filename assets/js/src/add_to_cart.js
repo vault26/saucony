@@ -14,22 +14,19 @@ $(function(){
     var $selectedProduct = $otherColors.find('ul li.selected');
     var productID = $selectedProduct.data('product-id');
 
-    axios.post('/cart/products/' + productID, {
+    axios.post('/cart/orders/' + productID, {
         size: selectedSizeNumber
       })
       .then(function (response) {
-        $('#cart').addClass('animated bounceIn')
-          .one(ANIMATE.animationEnd, function() {
-            $(this).removeClass('animated bounceIn');
-        });
+        ANIMATE.addAnimation($('#cart'), 'animated bounceIn');
         getCartProducts();
-        $('#add-to-cart-btn').html('<div class="fit-text">ADDED TO CART</div>');
+        // $('#add-to-cart-btn').html('<div class="fit-text">ADDED TO CART</div>');
       });
   });
 
 
   function getCartProducts(){
-    axios.get('/cart/products')
+    axios.get('/cart/orders')
       .then(function (response) {
         $('#cart .products').remove();
         $('#cart').append(response.data);
