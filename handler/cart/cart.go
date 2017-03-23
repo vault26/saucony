@@ -19,6 +19,7 @@ func Orders(w http.ResponseWriter, r *http.Request) {
 	td := model.Tpl{Cart: cart}
 	t := handler.BaseTemplate("", nil)
 	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Cache-Control", "max-age=0")
 	t.ExecuteTemplate(w, "cart-products", td)
 }
 
@@ -27,6 +28,7 @@ func CheckoutOrders(w http.ResponseWriter, r *http.Request) {
 	td := model.Tpl{Cart: cart}
 	t := handler.BaseTemplate("checkout.tmpl", nil)
 	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Cache-Control", "max-age=0")
 	t.ExecuteTemplate(w, "checkout-orders", td)
 }
 

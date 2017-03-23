@@ -18,7 +18,7 @@ func (s *Session) AddProductToCart(
 	product *Product,
 	size string) {
 
-	cart, ok := s.getCart()
+	data, ok := s.GetData("cart")
 	// cart is empty
 	if !ok {
 		s.Values["cart"] = Cart{
@@ -28,6 +28,7 @@ func (s *Session) AddProductToCart(
 		s.Save(r, w)
 		return
 	}
+	cart := data.(Cart)
 	// add quantity to existing product
 	for k, v := range cart.Products {
 		if v.Product.ID == product.ID && v.Size == size {
@@ -52,10 +53,11 @@ func (s *Session) RemoveProductFromCart(
 	productID string,
 	size string) error {
 
-	cart, ok := s.getCart()
+	data, ok := s.GetData("cart")
 	if !ok {
 		return errors.New("No products in cart")
 	}
+	cart := data.(Cart)
 	for k, v := range cart.Products {
 		if productID == strconv.Itoa(v.ID) && size == v.Size {
 			cart.Products = append(cart.Products[:k], cart.Products[k+1:]...)
@@ -66,6 +68,16 @@ func (s *Session) RemoveProductFromCart(
 		}
 	}
 	return errors.New("No products found")
+}
+
+func (s *Session) ClearCart(w http.ResponseWriter, r *http.Request) error {
+	_, ok := s.GetData("cart")
+	if !ok {
+		return errors.New("No products in cart")
+	}
+	delete(s.Values, "cart")
+	s.Save(r, w)
+	return nil
 }
 
 func (s *Session) AdjustOrder(
@@ -83,10 +95,11 @@ func (s *Session) AdjustOrder(
 	if !(params.Operator == "add" || params.Operator == "remove") {
 		return errors.New("Operator must be either 'add' or 'remove'")
 	}
-	cart, ok := s.getCart()
+	data, ok := s.GetData("cart")
 	if !ok {
 		return errors.New("No products in cart")
 	}
+	cart := data.(Cart)
 	for k, v := range cart.Products {
 		if productID == strconv.Itoa(v.ID) && params.Size == v.Size {
 			if params.Operator == "add" {
@@ -108,9 +121,23 @@ func (s *Session) AdjustOrder(
 	return errors.New("No products found")
 }
 
-func (s *Session) getCart() (Cart, bool) {
-	cart, ok := s.Values["cart"].(Cart)
-	return cart, ok
+func (s *Session) UpdateCustomerInfo(
+	w http.ResponseWriter,
+	r *http.Request,
+	params map[string]string) {
+	s.Values["customer"] = Customer{
+		Firstname: params["firstname"],
+		Lastname:  params["lastname"],
+		Email:     params["email"],
+		Phone:     params["phone"],
+		Address:   params["address"],
+	}
+	s.Save(r, w)
+}
+
+func (s *Session) GetData(key string) (interface{}, bool) {
+	data, ok := s.Values[key]
+	return data, ok
 }
 
 func updateOrderTotal(cart *Cart) {

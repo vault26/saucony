@@ -1,0 +1,28 @@
+#order-confirmation {
+  .title {
+    font-size: 0.9em;
+  }
+  .status {
+    text-align: center;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+  }
+  .check-logo {
+    svg {
+      width: auto;
+      height: 4em;
+      fill: $green100;
+    }
+  }
+  #order-id {
+    font-size: 1.25em;
+    color: $red100;
+  }
+  .contact-info {
+    font-size: 0.9em;
+    line-height: 1.75em;
+    b {
+      font-size: 0.9em;
+    }
+  }
+}

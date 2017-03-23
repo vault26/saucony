@@ -1,5 +1,6 @@
 $(function(){
   registerShoppingCart();
+  registerOrder();
 
   function registerShoppingCart() {
     showEmptyProducts();
@@ -11,7 +12,7 @@ $(function(){
       alertify
         .okBtn('<div class="alert-btn fit-text danger">DELETE</div>')
         .cancelBtn('<div class="alert-btn fit-text">GO BACK</div>')
-        .confirm('<div class="fit-text danger-msg">CONFIRM TO DELETE THE ORDER?</div><div>ยืนยันที่จะลบรายการสินค้า</div>',
+        .confirm('<div class="fit-text danger">CONFIRM TO DELETE THE ORDER?</div><div>ยืนยันที่จะลบรายการสินค้า</div>',
           function (e) {
             axios.delete('/cart/orders/' + productId + '?size=' + size)
               .then(function (response) {
@@ -74,4 +75,37 @@ $(function(){
       });
   }
 
+  function registerOrder() {
+    $('#order-form button[type="submit"]').click(function(e){
+      var $orderForm = $('#order-form');
+      var form = {
+        firstname: $orderForm.find('input#firstname').val(),
+        lastname: $orderForm.find('input#lastname').val(),
+        email: $orderForm.find('input#email').val(),
+        phone: $orderForm.find('input#phone').val(),
+        address: $orderForm.find('textarea#address').val()
+      }
+      var allInputsFilled = notEmpty(form.firstname) &&
+        notEmpty(form.lastname) &&
+        notEmpty(form.email) &&
+        notEmpty(form.phone) &&
+        notEmpty(form.address);
+      if (!allInputsFilled) return;
+
+      e.preventDefault();
+      alertify
+        .okBtn('<div class="alert-btn fit-text px-3 green">CONFIRM</div>')
+        .cancelBtn('<div class="alert-btn secondary fit-text">CANCEL</div>')
+        .confirm('<div class="fit-text green">CONFIRM ORDER</div><div>ยืนยันการสั่งซื้อสินค้า</div>',
+          function (e) {
+            $orderForm.submit();
+          },
+          undefined
+        );
+    })
+  }
+
+  function notEmpty(text) {
+    return text.trim().length > 0
+  }
 });

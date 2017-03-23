@@ -8,8 +8,23 @@ import (
 	"github.com/ekkapob/saucony/model"
 )
 
+type Checkout struct {
+	model.Tpl
+	Flash model.Flash
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
-	cart := helper.GetCart(r)
+	flash := helper.GetFlash(w, r)
 	t := handler.BaseTemplate("checkout.tmpl", nil)
-	t.ExecuteTemplate(w, "main", model.Tpl{Cart: cart})
+	cart := helper.GetCart(r)
+	customer := helper.GetCustomer(r)
+
+	checkout := Checkout{
+		Tpl: model.Tpl{
+			Cart:     cart,
+			Customer: customer,
+		},
+		Flash: flash,
+	}
+	t.ExecuteTemplate(w, "main", checkout)
 }

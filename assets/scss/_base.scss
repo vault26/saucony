@@ -7,6 +7,9 @@ body.font {
     font-family: interstate-bold-condensed;
     letter-spacing: 2px;
   }
+  .thai {
+    font-family: kanit-light, "Helvetica Neue", Arial, sans-serif;
+  }
 }
 
 a {
@@ -150,4 +153,25 @@ a.underline {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.gender-pill {
+  font-size: 8px;
+  color: white;
+  font-family: "Helvetica Neue";
+  font-weight: normal;
+  padding: 1px 3px;
+  border-radius: 2px;
+  margin: 0 0.5em;
+  background-color: $black100;
+  &.men {
+    background-color: $blue100;
+  }
+  &.women {
+    background-color: $pink200;
+  }
+}
+
+.txt-green {
+  color: $green100;
 }

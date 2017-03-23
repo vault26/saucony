@@ -18,3 +18,5 @@ import:
   version: v1.1
 - package: github.com/gorilla/securecookie
   version: v1.1
+- package: github.com/asaskevich/govalidator
+  version: v5

@@ -11,6 +11,7 @@ import (
 	"github.com/ekkapob/saucony/handler/cart"
 	"github.com/ekkapob/saucony/handler/checkout"
 	mw "github.com/ekkapob/saucony/handler/middleware"
+	"github.com/ekkapob/saucony/handler/order"
 	"github.com/ekkapob/saucony/handler/page"
 	"github.com/ekkapob/saucony/handler/product"
 	"github.com/gorilla/handlers"
@@ -62,6 +63,10 @@ func main() {
 
 	// Checkout
 	r.HandleFunc("/checkout", mw.PublicPage(publicParams, checkout.Index))
+
+	// Order
+	r.HandleFunc("/order", mw.PublicPage(publicParams, order.Create)).
+		Methods("POST")
 
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
 

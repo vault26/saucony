@@ -1,7 +1,10 @@
 .alertify {
   .dialog {
-    .danger-msg {
+    .danger {
       color: $red100;
+    }
+    .green {
+      color: $green100;
     }
     nav {
       button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button) {
@@ -11,6 +14,16 @@
             color: $red100;
             &:hover {
               background-color: $red100;
+              color: white;
+            }
+          }
+          &.secondary {
+            color: $grey300;
+          }
+          &.green {
+            color: $green100;
+            &:hover {
+              background-color: $green100;
               color: white;
             }
           }

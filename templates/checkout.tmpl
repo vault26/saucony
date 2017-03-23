@@ -8,89 +8,100 @@
             <span class="fit-text">SHOPPING CART</span>
             <small>ตระกร้าสินค้า</small>
           </h2>
-          <div id="checkout-orders">
-            {{template "checkout-orders" .}}
-          </div>
+          {{template "checkout-orders" .}}
         </div>
       </div>
     </div>
+    <div class="arrow-down">
+      <span>
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+      </span>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 offset-sm-1 col-lg-6 offset-lg-3">
+          <form id="order-form" action="/order" method="post">
+            <div id="customer-information" class="py-5">
+              <h4 class="text-center mb-4">
+                <div class="fit-text mb-2">CUSTOMER INFORMATION</div>
+                <small>ข้อมูลลูกค้า</small>
+              </h4>
+              <div class="row small-gutter">
+                <div class="col-sm-6">
+                  <label for="firstname">First Name ชื่อ <span class="required">*</span></label>
+                  <div class="form-group {{if index .Flash.FormErrorMap "Firstname"}}has-danger{{end}}">
+                    <input type="text" class="form-control"
+                                       id="firstname" name="firstname"
+                                       value="{{.Customer.Firstname}}">
+                    {{if index .Flash.FormErrorMap "Firstname"}}
+                      <div class="form-control-feedback">(required) กรุณากรอกข้อมูล</div>
+                    {{end}}
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="lastname">Last Name นามสกุล <span class="required">*</span></label>
+                  <div class="form-group {{if index .Flash.FormErrorMap "Lastname"}}has-danger{{end}}">
+                    <input type="text" class="form-control" id="lastname"
+                      name="lastname" value="{{.Customer.Lastname}}">
+                    {{if index .Flash.FormErrorMap "Lastname"}}
+                      <div class="form-control-feedback">(required) กรุณากรอกข้อมูล</div>
+                    {{end}}
+                  </div>
+                </div>
+              </div>
+              <div class="row small-gutter">
+                <div class="col-sm-12">
+                  <label for="email">Email อีเมล์ <span class="required">*</span></label>
+                  <div class="form-group {{if index .Flash.FormErrorMap "Email"}}has-danger{{end}}">
+                    <input type="text" class="form-control" id="email"
+                      name="email" value="{{.Customer.Email}}">
+                    {{if index .Flash.FormErrorMap "Email"}}
+                      <div class="form-control-feedback">(invalid email) กรุณากรอกอีเมล์ให้ถูกต้อง</div>
+                    {{end}}
+                  </div>
+                </div>
+              </div>
+              <div class="row small-gutter">
+                <div class="col-sm-12">
+                  <label for="phone">Phone เบอร์โทรศัพท์ <span class="required">*</span></label>
+                  <div class="form-group {{if index .Flash.FormErrorMap "Phone"}}has-danger{{end}}">
+                    <input type="text" class="form-control" id="phone"
+                      name="phone" value="{{.Customer.Phone}}">
+                    {{if index .Flash.FormErrorMap "Phone"}}
+                      <div class="form-control-feedback">(required) กรุณากรอกข้อมูล</div>
+                    {{end}}
+                  </div>
+                </div>
+              </div>
+              <div class="row small-gutter">
+                <div class="col-sm-12">
+                  <label for="address">Shipping Address ที่อยู่ในการจัดส่งสินค้า <span class="required">*</span></label>
+                  <div class="form-group {{if index .Flash.FormErrorMap "Address"}}has-danger{{end}}">
+                    <textarea rows="3" class="form-control" id="address" name="address">
+                      {{- .Customer.Address -}}
+                    </textarea>
+                    {{if index .Flash.FormErrorMap "Address"}}
+                      <div class="form-control-feedback">(required) กรุณากรอกข้อมูล</div>
+                    {{end}}
+                  </div>
+                </div>
+              </div>
+            </div> {{/* customer-information */}}
+            <div id="confirm-order" class="text-center my-5">
+              <button type="submit" class="btn">
+                <span class="mr-3">{{template "circle-check"}}</span>
+                <span class="fit-text pr-3">CONFIRM ORDER</span>
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
-{{end}}
-
-{{define "checkout-orders"}}
-<table id="shopping-cart" class="cart table fit-text mt-4">
-  <thead class="fit-text">
-    <tr>
-      <th>PRODUCT DETAIILS</th>
-      <th>PRICE</th>
-      <th>QUANTITY</th>
-      <th>TOTAL</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="no-products">
-      <td class="empty py-5" colspan="5">
-        <div>NO PRODUCTS <span class="thai">ไม่มีสินค้าในตระกร้า</span></div>
-      </td>
-    </tr>
-    {{range .Cart.Products}}
-      <tr class="products">
-        <td class="product-details">
-          <div class="row no-gutter">
-            <div class="col-sm-3">
-              <div class="bg-img" data-img="{{.PrimaryRemoteImage}}"
-                                  style="background-image:url({{remoteImageUrl .PrimaryRemoteImage nil}}"></div>
-            </div>
-            <div class="col-sm-9 details">
-              <div class="name my-1">{{.Model}}
-                {{if eq .Gender "M"}}
-                  <span class="gender-pill men">MEN</span>
-                {{else}}
-                  <span class="gender-pill women">WOMEN</span>
-                {{end}}
-              </div>
-              <div class="my-1 sub-details"><small>COLOR:</small>
-                {{.Color}} <small>SIZE: </small>{{.Size}}
-              </div>
-            </div>
-          </div>
-        </td>
-        <td><span class="price-per-product">{{money .Price 0 ""}}</span><small> THB</small></td>
-        <td class="order-line-quantity">
-          <a class="remove" href="#" data-product-id="{{.ID}}"
-            data-product-size="{{.Size}}">
-            <i class="fa fa-minus-square-o" aria-hidden="true"></i>
-          </a>
-          <span class="quantity">{{.Quantity}}</span>
-          <a class="add" href="#" data-product-id="{{.ID}}"
-            data-product-size="{{.Size}}">
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-          </a>
-        </td>
-        <td class="total-order-line">
-          <div>
-            <span class="price">{{money .Total 0 ""}}</span>
-            <small> THB</small>
-          </div>
-        </td>
-        <td class="remove">
-          <a data-product-id="{{.ID}}"
-              data-product-size="{{.Size}}" href="#">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-          </a>
-        </td>
-      </tr>
-    {{end}}
-    <tr class="order-total">
-      <td class="price text-right" colspan="3">ORDER TOTAL <span class="thai">ราคาสินค้าทั้งหมด</span></td>
-      <td class="total">{{money .Cart.OrderTotal 0 ""}} <small>THB</small></td>
-      <td></td>
-    </tr>
-
-  </tbody>
-</table>
 {{end}}
 
 {{define "cart-products"}}

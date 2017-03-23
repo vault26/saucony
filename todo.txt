@@ -1,0 +1,3 @@
+- create parent controller to initialize flash reader instead of calling
+  helper.GetFlash() OR helper.baseTplData() for cart, flash, session
+- save user info in session instead of very short Flash

@@ -1,0 +1,52 @@
+{{define "content"}}
+<div id="order-confirmation">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-xl-10 offset-xl-1">
+        <div class="check-logo text-center mt-5 mb-4">
+          {{template "circle-check"}}
+        </div>
+        <div class="text-center">
+          <h3 class="fit-text txt-green">THANK YOU. WE HAVE YOUR ORDER.</h3>
+          <h4 class="txt-green mt-3">เราได้รับรายการสั่งสินค้าของท่านแล้ว</h4>
+        </div>
+        <div class="status mt-5">
+          <div>We are checking orders and will contact you back as soon as
+            possible.</div>
+          <div>เจ้าหน้าที่กำลังตรวจสอบสินค้าและจะติดต่อกลับไปหาลูกค้าโดยเร็วที่สุด</div>
+        </div>
+        <hr class="my-5">
+        <div class="title fit-text">YOUR ORDER ID <span id="order-id">{{.OrderRef}}</span></div>
+        <div class="title mt-3">
+          <span class="fit-text">YOUR ORDER</span>
+          รายการสินค้า
+        </div>
+        <div class="readonly">
+          {{template "checkout-orders" .}}
+        </div>
+        <div class="title mt-3">
+          <span class="fit-text">YOUR CONTACT INFORMATION</span>
+          ข้อมูลลูกค้า
+        </div>
+        <div class="contact-info mt-3">
+          <div><b class="mr-2">Name ชื่อ: </b>{{.Customer.Firstname}}&nbsp;{{.Customer.Lastname}}</div>
+          <div><b class="mr-2">Email อีเมล์: </b>{{.Customer.Email}}</div>
+          <div><b class="mr-2">Phone เบอร์โทรศัพท์: </b>{{.Customer.Phone}}</div>
+          <div><b>Shipping Address ที่อยู่ในการจัดส่งสินค้า:</b></div>
+          <div>{{.Customer.Address}}</div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center mt-5">
+  <a class="btn btn-primary" href="/products">
+    <div class="fit-text">BACK TO PRODUCTS PAGE</div>
+  </a>
+</div>
+{{end}}
+
+{{define "cart-products"}}
+<span style="display:none"></span>
+{{end}}

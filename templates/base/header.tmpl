@@ -118,6 +118,22 @@
     {{template "cart-products" .}}
   </div>
 </div>
+
+{{template "flash-message" .}}
+
+{{end}}
+
+{{define "flash-message"}}
+  {{if .Flash.Message}}
+    <div class="container mt-5">
+      <div class="text-center py-4 alert {{if .Flash.Type}}alert-{{.Flash.Type}}{{end}} alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{.Flash.Message}}
+      </div>
+    </div>
+  {{end}}
 {{end}}
 
 {{define "cart-products"}}

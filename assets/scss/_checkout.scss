@@ -1,104 +1,77 @@
 #checkout {
-  .thai {
-    font-family: kanit-light, "Helvetica Neue", Arial, sans-serif;
-  }
   .bg-img.page-bg {
     background-image: url(/assets/images/red_wave.jpg);
-    height: 1000px;
     background-size: contain;
     background-repeat: no-repeat;
   }
-  .cart.table {
-    box-shadow: 0px 2px 5px 0px $grey300;
-    background-color: white;
-    td {
-      text-align: center;
-      &.remove {
-        i {
-          color: $grey300;
-        }
-      }
-      &.order-line-quantity {
-        color: $black100;
-        font-size: 1.2em;
-      }
+
+  .arrow-down {
+    margin: 4em 0;
+    span {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0px 2px 5px 0px $grey600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      background-color: white;
       i {
-        color: $grey300;
-        &:hover {
-          color: $red100;
-        }
+        color: $red100;
+        font-size: 1.5em;
       }
     }
-    thead {
-      line-height: 1.5em;
-      th {
-        text-align: center;
+  }
+
+  #customer-information {
+    background-color: white;
+    box-shadow: 0px 2px 5px 0px $grey300;
+    padding: 0 2.5em;
+    .small-gutter {
+      @include grid-gutter(10px);
+      label {
         font-size: 0.8em;
+        margin-bottom: 0;
         color: $grey300;
       }
     }
-    tbody {
-      font-size: 0.9em;
-      .no-products {
-        display: none;
+    .form-control-feedback {
+      display: none;
+      font-size: 0.8em;
+    }
+    .form-group.has-danger {
+      .form-control-feedback {
+        display: block;
       }
-      td {
-        vertical-align: middle;
-        color: #4A4A4A;
+    }
+    .required {
+      color: $red100;
+    }
+  }
+
+  #confirm-order {
+    button {
+      color: $green100;
+      font-size: 1.25em;
+      display: inline-flex;
+      align-items: center;
+      box-shadow: 0px 2px 5px 0px $grey300;
+      padding: 0.35em 0.5em;
+      border-radius: 50px;
+      background-color: white;
+      cursor: pointer;
+      svg {
+        fill: $green100;
+        width: auto;
+        height: 2em;
       }
-      small {
-        color: $grey300;
-      }
-      .product-details {
-        .bg-img {
-          width: 100%;
-          height: 80px;
-          background-repeat: no-repeat;
-          background-size: contain;
-        }
-        .details {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          div {
-            padding-left: 2em;
-          }
-          .name {
-            display: flex;
-            color: $black100;
-            align-items: center;
-          }
-          .sub-details {
-            font-size: 0.9em;
-            color: $grey500;
-          }
-        }
-      }
-      .order-total {
-        .total {
-          color: $blue100;
-          font-size: 1.2em;
+      &:hover {
+        color: $green200;
+        svg {
+          fill: $green200;
         }
       }
     }
   }
-
-  .gender-pill {
-    font-size: 8px;
-    color: white;
-    font-family: "Helvetica Neue";
-    font-weight: normal;
-    padding: 1px 3px;
-    border-radius: 2px;
-    margin: 0 0.5em;
-    background-color: $black100;
-    &.men {
-      background-color: $blue100;
-    }
-    &.women {
-      background-color: $pink200;
-    }
-  }
-
 }

@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/ekkapob/saucony/model"
-	"github.com/golang/glog"
 	pg "gopkg.in/pg.v5"
 	"gopkg.in/pg.v5/orm"
 )
@@ -74,10 +73,4 @@ func paramsValue(params map[string][]string, key string) ([]string, bool) {
 		return value, true
 	}
 	return nil, false
-}
-
-func logError(err error) {
-	if err != nil {
-		glog.Error(err)
-	}
 }
