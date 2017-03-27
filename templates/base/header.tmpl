@@ -155,10 +155,10 @@
       {{range .Cart.Products}}
         <div class="row no-gutter pt-1 px-3">
           <div class="col-sm-5 p-1">
-            <div class="image bg-img" style="background-image: url({{remoteImageUrl .Product.PrimaryRemoteImage nil}})"></div>
+            <div class="image bg-img" style="background-image: url({{remoteImageUrl .PrimaryRemoteImage nil}})"></div>
           </div>
           <div class="col-sm-7 product-info">
-            <div class="fit-text truncate">{{.Product.Model}}</div>
+            <div class="fit-text truncate">{{.Model}}</div>
             <div>
               <span class="amount truncate">ไซส์: {{.Size}}&nbsp;&nbsp;</span>
               <span class="amount truncate">จำนวน: {{.Quantity}}</span>

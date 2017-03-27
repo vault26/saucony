@@ -1,10 +1,15 @@
 package model
 
 type CartProduct struct {
-	Product
-	Quantity int
-	Size     string
-	Total    float64
+	ID                 int
+	Model              string
+	PrimaryRemoteImage string
+	Gender             string
+	Price              float64
+	Color              string
+	Quantity           int
+	Size               string
+	Total              float64
 }
 
 type Cart struct {

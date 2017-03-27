@@ -29,6 +29,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		})
 		session.Save(r, w)
 		http.Redirect(w, r, r.Referer(), http.StatusFound)
+		return
 	}
 
 	errorMap, customerID, err := db.CreateCustomer(formValue)
@@ -38,6 +39,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		})
 		session.Save(r, w)
 		http.Redirect(w, r, r.Referer()+"#customer-information", http.StatusFound)
+		return
 	}
 
 	orderRef, err := db.CreateOrder(customerID, cart)
@@ -48,6 +50,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		})
 		session.Save(r, w)
 		http.Redirect(w, r, r.Referer(), http.StatusFound)
+		return
 	}
 	confirmationPage(w, r, orderRef)
 }

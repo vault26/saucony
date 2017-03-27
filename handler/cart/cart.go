@@ -18,7 +18,7 @@ func Orders(w http.ResponseWriter, r *http.Request) {
 	cart := helper.GetCart(r)
 	td := model.Tpl{Cart: cart}
 	t := handler.BaseTemplate("", nil)
-	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("Cache-Control", "max-age=0")
 	t.ExecuteTemplate(w, "cart-products", td)
 }
@@ -27,7 +27,7 @@ func CheckoutOrders(w http.ResponseWriter, r *http.Request) {
 	cart := helper.GetCart(r)
 	td := model.Tpl{Cart: cart}
 	t := handler.BaseTemplate("checkout.tmpl", nil)
-	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("Cache-Control", "max-age=0")
 	t.ExecuteTemplate(w, "checkout-orders", td)
 }
@@ -57,7 +57,11 @@ func AddOrder(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
-	session.AddProductToCart(w, r, product, request.Size)
+	err = session.AddProductToCart(w, r, product, request.Size)
+	if err != nil {
+		formatError(w, err)
+		return
+	}
 	w.WriteHeader(http.StatusOK)
 }
 

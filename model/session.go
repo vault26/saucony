@@ -16,35 +16,43 @@ func (s *Session) AddProductToCart(
 	w http.ResponseWriter,
 	r *http.Request,
 	product *Product,
-	size string) {
+	size string) error {
 
 	data, ok := s.GetData("cart")
 	// cart is empty
+	cartProduct := CartProduct{
+		ID:                 product.ID,
+		Model:              product.Model,
+		PrimaryRemoteImage: product.PrimaryRemoteImage,
+		Gender:             product.Gender,
+		Price:              product.Price,
+		Color:              product.Color,
+		Quantity:           1,
+		Size:               size,
+		Total:              product.Price,
+	}
 	if !ok {
 		s.Values["cart"] = Cart{
-			[]CartProduct{{*product, 1, size, product.Price}},
+			[]CartProduct{cartProduct},
 			product.Price,
 		}
-		s.Save(r, w)
-		return
+		return s.Save(r, w)
 	}
 	cart := data.(Cart)
 	// add quantity to existing product
 	for k, v := range cart.Products {
-		if v.Product.ID == product.ID && v.Size == size {
+		if v.ID == product.ID && v.Size == size {
 			cart.Products[k].Quantity += 1
 			cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Price
 			updateOrderTotal(&cart)
-			s.Save(r, w)
-			return
+			return s.Save(r, w)
 		}
 	}
 	// create new product
-	cart.Products = append(cart.Products, CartProduct{*product, 1, size, product.Price})
+	cart.Products = append(cart.Products, cartProduct)
 	updateOrderTotal(&cart)
 	s.Values["cart"] = cart
-	s.Save(r, w)
-	return
+	return s.Save(r, w)
 }
 
 func (s *Session) RemoveProductFromCart(
@@ -63,8 +71,7 @@ func (s *Session) RemoveProductFromCart(
 			cart.Products = append(cart.Products[:k], cart.Products[k+1:]...)
 			updateOrderTotal(&cart)
 			s.Values["cart"] = cart
-			s.Save(r, w)
-			return nil
+			return s.Save(r, w)
 		}
 	}
 	return errors.New("No products found")
@@ -76,8 +83,7 @@ func (s *Session) ClearCart(w http.ResponseWriter, r *http.Request) error {
 		return errors.New("No products in cart")
 	}
 	delete(s.Values, "cart")
-	s.Save(r, w)
-	return nil
+	return s.Save(r, w)
 }
 
 func (s *Session) AdjustOrder(
@@ -114,8 +120,7 @@ func (s *Session) AdjustOrder(
 			}
 			updateOrderTotal(&cart)
 			s.Values["cart"] = cart
-			s.Save(r, w)
-			return nil
+			return s.Save(r, w)
 		}
 	}
 	return errors.New("No products found")
@@ -124,7 +129,7 @@ func (s *Session) AdjustOrder(
 func (s *Session) UpdateCustomerInfo(
 	w http.ResponseWriter,
 	r *http.Request,
-	params map[string]string) {
+	params map[string]string) error {
 	s.Values["customer"] = Customer{
 		Firstname: params["firstname"],
 		Lastname:  params["lastname"],
@@ -132,7 +137,7 @@ func (s *Session) UpdateCustomerInfo(
 		Phone:     params["phone"],
 		Address:   params["address"],
 	}
-	s.Save(r, w)
+	return s.Save(r, w)
 }
 
 func (s *Session) GetData(key string) (interface{}, bool) {

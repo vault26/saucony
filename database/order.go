@@ -1,6 +1,7 @@
 package database
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -12,6 +13,12 @@ func (db *DB) CreateOrder(customerId int, cart model.Cart) (ref string, err erro
 		CustomerId: customerId,
 		TotalPrice: cart.OrderTotal,
 	}
+
+	if len(cart.Products) == 0 {
+		err = errors.New("Products in cart are empty.")
+		return ref, err
+	}
+
 	err = db.Insert(order)
 	if err != nil {
 		return ref, err

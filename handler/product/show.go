@@ -48,8 +48,11 @@ func Show(w http.ResponseWriter, r *http.Request) {
 		if firstColor == "" {
 			firstColor = product.Color
 		}
-		queryColorMatch = (color == product.Color)
+		if !queryColorMatch {
+			queryColorMatch = (color == product.Color)
+		}
 	}
+
 	if color == "" || !queryColorMatch {
 		color = firstColor
 	}
