@@ -23,13 +23,14 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 }
 
 func BaseTemplate(contentTemplateFile string, funcMap template.FuncMap) *template.Template {
+	templateFolder := "templates/dist/"
 	t := template.New("base").Funcs(BaseFuncMap())
 	if funcMap != nil {
 		t.Funcs(funcMap)
 	}
-	t = template.Must(t.ParseGlob("templates/base/*.tmpl"))
+	t = template.Must(t.ParseGlob(templateFolder + "base/*.tmpl"))
 	if contentTemplateFile != "" {
-		t = template.Must(t.ParseFiles(fmt.Sprintf("templates/%v", contentTemplateFile)))
+		t = template.Must(t.ParseFiles(fmt.Sprint(templateFolder, contentTemplateFile)))
 	}
 	return t
 }

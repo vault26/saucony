@@ -8,10 +8,20 @@ var uglify = require('gulp-uglify');
 var pump = require('pump');
 var plumber = require('gulp-plumber');
 var argv = require('yargs').argv;
+var htmlmin = require('gulp-htmlmin');
 
 var config = {
   development: !argv.production
 };
+
+gulp.task('minify:html', function() {
+  return gulp.src('./templates/**/*.tmpl')
+    .pipe(htmlmin({
+      collapseWhitespace: true,
+      ignoreCustomFragments: [ /{{[\s\S]*?}}/ ]
+    }))
+    .pipe(gulp.dest('./templates/dist'));
+});
 
 gulp.task('sass', () => {
   return gulp.src('./assets/scss/main.scss')

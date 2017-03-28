@@ -10,4 +10,6 @@ assets/css/main.css.map
 assets/js/main.js
 assets/js/main.js.map
 
+templates/dist/*
+
 // a.ssets/images/products/*
