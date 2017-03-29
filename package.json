@@ -18,7 +18,8 @@
     "yargs": "^7.0.2"
   },
   "scripts": {
-    "start": "gin -p 4000  & gulp",
+    "start": "gin -p 4000 & gulp",
+    "build": "go install & gulp build --production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -15,7 +15,7 @@ var config = {
 };
 
 gulp.task('minify:html', function() {
-  return gulp.src('./templates/**/*.tmpl')
+  return gulp.src('./templates/src/**/*.tmpl')
     .pipe(htmlmin({
       collapseWhitespace: true,
       ignoreCustomFragments: [ /{{[\s\S]*?}}/ ]

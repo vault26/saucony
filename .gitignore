@@ -4,6 +4,7 @@ vendor/*
 gin-bin
 debug
 node_modules
+APP_ENV
 
 assets/css/main.css
 assets/css/main.css.map
