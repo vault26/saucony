@@ -17,7 +17,9 @@
       <div class="row filters">
         <div class="col-sm-3">
           <form id="products-list" action="/products#product-list">
-            <input type="hidden" name="query" value="{{.QueryText}}">
+            {{if ne .QueryText ""}}
+              <input type="hidden" name="query" value="{{.QueryText}}">
+            {{end}}
             <section class="top card">
               <div class="gender">
                 <div class="checkbox-link">
