@@ -32,3 +32,22 @@ func GetFlash(w http.ResponseWriter, r *http.Request) (flash model.Flash) {
 	}
 	return flash
 }
+
+func GetContext(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	return map[string]interface{}{
+		"db":       GetDB(r),
+		"session":  GetSession(r),
+		"cart":     GetCart(r),
+		"customer": GetCustomer(r),
+		"flash":    GetFlash(w, r),
+	}
+}
+
+func InitTemplate(w http.ResponseWriter, r *http.Request) model.Tmpl {
+	ctx := GetContext(w, r)
+	return model.Tmpl{
+		Flash:    ctx["flash"].(model.Flash),
+		Cart:     ctx["cart"].(model.Cart),
+		Customer: ctx["customer"].(model.Customer),
+	}
+}

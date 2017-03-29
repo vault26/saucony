@@ -3,6 +3,7 @@ package product
 import (
 	"net/http"
 
+	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
@@ -17,15 +18,16 @@ type ShowQuery struct {
 }
 
 type Product struct {
-	model.Tpl
+	model.Tmpl
 	ProductMap    map[string]model.Product
 	Query         ShowQuery
 	AlreadyInCart bool
 }
 
 func Show(w http.ResponseWriter, r *http.Request) {
-	db := helper.GetDB(r)
-	cart := helper.GetCart(r)
+	ctx := helper.GetContext(w, r)
+	db := ctx["db"].(database.DB)
+	cart := ctx["cart"].(model.Cart)
 
 	color := r.URL.Query().Get("color")
 	vars := mux.Vars(r)

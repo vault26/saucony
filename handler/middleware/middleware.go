@@ -19,9 +19,7 @@ func PublicPage(
 
 		ctx := context.WithValue(r.Context(), "db", db)
 		ctx = withSessionCtx(cookieStore, r.WithContext(ctx))
-		ctx = withCartCtx(r.WithContext(ctx))
-		ctx = withCustomerCtx(r.WithContext(ctx))
-		// ctx = withSessionDataCtx(r.WithContext(ctx), []string{"cart", "customer"})
+		ctx = withSessionDataCtx(r.WithContext(ctx), []string{"cart", "customer"})
 		next(w, r.WithContext(ctx))
 	}
 }
@@ -34,20 +32,21 @@ func withSessionCtx(store *sessions.CookieStore, r *http.Request) context.Contex
 	return context.WithValue(r.Context(), "session", &model.Session{session})
 }
 
-// func withSessionDataCtx(r *http.Request, names []string) context.Context {
-// 	session, ok := r.Context().Value("session").(*model.Session)
-// 	if !ok {
-// 		return r.Context()
-// 	}
-// 	for _, v := range names {
-// 		data, ok := session.Values[v]
-// 		if ok {
-// 			r.WithContext(context.WithValue(r.Context(), v, data))
-// 		}
-// 	}
-// 	return r.Context()
-// }
-//
+func withSessionDataCtx(r *http.Request, names []string) context.Context {
+	session, ok := r.Context().Value("session").(*model.Session)
+	if !ok {
+		return r.Context()
+	}
+	ctx := r.Context()
+	for _, v := range names {
+		data, ok := session.Values[v]
+		if ok {
+			ctx = context.WithValue(ctx, v, data)
+		}
+	}
+	return ctx
+}
+
 func withCartCtx(r *http.Request) context.Context {
 	session, ok := r.Context().Value("session").(*model.Session)
 	if !ok {

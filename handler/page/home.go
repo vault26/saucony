@@ -5,13 +5,10 @@ import (
 
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/helper"
-	"github.com/ekkapob/saucony/model"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	db := helper.GetDB(r)
-	_ = db
-	cart := helper.GetCart(r)
+	tmpl := helper.InitTemplate(w, r)
 	t := handler.BaseTemplate("home.tmpl", nil)
-	t.ExecuteTemplate(w, "main", model.Tpl{Cart: cart})
+	t.ExecuteTemplate(w, "main", tmpl)
 }

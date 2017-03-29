@@ -1,6 +1,6 @@
 package model
 
-type Tpl struct {
+type Tmpl struct {
 	Flash     Flash
 	QueryText string
 	Title     string

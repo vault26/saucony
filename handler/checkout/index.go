@@ -9,18 +9,19 @@ import (
 )
 
 type Checkout struct {
-	model.Tpl
+	model.Tmpl
 	Flash model.Flash
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	flash := helper.GetFlash(w, r)
+	ctx := helper.GetContext(w, r)
+	flash := ctx["flash"].(model.Flash)
+	cart := ctx["cart"].(model.Cart)
+	customer := ctx["customer"].(model.Customer)
 	t := handler.BaseTemplate("checkout.tmpl", nil)
-	cart := helper.GetCart(r)
-	customer := helper.GetCustomer(r)
 
 	checkout := Checkout{
-		Tpl: model.Tpl{
+		Tmpl: model.Tmpl{
 			Cart:     cart,
 			Customer: customer,
 		},

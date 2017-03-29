@@ -3,15 +3,17 @@ package order
 import (
 	"net/http"
 
+	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
-	db := helper.GetDB(r)
-	session := helper.GetSession(r)
-	cart := helper.GetCart(r)
+	ctx := helper.GetContext(w, r)
+	db := ctx["db"].(database.DB)
+	session := ctx["session"].(*model.Session)
+	cart := ctx["cart"].(model.Cart)
 
 	formValue := map[string]string{
 		"firstname": r.FormValue("firstname"),
@@ -56,20 +58,21 @@ func Create(w http.ResponseWriter, r *http.Request) {
 }
 
 type OrderConfirmation struct {
-	model.Tpl
+	model.Tmpl
 	OrderRef string
 }
 
 func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
-	cart := helper.GetCart(r)
+	ctx := helper.GetContext(w, r)
+	cart := ctx["cart"].(model.Cart)
+	session := ctx["session"].(*model.Session)
 	// get customer directly from session as it is not in request's context yet
-	session := helper.GetSession(r)
 	customer, _ := session.GetData("customer")
 	session.ClearCart(w, r)
 
 	t := handler.BaseTemplate("order_confirmation.tmpl", nil)
 	orderConfirmation := OrderConfirmation{
-		Tpl: model.Tpl{
+		Tmpl: model.Tmpl{
 			Cart:     cart,
 			Customer: customer.(model.Customer),
 		},

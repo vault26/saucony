@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
@@ -14,7 +15,7 @@ type IndexHelper struct {
 }
 
 type Products struct {
-	model.Tpl
+	model.Tmpl
 	T        IndexHelper
 	Genders  []string
 	Sections []string
@@ -25,8 +26,9 @@ type Products struct {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	redirectWithGenders(w, r)
-	db := helper.GetDB(r)
-	cart := helper.GetCart(r)
+	ctx := helper.GetContext(w, r)
+	db := ctx["db"].(database.DB)
+	cart := ctx["cart"].(model.Cart)
 
 	r.ParseForm()
 	queryMap := make(map[string][]string)

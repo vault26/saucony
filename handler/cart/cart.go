@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
@@ -16,25 +17,27 @@ type Response struct {
 
 func Orders(w http.ResponseWriter, r *http.Request) {
 	cart := helper.GetCart(r)
-	td := model.Tpl{Cart: cart}
+	tmpl := model.Tmpl{Cart: cart}
 	t := handler.BaseTemplate("", nil)
 	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("Cache-Control", "max-age=0")
-	t.ExecuteTemplate(w, "cart-products", td)
+	t.ExecuteTemplate(w, "cart-products", tmpl)
 }
 
 func CheckoutOrders(w http.ResponseWriter, r *http.Request) {
 	cart := helper.GetCart(r)
-	td := model.Tpl{Cart: cart}
+	tmpl := model.Tmpl{Cart: cart}
 	t := handler.BaseTemplate("checkout.tmpl", nil)
 	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("Cache-Control", "max-age=0")
-	t.ExecuteTemplate(w, "checkout-orders", td)
+	t.ExecuteTemplate(w, "checkout-orders", tmpl)
 }
 
 func AddOrder(w http.ResponseWriter, r *http.Request) {
-	db := helper.GetDB(r)
-	session := helper.GetSession(r)
+	ctx := helper.GetContext(w, r)
+	db := ctx["db"].(database.DB)
+	session := ctx["session"].(*model.Session)
+
 	decoder := json.NewDecoder(r.Body)
 	request := struct{ Size string }{}
 	decoder.Decode(&request)
