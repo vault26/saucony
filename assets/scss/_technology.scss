@@ -1,0 +1,100 @@
+#technology {
+  .everun {
+    margin: 5em 0 3em;
+    img {
+      width: 300px;
+    }
+  }
+  .bg-img {
+    height: 500px;
+    position: relative;
+  }
+  .everun-tech {
+    .bg-img {
+      background-size: cover;
+      background-repeat: no-repeat;
+      @media (max-width: 553px) {
+        height: 220px;
+      }
+    }
+  }
+  iframe {
+    width: 100%;
+    height: 500px;
+    @media (max-width: 991px) {
+      height: 300px;
+    }
+  }
+  .video-bg {
+    background-image: url(/assets/images/technology/everun_bg.jpg);
+    @media (max-width: 991px) {
+      height: 300px;
+    }
+  }
+  .video-container {
+    width: 70%;
+    margin: 0 auto;
+    @media (max-width: 991px) {
+      width: 100%;
+    }
+  }
+  .details {
+    position: absolute;
+    font-size: 1.2em;
+    .title {
+      font-size: 2em;
+      @media (max-width: 991px) {
+        font-size: 1.25em;
+      }
+    }
+  }
+  .triumph, .hurricane, .kinvara {
+    span {
+      background-color: white;
+    }
+    &.bg-img {
+      @media (max-width: 553px) {
+        background-position-x: 52em;
+      }
+    }
+    .details {
+      top: 3em;
+      left: 10em;
+      width: 40%;
+      @media (max-width: 991px) {
+        left: 0;
+        padding: 0 5em 0 1em;
+        width: 90%;
+      }
+      @media (max-width: 553px) {
+        width: 100%;
+      }
+    }
+  }
+  .guide, .peregrine {
+    span {
+      background-color: $grey200;
+    }
+    &.bg-img {
+      background-color: $grey200;
+    }
+    &.bg-img {
+      @media (max-width: 553px) {
+        background-position-x: -25em;
+      }
+    }
+    .details {
+      top: 3em;
+      right: 10em;
+      width: 40%;
+      @media (max-width: 991px) {
+        right: 0;
+        padding: 0 1em 0 5em;
+        width: 90%;
+      }
+      @media (max-width: 553px) {
+        width: 90%;
+      }
+    }
+  }
+}
