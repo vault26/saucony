@@ -16,6 +16,7 @@ var config = {
 
 gulp.task('minify:html', function() {
   return gulp.src('./templates/src/**/*.tmpl')
+    .pipe(plumber())
     .pipe(htmlmin({
       collapseWhitespace: true,
       ignoreCustomFragments: [ /{{[\s\S]*?}}/ ]
@@ -39,6 +40,10 @@ gulp.task('sass:watch', () => {
   gulp.watch('./assets/scss/**/*.scss', ['sass']);
 });
 
+gulp.task('html:watch', () => {
+  gulp.watch('./templates/src/**/*.tmpl', ['minify:html']);
+});
+
 gulp.task('js', (cb) => {
   pump([
     gulp.src('./assets/js/src/**/*.js'),
@@ -54,5 +59,5 @@ gulp.task('js:watch', () => {
   gulp.watch('./assets/js/src/**/*.js', ['js']);
 });
 
-gulp.task('default', ['sass', 'js', 'sass:watch', 'js:watch']);
-gulp.task('build', ['sass', 'js']);
+gulp.task('default', ['sass', 'js', 'sass:watch', 'js:watch', 'html:watch']);
+gulp.task('build', ['sass', 'js', 'minify:html']);
