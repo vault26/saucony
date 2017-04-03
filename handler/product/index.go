@@ -36,6 +36,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	queryMap["sections"] = r.Form["section[]"]
 	queryMap["sizes"] = r.Form["size[]"]
 	queryMap["types"] = r.Form["gender[]"]
+	queryMap["section"] = r.Form["section[]"]
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		queryMap["query"] = r.Form["query"]

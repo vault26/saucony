@@ -1,6 +1,11 @@
 {{define "content"}}
 <div id="hero">
-  <div class="bg-img promo"></div>
+  <div class="bg-img promo">
+    <div class="content">
+      <a class="btn btn-primary mr-3" href="/products?query=KINVARA&gender%5B%5D=M">SHOP MEN'S</a>
+      <a class="btn btn-primary" href="/products?query=KINVARA&gender%5B%5D=W">SHOP WOMEN'S</a>
+    </div>
+  </div>
 </div>
 <div id="card-menu" class="text-center">
   <div class="container">
@@ -31,7 +36,7 @@
           <h5><b>SALE</b></h5>
           <div class="info">
             <div class="details">สินค้าลดราคาพิเศษ</div>
-            <a class="hidden-xs-down btn btn-primary" href="#">อ่านเพิ่มเติม</a>
+            <a class="hidden-xs-down btn btn-primary" href="/products?gender%5B%5D=M&gender%5B%5D=W&section%5B%5D=sale">อ่านเพิ่มเติม</a>
           </div>
         </div>
       </div>
@@ -67,78 +72,64 @@
 <!-- </div> -->
 <div id="hot-products" class="mb-5">
   <div class="container">
-    <div class="row no-gutter">
+    <div class="row no-gutter mt-5">
       <div class="col-sm-6 pr-2">
         <div class="row product-list">
-          <div class="col-sm-6">
+          <div class="col-sm-6 mb-5">
             <div class="message fit-text">NEW ARRIVALS +</div>
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO FREEDOM ISO FREEDOM FREEDOM</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
+            <a href="/products/men/kinvara-8?color=RED%2FBLK%2FTEA">
+              <div class="product-img"
+                style="background-image:url(http://img.wolverineworldwide.com/is/image/WolverineWorldWide/S20356-3_1?wid=800)"></div>
+            </a>
+            <div class="fit-text">KINVARA 8</div>
+            <a href="/products/men/kinvara-8?color=RED%2FBLK%2FTEA" class="btn btn-grey fit-text">MORE DETAILS</a>
           </div>
-          <div class="col-sm-6">
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
-          </div>
-          <div class="col-sm-6">
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO FREEDOM ISO FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
-          </div>
-          <div class="col-sm-6">
-            <div class="message fit-text">CUSTOMERS' CHOICE</div>
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
+          <div class="col-sm-6 mb-5">
+            <div class="message fit-text">AWARD WINNER</div>
+            <a href="/products/women/peregrine-7?color=TEA%2FPUR">
+              <div class="product-img"
+                style="background-image:url(http://img.wolverineworldwide.com/is/image/WolverineWorldWide/S10359-2_1?wid=800)"></div>
+            </a>
+            <div class="fit-text">PEREGRINE 7</div>
+            <a href="/products/women/peregrine-7?color=TEA%2FPUR" class="btn btn-grey fit-text">MORE DETAILS</a>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 pl-2 hidden-xs-down">
-        <!-- <div class="row gender mt-5 hidden-sm-up"> -->
-        <!--   <div class="col-sm-12"> -->
-        <!--     <h2 class="fit-text mr-2">WOMEN</h2> -->
-        <!--     <span class="mr-2">ผู้หญิง</span> -->
-        <!--     <a class="underline" href="#">สินค้าทั้งหมด</a> -->
-        <!--     <div class="bar-separator"></div> -->
-        <!--   </div> -->
-        <!-- </div> -->
+      <div class="col-sm-6 pl-2">
         <div class="row product-list">
-          <div class="col-sm-6">
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
+          <div class="col-sm-6 mb-5">
+            <div class="message fit-text">AWARD WINNER</div>
+            <a href="/products/men/triumph-iso-3?color=BLU%2FSIL">
+              <div class="product-img"
+                style="background-image:url(http://img.wolverineworldwide.com/is/image/WolverineWorldWide/S20347-1_1?wid=800)"></div>
+            </a>
+            <div class="fit-text">TRIUMPH ISO 3</div>
+            <a href="/products/men/triumph-iso-3?color=BLU%2FSIL" class="btn btn-grey fit-text">MORE DETAILS</a>
           </div>
-          <div class="col-sm-6">
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
-          </div>
-          <div class="col-sm-6">
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
-          </div>
-          <div class="col-sm-6">
-            <div class="product-img"></div>
-            <div class="fit-text">FREEDOM ISO</div>
-            <a href="#" class="btn btn-grey">แบบสีอื่น</a>
+          <div class="col-sm-6 mb-5">
+            <div class="message fit-text">NEW ARRIVALS +</div>
+            <a href="/products/men/hurricane-iso3?color=GREY%2FBLACK%2FCTN">
+              <div class="product-img"
+                style="background-image:url(http://img.wolverineworldwide.com/is/image/WolverineWorldWide/S20349-1_1?wid=800)"></div>
+            </a>
+            <div class="fit-text">HURRICANE ISO3</div>
+            <a href="/products/men/hurricane-iso3?color=GREY%2FBLACK%2FCTN" class="btn btn-grey fit-text">MORE DETAILS</a>
           </div>
         </div>
       </div>
     </div>
     <div class="text-center">
-      <a class="btn btn-primary" href="">สินค้าทั้งหมด</a>
+      <a class="btn btn-primary" href="/products">สินค้าทั้งหมด</a>
     </div>
   </div>
 </div>
-<div id="sale" class="text-center bg-img">
-  <div class="details">
-    <b>SALE</b>
-    <div class="content">เลือกซื้อรองเท้าหลากหลายสีสรรตามสไตล์คุณ ในราคาพิเศษ</div>
-    <a class="btn btn-red mt-5" href="#">สินค้าโปรโมชั่น</a>
-  </div>
-</div>
+<!-- <div id="sale" class="text-center bg-img"> -->
+<!--   <div class="details"> -->
+<!--     <b>SALE</b> -->
+<!--     <div class="content">เลือกซื้อรองเท้าหลากหลายสีสรรตามสไตล์คุณ ในราคาพิเศษ</div> -->
+<!--     <a class="btn btn-red mt-5" href="#">สินค้าโปรโมชั่น</a> -->
+<!--   </div> -->
+<!-- </div> -->
 <div id="socials" class="mt-5 mb-5">
   <div class="container">
     <div class="title">

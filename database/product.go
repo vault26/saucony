@@ -23,6 +23,13 @@ func (db *DB) Products(params map[string][]string) (products []model.Product) {
 	if sizes, ok := paramsValue(params, "sizes"); ok {
 		query.Where("sizes && ?", pg.Array(sizes))
 	}
+	if section, ok := paramsValue(params, "section"); ok {
+		for _, v := range section {
+			if v == "sale" {
+				query.Where("discount > 0")
+			}
+		}
+	}
 	logError(query.Order("model").Select())
 	return products
 }
