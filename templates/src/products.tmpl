@@ -37,25 +37,25 @@
               </div>
               <div class="links mt-3">
                 <div class="checkbox-link">
-                  <input type="checkbox" name="section[]"
+                  <input type="checkbox" name="sections[]"
                     value="new_arrivals" id="new-arrivals-box"
                     {{if contains .Sections "new_arrivals"}}checked{{end}}>
                   <label for="new-arrivals-box"><b>NEW ARRIVALS</b> สินค้ามาใหม่</label>
                 </div>
                 <div class="checkbox-link">
-                  <input type="checkbox" name="section[]"
+                  <input type="checkbox" name="sections[]"
                     value="best_sellers" id="best-sellers-box"
                     {{if contains .Sections "best_sellers"}}checked{{end}}>
                   <label for="best-sellers-box"><b>BEST SELLERS</b> สินค้าขายดี</label>
                 </div>
                 <div class="checkbox-link">
-                  <input type="checkbox" name="section[]"
+                  <input type="checkbox" name="sections[]"
                     value="award_winners" id="award-winners-box"
                     {{if contains .Sections "award_winners"}}checked{{end}}>
                   <label for="award-winners-box"><b>AWARD WINNERS</b> รองเท้าได้รับรางวัล</label>
                 </div>
                 <div class="checkbox-link">
-                  <input type="checkbox" name="section[]"
+                  <input type="checkbox" name="sections[]"
                     value="sale" id="sale-box"
                     {{if contains .Sections "sale"}}checked{{end}}>
                   <label for="sale-box"><b>SALE</b> สินค้าลดราคา</label>
@@ -164,6 +164,14 @@
               {{range .}}
                 <div class="col-sm-4">
                   <div class="card product">
+                    {{if contains .Features "best_runner_update"}}
+                      <img class="award" src="/assets/images/best_runner_update.png"
+                      alt="best runner update award">
+                    {{end}}
+                    {{if contains .Features "best_runner_buy"}}
+                      <img class="award" src="/assets/images/best_runner_buy.png"
+                      alt="best runner buy award">
+                    {{end}}
                     <a href="{{.URL}}">
                       {{if .PrimaryRemoteImage}}
                         <div class="image bg-img"

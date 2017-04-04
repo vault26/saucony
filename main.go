@@ -46,6 +46,8 @@ func main() {
 	r.HandleFunc("/", mw.PublicPage(publicParams, page.Home))
 	r.HandleFunc("/history", mw.PublicPage(publicParams, page.History))
 	r.HandleFunc("/technology", mw.PublicPage(publicParams, page.Technology))
+	r.HandleFunc("/store", mw.PublicPage(publicParams, page.Store))
+	r.HandleFunc("/sale", mw.PublicPage(publicParams, page.Sale))
 
 	// Products
 	r.HandleFunc("/products", mw.PublicPage(publicParams, product.Index))

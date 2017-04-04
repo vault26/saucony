@@ -45,6 +45,11 @@
     }
   }
   .main-image {
+    .award {
+      position: absolute;
+      top: 0;
+      right: 2em;
+    }
     .bg-img {
       background-size: contain;
       background-repeat: no-repeat;

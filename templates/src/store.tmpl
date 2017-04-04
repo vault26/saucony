@@ -1,0 +1,30 @@
+{{define "content"}}
+<div id="store">
+  <div class="container">
+    <h2 class="text-center">
+      <div class="fit-text mb-3">SAUCONY STORES</div>
+      <small>ร้านค้า</small>
+    </h2>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <table class="table table-hover mt-5">
+          <thead>
+            <tr>
+              <th class="fit-text">STORE</th>
+              <th class="fit-text">CITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{range .Stores}}
+              <tr>
+                <td>{{.Name}}</td>
+                <td>{{.CityTh}}&nbsp;<small>{{.City}}</small></td>
+              </tr>
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{{end}}

@@ -46,8 +46,20 @@
               </ul>
             {{end}}
           </div>
+
           <div class="col-sm-10 main-image">
-            <div class="px-3">
+            <div class="px-3 mt-4">
+              {{with $product := index .ProductMap .Query.Color}}
+                {{if contains .Features "best_runner_update"}}
+                  <img class="award" src="/assets/images/best_runner_update.png"
+                  alt="best runner update award">
+                {{end}}
+                {{if contains .Features "best_runner_buy"}}
+                  <img class="award" src="/assets/images/best_runner_buy.png"
+                  alt="best runner buy award">
+                {{end}}
+              {{end}}
+
               {{with $product := index .ProductMap .Query.Color}}
                 <div class="bg-img"
                      data-img="{{.PrimaryRemoteImage}}"

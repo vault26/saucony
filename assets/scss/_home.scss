@@ -101,7 +101,7 @@
   .history-img {
     background-image: url("/assets/images/history.jpg");
   }
-  .technology-img {
+  .sale-img {
     background-image: url("/assets/images/sale.jpg");
   }
   @media (max-width: 575px) {
@@ -192,6 +192,14 @@
       top: 1em;
       font-size: 0.8em;
       color: $red100;
+    }
+    .shoe {
+      position: relative;
+      .award {
+        position: absolute;
+        width: 70px;
+        right: 2em;
+      }
     }
   }
   .btn-primary {
