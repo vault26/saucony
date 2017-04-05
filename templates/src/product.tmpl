@@ -79,7 +79,15 @@
             {{else}}
               <div class="gender">WOMEN'S SHOES | รองเท้าผู้หญิง</div>
             {{end}}
-            <div class="price"><b>{{money .Price 0 ""}} บาท</b></div>
+            <div class="price">
+              {{if .Discount}}
+                <div>
+                  <span class="before-discount">{{money .Price 0 ""}} บาท</span>
+                  <span class="percent-discount ml-1">-{{.Discount}}%</span>
+                </div>
+              {{end}}
+              <b>{{money .SellPrice 0 ""}} บาท</b>
+            </div>
           {{end}}
           <div class="other-colors">
             <div class="text fit-text">
@@ -116,6 +124,21 @@
             <div class="error mt-2 animated bounceIn">Please select the size กรุณาเลือกขนาดรองเท้า</div>
             <div class="success mt-2 animated bounceIn">Successfully added to cart สินค้าอยู่ในตระกร้าเรียบร้อย</div>
           </div>
+          <!-- <div id="promocode"> -->
+          <!--   <form class="form-inline mt-4"> -->
+          <!--     <div class="form-group"> -->
+          <!--       <div class="input-group"> -->
+          <!--         <label class="input-group-addon fit-text" -->
+          <!--           for="code">PROMO CODE</label> -->
+          <!--         <input id="code" type="text" class="form-control" -->
+          <!--         placeholder="code here"> -->
+          <!--         <button type="submit" class="fit-text input-group-addon btn btn-primary"> -->
+          <!--           OK -->
+          <!--         </button> -->
+          <!--       </div> -->
+          <!--     </div> -->
+          <!--   </form> -->
+          <!-- </div> -->
           <div class="add-to-cart mt-4">
             <a id="add-to-cart-btn" href="#" class="btn btn-red">
               {{if .AlreadyInCart}}

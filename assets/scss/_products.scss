@@ -140,6 +140,7 @@
         padding: 4em 2em 2em;
         margin-bottom: 5px;
         padding-bottom: 1.5em;
+        min-height: 310px;
       }
       .product {
         .image {
@@ -154,6 +155,16 @@
         }
         .price {
           font-size: 0.7em;
+          .before-discount {
+            text-decoration: line-through;
+          }
+          .percent-discount {
+            background-color: $red100;
+            color: white;
+            padding: 3px 3px;
+            border-radius: 3px;
+            font-size: 0.9em;
+          }
         }
         .btn-secondary {
           font-size: 0.7em;

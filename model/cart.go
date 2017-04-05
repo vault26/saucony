@@ -6,6 +6,7 @@ type CartProduct struct {
 	PrimaryRemoteImage string
 	Gender             string
 	Price              float64
+	Discount           float64
 	Color              string
 	Quantity           int
 	Size               string

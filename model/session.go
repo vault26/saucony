@@ -26,10 +26,11 @@ func (s *Session) AddProductToCart(
 		PrimaryRemoteImage: product.PrimaryRemoteImage,
 		Gender:             product.Gender,
 		Price:              product.Price,
+		Discount:           product.Discount,
 		Color:              product.Color,
 		Quantity:           1,
 		Size:               size,
-		Total:              product.Price,
+		Total:              product.SellPrice(),
 	}
 	if !ok {
 		s.Values["cart"] = Cart{

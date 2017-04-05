@@ -182,7 +182,17 @@
                       {{end}}
                     </a>
                     <div class="fit-text title truncate"><b>{{.Model}}</b></div>
-                    <div class="price mt-2">{{money .Price 0 " THB"}}</div>
+                    <div class="price mt-2">
+                      {{if .Discount}}
+                        <div>
+                          <span class="before-discount">
+                            {{money .Price 0 " THB"}}
+                          </span>
+                          <span class="percent-discount ml-2">-{{.Discount}}%</span>
+                        </div>
+                      {{end}}
+                      <div>{{money .SellPrice 0 " THB"}}</div>
+                    </div>
                   </div>
                 </div>
               {{end}}

@@ -38,7 +38,13 @@
               </div>
             </div>
           </td>
-          <td><span class="price-per-product">{{money .Price 0 ""}}</span><small> THB</small></td>
+          <td>
+            <span class="price-per-product {{if .Discount}}sale{{end}}">{{money .Price 0 ""}}</span>
+            <small> THB</small>
+            {{if .Discount}}
+              <span class="percent-discount">-{{.Discount}}%</span>
+            {{end}}
+          </td>
           <td class="order-line-quantity">
             <a class="hidden-readonly remove" href="#" data-product-id="{{.ID}}"
               data-product-size="{{.Size}}">

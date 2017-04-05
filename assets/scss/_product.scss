@@ -71,6 +71,17 @@
     }
     .price {
       margin-top: 0.5em;
+      .before-discount {
+        font-size: 0.8em;
+        text-decoration: line-through;
+      }
+      .percent-discount {
+        background-color: $red100;
+        color: white;
+        padding: 4px;
+        font-size: 0.7em;
+        border-radius: 3px;
+      }
     }
 
     .other-colors {
@@ -116,6 +127,26 @@
             background-repeat: no-repeat;
           }
         }
+      }
+    }
+    #promocode {
+      label {
+        font-size: 0.8em;
+        border: 0;
+        border-radius: 0;
+        color: $grey300;
+      }
+      input {
+        width: 8em;
+        border-color: $grey200;
+        &::placeholder {
+          color: $grey100;
+        }
+      }
+      button {
+        font-size: 0.7em;
+        padding: 0 1.25em;
+        cursor: pointer;
       }
     }
     .sizes {

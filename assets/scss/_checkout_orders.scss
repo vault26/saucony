@@ -19,6 +19,17 @@
           color: $red100;
         }
       }
+      .sale {
+        text-decoration: line-through;
+      }
+      .percent-discount {
+        font-size: 0.7em;
+        background-color: $red100;
+        color: white;
+        font-weight: normal;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
     }
     thead {
       line-height: 1.5em;

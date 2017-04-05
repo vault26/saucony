@@ -50,3 +50,10 @@ func (p Product) URL() string {
 	u.RawQuery = values.Encode()
 	return u.String()
 }
+
+func (p Product) SellPrice() float64 {
+	if p.Discount > 0 {
+		return p.Price * (1 - p.Discount/100)
+	}
+	return p.Price
+}

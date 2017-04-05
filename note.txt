@@ -72,9 +72,10 @@ notes: when login to postgres, need to $ sudo -i -u {user} first
 DUMP & RESTORE
 --------------
 1. $ pg_dump -c saucony > saucony_date.sql
-2. put the file to remote
-3. (on remote) $ sudo -i -u postgres
-4. $ pg_restore saucony < /path_to_the_file/saucony_date.sql
+2. change owner to saucony_admin
+3. put the file to remote
+4. (on remote) $ sudo -i -u postgres
+5. $ psql saucony < /path_to_the_file/saucony_date.sql
 
 Gulp
 ====
