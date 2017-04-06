@@ -5,8 +5,10 @@ import (
 
 	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
+	"github.com/ekkapob/saucony/handler/mail"
 	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
+	"github.com/golang/glog"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
@@ -69,6 +71,13 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 	// get customer directly from session as it is not in request's context yet
 	customer, _ := session.GetData("customer")
 	session.ClearCart(w, r)
+
+	go (func() {
+		_, err := mail.OrderNotify(orderRef, cart, customer.(model.Customer))
+		if err != nil {
+			glog.Error(err)
+		}
+	})()
 
 	t := handler.BaseTemplate("order_confirmation.tmpl", nil)
 	orderConfirmation := OrderConfirmation{

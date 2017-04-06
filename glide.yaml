@@ -20,3 +20,9 @@ import:
   version: v1.1
 - package: github.com/asaskevich/govalidator
   version: v5
+- package: github.com/pkg/errors
+  version: v0.8.0
+- package: github.com/gorilla/context
+  version: v1.1
+- package: gopkg.in/mailgun/mailgun-go.v1
+  version: v1.1.0
