@@ -35,7 +35,7 @@ func (s *Session) AddProductToCart(
 	if !ok {
 		s.Values["cart"] = Cart{
 			[]CartProduct{cartProduct},
-			product.Price,
+			product.SellPrice(),
 		}
 		return s.Save(r, w)
 	}
@@ -44,7 +44,7 @@ func (s *Session) AddProductToCart(
 	for k, v := range cart.Products {
 		if v.ID == product.ID && v.Size == size {
 			cart.Products[k].Quantity += 1
-			cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Price
+			cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Total
 			updateOrderTotal(&cart)
 			return s.Save(r, w)
 		}
@@ -111,13 +111,13 @@ func (s *Session) AdjustOrder(
 		if productID == strconv.Itoa(v.ID) && params.Size == v.Size {
 			if params.Operator == "add" {
 				cart.Products[k].Quantity += params.Quantity
-				cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Price
+				cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Total
 			} else if params.Operator == "remove" {
 				if (cart.Products[k].Quantity - params.Quantity) < 1 {
 					return errors.New("Cannot remove cart product to be less than 1 item")
 				}
 				cart.Products[k].Quantity -= params.Quantity
-				cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Price
+				cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Total
 			}
 			updateOrderTotal(&cart)
 			s.Values["cart"] = cart

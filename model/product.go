@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"math"
 	"net/url"
 	"time"
 
@@ -53,7 +54,7 @@ func (p Product) URL() string {
 
 func (p Product) SellPrice() float64 {
 	if p.Discount > 0 {
-		return p.Price * (1 - p.Discount/100)
+		return math.Ceil(p.Price * (1 - (p.Discount / 100)))
 	}
 	return p.Price
 }
