@@ -24,7 +24,7 @@ func OrderNotify(
 		"Saucony Thailand <contact@sauconythailand.com>",
 		"Thank you for Your Order - "+orderID,
 		"We've received your order.",
-		"ekkapob@gmail.com",
+		customer.Email,
 	)
 
 	html := orderEmailHtml(orderID, cart, customer)
