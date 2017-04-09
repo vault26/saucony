@@ -26,11 +26,15 @@ func (db *DB) Products(params map[string][]string) (products []model.Product) {
 	if types, ok := paramsValue(params, "types"); ok {
 		query.Where("types && ?", pg.Array(types))
 	}
-	if sections, ok := paramsValue(params, "sections"); ok {
-		for _, v := range sections {
+	if features, ok := paramsValue(params, "features"); ok {
+		for k, v := range features {
 			if v == "sale" {
 				query.Where("discount > 0")
+				features = append(features[:k], features[k+1:]...)
 			}
+		}
+		if len(features) > 0 {
+			query.Where("features && ?", pg.Array(features))
 		}
 	}
 	logError(query.Order("model").Select())

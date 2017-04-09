@@ -18,7 +18,7 @@ type Products struct {
 	model.Tmpl
 	T        IndexHelper
 	Genders  []string
-	Sections []string
+	Features []string
 	Sizes    []string
 	Types    []string
 	Products []model.Product
@@ -35,7 +35,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	queryMap["genders"] = r.Form["gender[]"]
 	queryMap["sizes"] = r.Form["size[]"]
 	queryMap["types"] = r.Form["types[]"]
-	queryMap["sections"] = r.Form["sections[]"]
+	queryMap["features"] = r.Form["features[]"]
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		queryMap["query"] = r.Form["query"]
@@ -51,7 +51,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			},
 		},
 		Genders:  queryMap["genders"],
-		Sections: queryMap["sections"],
+		Features: queryMap["features"],
 		Sizes:    queryMap["sizes"],
 		Types:    queryMap["types"],
 		Products: db.Products(queryMap),
