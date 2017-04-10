@@ -1,0 +1,96 @@
+{{define "content"}}
+<div id="stores">
+  <div class="container">
+    <h2 class="text-center">
+      <div class="fit-text mb-3">SAUCONY STORES</div>
+      <small>ร้านค้า</small>
+    </h2>
+    <form class="mt-5" action="/stores/search">
+      <div class="form-group">
+        <label for="find-shoes-in-stores" class="fit-text">FIND SHOES IN STORES</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <img src="/assets/images/sneaker.png" alt="shoe">
+          </div>
+          <input id="find-shoes-in-stores" type="text" name="query"
+                                                       class="form-control"
+                                                       placeholder="shoe model name"
+                                                       value="{{.Query}}">
+          <button type="submit" class="input-group-addon fit-text btn btn-primary">
+            FIND
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="search-result">
+          {{if .RetailerMap}}
+            <div class="text-center">
+              <div>found products&nbsp;<span class="fit-text">{{.Query}}</span>&nbsp;in stores below</div>
+            </div>
+          {{else if ne .Query ""}}
+            <div class="text-center red">
+              <div>Counldn't find the product name in any stores. Please contact the stores.</div>
+              <div>ไม่พบสินค้าที่ระบุในร้านค้า กรุณาติดต่อร้านค้าใกล้เคียงเพื่อสอบถาม</div>
+            </div>
+          {{end}}
+        </div>
+        <table class="table table-hover mt-5">
+          <thead>
+            <tr>
+              <th class="fit-text">STORE</th>
+              <th class="fit-text">PHONE</th>
+              <th class="fit-text">CITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{if .RetailerMap}}
+              {{range $key, $value := .RetailerMap}}
+                <tr class="store">
+                  <td>{{$value.Name}}</td>
+                  <td>{{$value.Phone}}</td>
+                  <td>{{$value.CityTh}}</td>
+                </tr>
+
+                  <tr class="store-products">
+                    <td colspan="3">
+                      {{ range $productName, $productValue := $value.ProductMap }}
+                        <div class="product">
+                          {{if $productValue.RemoteImage}}
+                            <div class="image bg-img"
+                              style="background-image: url({{remoteImageUrl $productValue.RemoteImage 500}}">
+                            </div>
+                          {{else}}
+                            <div class="image bg-img"
+                              style="background-image: url(/assets/images/products/missing.jpg)">
+                            </div>
+                          {{end}}
+                          <div>{{$productName}}</div>
+                          <div>sizes:
+                            {{range $index, $element := $productValue.Sizes}}
+                              <span>{{if $index}},&nbsp;{{end}}{{$element}}</span>
+                            {{end}}
+                          </div>
+                        </div>
+                      {{end}}
+                    </td>
+                  </tr>
+
+              {{end}}
+            {{else}}
+              {{range .Stores}}
+                <tr>
+                  <td>{{.Name}}</td>
+                  <td>{{.Phone}}</td>
+                  <td>{{.CityTh}}</td>
+                </tr>
+              {{end}}
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{{end}}

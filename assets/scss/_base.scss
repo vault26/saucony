@@ -31,6 +31,10 @@ a.primary {
   background-position: center;
 }
 
+.red {
+  color: $red100;
+}
+
 .text-bg-img {
   position: relative;
   &::after {

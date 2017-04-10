@@ -1,7 +1,11 @@
 package model
 
 type Store struct {
-	Name   string
-	City   string
-	CityTh string
+	RetailerNo  string
+	Name        string
+	Phone       string
+	CityTh      string
+	Model       string
+	Size        string
+	RemoteImage string
 }

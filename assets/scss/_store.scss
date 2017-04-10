@@ -1,5 +1,95 @@
-#store {
+#stores {
   h2 {
     margin-top: 3em;
+  }
+  .search-result {
+    letter-spacing: 1px;
+  }
+  table {
+    @media (max-width: 575px) {
+      font-size: 12px;
+    }
+    td {
+      vertical-align: middle;
+    }
+  }
+  .form-group {
+    width: 40%;
+    margin: 0 auto;
+    @media (max-width: 991px) {
+      width: 70%;
+    }
+    @media (max-width: 575px) {
+      width: initial;
+    }
+    label {
+      margin: 0;
+      font-size: 0.8em;
+    }
+    div.input-group-addon {
+      padding: 0;
+      margin: 0;
+      background: none;
+      padding-left: 0.5em;
+      border-color: $grey400;
+      img {
+        height: 35px;
+      }
+    }
+    input {
+      border-left: none;
+      border-radius: 0;
+      border-color: $grey400;
+      &::placeholder {
+        color: $grey100;
+      }
+      &:focus {
+        border-color: $grey400;
+      }
+    }
+    button {
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+  }
+  .image {
+    width: 55px;
+    height: 45px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .store-products {
+    font-size: 0.75em;
+    td {
+      padding: 0;
+    }
+    &:hover {
+      background-color: initial;
+    }
+    .product {
+      padding-left: 3em;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      > * {
+        margin-right: 1em;
+      }
+      &:first-child {
+        margin-top: 2em;
+      }
+      &:last-child {
+        margin-bottom: 2em;
+      }
+      &:hover {
+        background-color: initial;
+        color: $red100;
+      }
+    }
+  }
+  .store {
+    box-shadow: 0px 2px 8px 0px $grey100;
+    &:hover {
+      background-color: initial;
+    }
   }
 }

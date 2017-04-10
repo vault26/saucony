@@ -14,6 +14,7 @@ import (
 	"github.com/ekkapob/saucony/handler/order"
 	"github.com/ekkapob/saucony/handler/page"
 	"github.com/ekkapob/saucony/handler/product"
+	"github.com/ekkapob/saucony/handler/store"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -46,8 +47,11 @@ func main() {
 	r.HandleFunc("/", mw.PublicPage(publicParams, page.Home))
 	r.HandleFunc("/history", mw.PublicPage(publicParams, page.History))
 	r.HandleFunc("/technology", mw.PublicPage(publicParams, page.Technology))
-	r.HandleFunc("/store", mw.PublicPage(publicParams, page.Store))
+	r.HandleFunc("/stores", mw.PublicPage(publicParams, store.Stores))
 	r.HandleFunc("/sale", mw.PublicPage(publicParams, page.Sale))
+
+	// Stores
+	r.HandleFunc("/stores/search", mw.PublicPage(publicParams, store.Search))
 
 	// Products
 	r.HandleFunc("/products", mw.PublicPage(publicParams, product.Index))
