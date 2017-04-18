@@ -13,7 +13,8 @@ import (
 func OrderNotify(
 	orderID string,
 	cart model.Cart,
-	customer model.Customer) (string, error) {
+	customer model.Customer,
+	promotion model.Promotion) (string, error) {
 
 	domain := os.Getenv("MG_DOMAIN")
 	apiKey := os.Getenv("MG_API_KEY")
@@ -27,7 +28,7 @@ func OrderNotify(
 		customer.Email,
 	)
 
-	html := orderEmailHtml(orderID, cart, customer)
+	html := orderEmailHtml(orderID, cart, customer, promotion)
 	message.SetHtml(html)
 
 	_, id, err := mg.Send(message)
@@ -35,19 +36,21 @@ func OrderNotify(
 }
 
 type OrderTmplData struct {
-	OrderID  string
-	Cart     model.Cart
-	Customer model.Customer
+	OrderID   string
+	Cart      model.Cart
+	Customer  model.Customer
+	Promotion model.Promotion
 }
 
 func orderEmailHtml(
 	orderID string,
 	cart model.Cart,
-	customer model.Customer) string {
+	customer model.Customer,
+	promotion model.Promotion) string {
 
 	var content bytes.Buffer
 	t := template.New("email").Funcs(handler.BaseFuncMap())
 	t = template.Must(t.ParseFiles("templates/emails/order.tmpl"))
-	t.ExecuteTemplate(&content, "email", OrderTmplData{orderID, cart, customer})
+	t.ExecuteTemplate(&content, "email", OrderTmplData{orderID, cart, customer, promotion})
 	return content.String()
 }

@@ -33,10 +33,12 @@ func (s *Session) AddProductToCart(
 		Total:              product.SellPrice(),
 	}
 	if !ok {
-		s.Values["cart"] = Cart{
-			[]CartProduct{cartProduct},
-			product.SellPrice(),
+		cart := Cart{
+			Products:   []CartProduct{cartProduct},
+			OrderTotal: product.SellPrice(),
 		}
+		s.updateOrderTotal(&cart)
+		s.Values["cart"] = cart
 		return s.Save(r, w)
 	}
 	cart := data.(Cart)
@@ -45,13 +47,13 @@ func (s *Session) AddProductToCart(
 		if v.ID == product.ID && v.Size == size {
 			cart.Products[k].Quantity += 1
 			cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Total
-			updateOrderTotal(&cart)
+			s.updateOrderTotal(&cart)
 			return s.Save(r, w)
 		}
 	}
 	// create new product
 	cart.Products = append(cart.Products, cartProduct)
-	updateOrderTotal(&cart)
+	s.updateOrderTotal(&cart)
 	s.Values["cart"] = cart
 	return s.Save(r, w)
 }
@@ -70,7 +72,7 @@ func (s *Session) RemoveProductFromCart(
 	for k, v := range cart.Products {
 		if productID == strconv.Itoa(v.ID) && size == v.Size {
 			cart.Products = append(cart.Products[:k], cart.Products[k+1:]...)
-			updateOrderTotal(&cart)
+			s.updateOrderTotal(&cart)
 			s.Values["cart"] = cart
 			return s.Save(r, w)
 		}
@@ -78,12 +80,12 @@ func (s *Session) RemoveProductFromCart(
 	return errors.New("No products found")
 }
 
-func (s *Session) ClearCart(w http.ResponseWriter, r *http.Request) error {
-	_, ok := s.GetData("cart")
+func (s *Session) ClearData(w http.ResponseWriter, r *http.Request, key string) error {
+	_, ok := s.GetData(key)
 	if !ok {
-		return errors.New("No products in cart")
+		return errors.New("No data found")
 	}
-	delete(s.Values, "cart")
+	delete(s.Values, key)
 	return s.Save(r, w)
 }
 
@@ -119,7 +121,7 @@ func (s *Session) AdjustOrder(
 				cart.Products[k].Quantity -= params.Quantity
 				cart.Products[k].Total = float64(cart.Products[k].Quantity) * cart.Products[k].Total
 			}
-			updateOrderTotal(&cart)
+			s.updateOrderTotal(&cart)
 			s.Values["cart"] = cart
 			return s.Save(r, w)
 		}
@@ -146,9 +148,24 @@ func (s *Session) GetData(key string) (interface{}, bool) {
 	return data, ok
 }
 
-func updateOrderTotal(cart *Cart) {
+func (s *Session) ApplyPromotion(
+	w http.ResponseWriter,
+	r *http.Request,
+	promotion Promotion) error {
+	s.Values["promotion"] = promotion
+	return s.Save(r, w)
+}
+
+func (s *Session) updateOrderTotal(cart *Cart) {
 	cart.OrderTotal = 0
 	for _, v := range cart.Products {
 		cart.OrderTotal += v.Total
 	}
+	cart.OrderTotalBeforePromoDiscount = cart.OrderTotal
+	data, ok := s.GetData("promotion")
+	if !ok {
+		return
+	}
+	promotion := data.(Promotion)
+	cart.OrderTotal = cart.OrderTotal * (1 - promotion.DiscountPercent/100)
 }

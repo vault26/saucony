@@ -70,6 +70,17 @@
           </td>
         </tr>
       {{end}}
+      {{if and .Cart.Products .Promotion.DiscountPercent}}
+        <tr class="promotion">
+          <td class="price text-right" colspan="3">PROMO CODE DISCOUNT <span
+              class="thai">ส่วนลดจากรหัสโปรโมชั่น</span></td>
+          <td class="discount">
+            <span class="price-before">{{money .Cart.OrderTotalBeforePromoDiscount 0 ""}}&nbsp;</span>
+            <span class="percent">-{{.Promotion.DiscountPercent}}%</span>
+          </td>
+          <td class="hidden-readonly"></td>
+        </tr>
+      {{end}}
       <tr class="order-total">
         <td class="price text-right" colspan="3">ORDER TOTAL <span class="thai">ราคาสินค้าทั้งหมด</span></td>
         <td class="total">{{money .Cart.OrderTotal 0 ""}} <small>THB</small></td>

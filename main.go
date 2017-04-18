@@ -14,6 +14,7 @@ import (
 	"github.com/ekkapob/saucony/handler/order"
 	"github.com/ekkapob/saucony/handler/page"
 	"github.com/ekkapob/saucony/handler/product"
+	"github.com/ekkapob/saucony/handler/promotion"
 	"github.com/ekkapob/saucony/handler/store"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -74,6 +75,10 @@ func main() {
 
 	// Order
 	r.HandleFunc("/order", mw.PublicPage(publicParams, order.Create)).
+		Methods("POST")
+
+	// Promotion
+	r.HandleFunc("/promotions", mw.PublicPage(publicParams, promotion.ApplyCode)).
 		Methods("POST")
 
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)

@@ -26,7 +26,11 @@ func Orders(w http.ResponseWriter, r *http.Request) {
 
 func CheckoutOrders(w http.ResponseWriter, r *http.Request) {
 	cart := helper.GetCart(r)
-	tmpl := model.Tmpl{Cart: cart}
+	promotion := helper.GetPromotion(r)
+	tmpl := model.Tmpl{
+		Cart:      cart,
+		Promotion: promotion,
+	}
 	t := handler.BaseTemplate("checkout.tmpl", nil)
 	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("Cache-Control", "max-age=0")

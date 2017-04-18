@@ -77,6 +77,20 @@
           }
         }
       }
+      .promotion {
+        .discount {
+          .price-before {
+            text-decoration: line-through;
+          }
+          .percent {
+            background-color: $red100;
+            color: white;
+            font-size: 0.8em;
+            padding: 0.25em 0.5em;
+            border-radius: 5px;
+          }
+        }
+      }
       .order-total {
         .total {
           color: $blue100;

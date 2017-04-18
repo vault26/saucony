@@ -16,6 +16,7 @@ func init() {
 	gob.Register(model.Cart{})
 	gob.Register(model.Flash{})
 	gob.Register(model.Customer{})
+	gob.Register(model.Promotion{})
 }
 
 func NotFound(w http.ResponseWriter, r *http.Request) {

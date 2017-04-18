@@ -14,8 +14,9 @@ type CartProduct struct {
 }
 
 type Cart struct {
-	Products   []CartProduct
-	OrderTotal float64
+	Products                      []CartProduct
+	OrderTotalBeforePromoDiscount float64
+	OrderTotal                    float64
 }
 
 func (c Cart) Total() (total int) {

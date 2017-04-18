@@ -6,4 +6,5 @@ type Tmpl struct {
 	Title     string
 	Cart      Cart
 	Customer  Customer
+	Promotion Promotion
 }

@@ -18,12 +18,14 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	flash := ctx["flash"].(model.Flash)
 	cart := ctx["cart"].(model.Cart)
 	customer := ctx["customer"].(model.Customer)
+	promotion := ctx["promotion"].(model.Promotion)
 	t := handler.BaseTemplate("checkout.tmpl", nil)
 
 	checkout := Checkout{
 		Tmpl: model.Tmpl{
-			Cart:     cart,
-			Customer: customer,
+			Cart:      cart,
+			Customer:  customer,
+			Promotion: promotion,
 		},
 		Flash: flash,
 	}

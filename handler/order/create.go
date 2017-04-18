@@ -70,10 +70,16 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 	session := ctx["session"].(*model.Session)
 	// get customer directly from session as it is not in request's context yet
 	customer, _ := session.GetData("customer")
-	session.ClearCart(w, r)
+	promotion, _ := session.GetData("promotion")
+	session.ClearData(w, r, "cart")
 
 	go (func() {
-		_, err := mail.OrderNotify(orderRef, cart, customer.(model.Customer))
+		_, err := mail.OrderNotify(
+			orderRef,
+			cart,
+			customer.(model.Customer),
+			promotion.(model.Promotion),
+		)
 		if err != nil {
 			glog.Error(err)
 		}
@@ -82,8 +88,9 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 	t := handler.BaseTemplate("order_confirmation.tmpl", nil)
 	orderConfirmation := OrderConfirmation{
 		Tmpl: model.Tmpl{
-			Cart:     cart,
-			Customer: customer.(model.Customer),
+			Cart:      cart,
+			Customer:  customer.(model.Customer),
+			Promotion: promotion.(model.Promotion),
 		},
 		OrderRef: orderRef,
 	}

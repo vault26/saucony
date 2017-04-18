@@ -28,6 +28,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	ctx := helper.GetContext(w, r)
 	db := ctx["db"].(database.DB)
 	cart := ctx["cart"].(model.Cart)
+	promotion := ctx["promotion"].(model.Promotion)
 
 	color := r.URL.Query().Get("color")
 	vars := mux.Vars(r)
@@ -71,6 +72,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	}
 	td.Title = productMap[color].Model
 	td.Cart = cart
+	td.Promotion = promotion
 	for _, v := range cart.Products {
 		if productId == v.ID {
 			td.AlreadyInCart = true

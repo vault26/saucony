@@ -148,6 +148,18 @@
         padding: 0 1.25em;
         cursor: pointer;
       }
+      .promotion-success {
+        &.hidden {
+          display: none;
+        }
+        font-size: 0.8em;
+        color: $green100;
+      }
+      .promotion-error {
+        display: none;
+        font-size: 0.8em;
+        color: $red100;
+      }
     }
     .sizes {
       margin-top: 1em;

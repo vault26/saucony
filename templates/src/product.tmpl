@@ -124,21 +124,30 @@
             <div class="error mt-2 animated bounceIn">Please select the size กรุณาเลือกขนาดรองเท้า</div>
             <div class="success mt-2 animated bounceIn">Successfully added to cart สินค้าอยู่ในตระกร้าเรียบร้อย</div>
           </div>
-          <!-- <div id="promocode"> -->
-          <!--   <form class="form-inline mt-4"> -->
-          <!--     <div class="form-group"> -->
-          <!--       <div class="input-group"> -->
-          <!--         <label class="input-group-addon fit-text" -->
-          <!--           for="code">PROMO CODE</label> -->
-          <!--         <input id="code" type="text" class="form-control" -->
-          <!--         placeholder="code here"> -->
-          <!--         <button type="submit" class="fit-text input-group-addon btn btn-primary"> -->
-          <!--           OK -->
-          <!--         </button> -->
-          <!--       </div> -->
-          <!--     </div> -->
-          <!--   </form> -->
-          <!-- </div> -->
+          <div id="promocode" class="mt-4">
+            <form lass="form-inline mt-4" method="POST" action="/promotions">
+              <div class="form-group">
+                <div class="input-group">
+                  <label class="input-group-addon fit-text"
+                    for="code">PROMO CODE</label>
+                  <input id="code"
+                         type="text"
+                         name="code"
+                         class="form-control"
+                         placeholder="code here"
+                         value="{{.Promotion.Code}}">
+                  <button type="submit" class="fit-text input-group-addon btn btn-primary">
+                    OK
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="promotion-success {{if not .Promotion.DiscountPercent}}hidden{{end}}">
+              you have extra <span>{{.Promotion.DiscountPercent}}%</span>
+              discount | คุณได้รับส่วนลดเพิ่มอีก <span>{{.Promotion.DiscountPercent}}%</span>
+            </div>
+            <div class="promotion-error">Invalid promotion code | รหัสไม่ถูกต้อง</div>
+          </div>
           <div class="add-to-cart mt-4">
             <a id="add-to-cart-btn" href="#" class="btn btn-red">
               {{if .AlreadyInCart}}

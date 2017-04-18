@@ -33,21 +33,28 @@ func GetFlash(w http.ResponseWriter, r *http.Request) (flash model.Flash) {
 	return flash
 }
 
+func GetPromotion(r *http.Request) model.Promotion {
+	promotion, _ := r.Context().Value("promotion").(model.Promotion)
+	return promotion
+}
+
 func GetContext(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	return map[string]interface{}{
-		"db":       GetDB(r),
-		"session":  GetSession(r),
-		"cart":     GetCart(r),
-		"customer": GetCustomer(r),
-		"flash":    GetFlash(w, r),
+		"db":        GetDB(r),
+		"session":   GetSession(r),
+		"cart":      GetCart(r),
+		"customer":  GetCustomer(r),
+		"flash":     GetFlash(w, r),
+		"promotion": GetPromotion(r),
 	}
 }
 
 func InitTemplate(w http.ResponseWriter, r *http.Request) model.Tmpl {
 	ctx := GetContext(w, r)
 	return model.Tmpl{
-		Flash:    ctx["flash"].(model.Flash),
-		Cart:     ctx["cart"].(model.Cart),
-		Customer: ctx["customer"].(model.Customer),
+		Flash:     ctx["flash"].(model.Flash),
+		Cart:      ctx["cart"].(model.Cart),
+		Customer:  ctx["customer"].(model.Customer),
+		Promotion: ctx["promotion"].(model.Promotion),
 	}
 }
