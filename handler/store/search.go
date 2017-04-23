@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
@@ -13,10 +14,11 @@ import (
 
 type Product struct {
 	RemoteImage string
+	Gender      string
 	Sizes       []float64 // need float for sorted sizes
 }
 
-type Retailer struct {
+type Customer struct {
 	Name       string
 	Phone      string
 	CityTh     string
@@ -27,7 +29,7 @@ type StoresIndex struct {
 	model.Tmpl
 	Query       string
 	Stores      []model.Store
-	RetailerMap map[string]Retailer
+	CustomerMap map[string]Customer
 }
 
 func Stores(w http.ResponseWriter, r *http.Request) {
@@ -51,50 +53,66 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	ctx := helper.GetContext(w, r)
 	db := ctx["db"].(database.DB)
 	storeResults := db.FindStores(queryText)
-	retailerMap := reduceStoreProducts(storeResults)
+	customerMap := reduceStoreProducts(storeResults)
 
 	tmpl := helper.InitTemplate(w, r)
 	stores := &StoresIndex{
 		Tmpl:        tmpl,
 		Query:       queryText,
 		Stores:      db.Stores(),
-		RetailerMap: retailerMap,
+		CustomerMap: customerMap,
 	}
 
 	t := handler.BaseTemplate("stores.tmpl", nil)
 	t.ExecuteTemplate(w, "main", stores)
 }
 
-func reduceStoreProducts(stores []model.Store) map[string]Retailer {
-	retailerMap := make(map[string]Retailer)
+func reduceStoreProducts(stores []model.Store) map[string]Customer {
+	customerMap := make(map[string]Customer)
 	for _, v := range stores {
 		size, _ := strconv.ParseFloat(v.Size, 64)
 		// exisiting values
-		if _, ok := retailerMap[v.RetailerNo]; ok {
-			retailer := retailerMap[v.RetailerNo]
-			product := retailer.ProductMap[v.Model]
-			if _, ok := retailer.ProductMap[v.Model]; ok {
-				product.Sizes = append(product.Sizes, size)
+		if _, ok := customerMap[v.CustomerNo]; ok {
+			customer := customerMap[v.CustomerNo]
+			product := customer.ProductMap[v.Model]
+			if _, ok := customer.ProductMap[v.Model]; ok {
+				if !containSize(product.Sizes, size) {
+					product.Sizes = append(product.Sizes, size)
+				}
 				sort.Float64s(product.Sizes)
+				if product.Gender != "MW" &&
+					strings.Index(product.Gender, v.Gender) == -1 {
+					product.Gender = "MW"
+				}
 			} else {
 				product.RemoteImage = v.RemoteImage
 				product.Sizes = []float64{size}
 			}
-			retailer.ProductMap[v.Model] = product
+			customer.ProductMap[v.Model] = product
 			continue
 		}
 		// new value
-		retailer := Retailer{
+		customer := Customer{
 			Name:   v.Name,
 			Phone:  v.Phone,
 			CityTh: v.CityTh,
 		}
-		retailer.ProductMap = make(map[string]Product)
-		retailer.ProductMap[v.Model] = Product{
+		customer.ProductMap = make(map[string]Product)
+		customer.ProductMap[v.Model] = Product{
 			RemoteImage: v.RemoteImage,
+			Gender:      v.Gender,
 			Sizes:       []float64{size},
 		}
-		retailerMap[v.RetailerNo] = retailer
+		customerMap[v.CustomerNo] = customer
 	}
-	return retailerMap
+	return customerMap
+}
+
+func containSize(slice []float64, size float64) bool {
+	for _, v := range slice {
+		if v == size {
+			return true
+		}
+	}
+	return false
 }

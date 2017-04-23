@@ -72,7 +72,7 @@
       width: 100%;
       align-items: center;
       > * {
-        margin-right: 1em;
+        margin-right: 0.5em;
       }
       &:first-child {
         margin-top: 2em;
@@ -83,6 +83,9 @@
       &:hover {
         background-color: initial;
         color: $red100;
+      }
+      .gender {
+        color: $grey300;
       }
     }
   }

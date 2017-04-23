@@ -1,8 +1,9 @@
 package model
 
 type Store struct {
-	RetailerNo  string
+	CustomerNo  string
 	Name        string
+	Gender      string
 	Phone       string
 	CityTh      string
 	Model       string

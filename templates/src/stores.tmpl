@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="search-result">
-          {{if .RetailerMap}}
+          {{if .CustomerMap}}
             <div class="text-center">
               <div>found products&nbsp;<span class="fit-text">{{.Query}}</span>&nbsp;in stores below</div>
             </div>
@@ -45,8 +45,8 @@
             </tr>
           </thead>
           <tbody>
-            {{if .RetailerMap}}
-              {{range $key, $value := .RetailerMap}}
+            {{if .CustomerMap}}
+              {{range $key, $value := .CustomerMap}}
                 <tr class="store">
                   <td>{{$value.Name}}</td>
                   <td>{{$value.Phone}}</td>
@@ -67,6 +67,17 @@
                             </div>
                           {{end}}
                           <div>{{$productName}}</div>
+                          <div class="gender">
+                            {{if $productValue.Gender }}
+                              {{if eq $productValue.Gender "MW"}}
+                                (men, women)
+                              {{else if eq $productValue.Gender "M"}}
+                                (men)
+                              {{else}}
+                                (women)
+                              {{end}}
+                            {{end}}
+                          </div>
                           <div>sizes:
                             {{range $index, $element := $productValue.Sizes}}
                               <span>{{if $index}},&nbsp;{{end}}{{$element}}</span>

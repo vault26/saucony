@@ -13,22 +13,23 @@ func (db *DB) Stores() (stores []model.Store) {
 
 func (db *DB) FindStores(queryText string) (stores []model.Store) {
 	sql := `
-		SELECT retailers.retailer_no,
+		SELECT salers.customer_no,
 		stores.name,
 		stores.phone,
 		stores.city_th,
-		concat(retailers.style, ' (', retailers.color, ')') AS model,
-		retailers.size,
-		products.primary_remote_image AS remote_image
+		concat(salers.style, ' (', salers.color, ')') AS model,
+		salers.size,
+		products.primary_remote_image AS remote_image,
+		products.gender
 		FROM stores
-		INNER JOIN retailers
-		ON retailers.retailer_no IN (stores.retailer_no, stores.retailer_no_2)
+		LEFT JOIN 
+		(select retailer_no AS customer_no, size, style, color from retailers
+		union
+		select wholesaler_no, size, style, color from wholesales) AS salers
+		ON salers.customer_no IN (stores.customer_no, stores.customer_no_2)
 		LEFT JOIN products
-		ON retailers.style = products.model AND retailers.color = products.color
-		WHERE retailers.style ~* ?
-		GROUP BY retailers.retailer_no, stores.name, stores.phone,
-		stores.city_th, retailers.style, retailers.color,
-		retailers.size, stores.id, products.primary_remote_image
+		ON salers.style = products.model AND salers.color = products.color
+		WHERE salers.style ~* ?
 		ORDER BY stores.id;
 	`
 	_, err := db.Query(&stores, sql, queryText)
