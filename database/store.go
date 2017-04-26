@@ -23,7 +23,7 @@ func (db *DB) FindStores(queryText string) (stores []model.Store) {
 		products.gender
 		FROM stores
 		LEFT JOIN 
-		(select retailer_no AS customer_no, size, style, color from retailers
+		(select customer_no, size, style, color from consign
 		union
 		select wholesaler_no, size, style, color from wholesales) AS salers
 		ON salers.customer_no IN (stores.customer_no, stores.customer_no_2)

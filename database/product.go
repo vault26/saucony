@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/ekkapob/saucony/model"
+	"github.com/golang/glog"
 	pg "gopkg.in/pg.v5"
 	"gopkg.in/pg.v5/orm"
 )
@@ -38,6 +39,58 @@ func (db *DB) Products(params map[string][]string) (products []model.Product) {
 		}
 	}
 	logError(query.Order("model").Select())
+	products = db.filterProducts(products)
+	return products
+}
+
+func (db *DB) avaiableProductIdMap() (idMap map[int]int) {
+	var ids []int
+	sql := `
+		SELECT products.id
+		FROM products
+		INNER JOIN consign 
+		ON consign.style = products.model
+		WHERE	customer_no IN ('11112', '11111')
+		AND consign.quantity > 0
+		GROUP BY products.id;
+	`
+	_, err := db.Query(&ids, sql)
+	if err != nil {
+		glog.Error(err)
+		return idMap
+	}
+	idMap = make(map[int]int)
+	for _, v := range ids {
+		idMap[v] = v
+	}
+	return idMap
+}
+
+func (db *DB) availableProductSizes(product model.Product) (sizes []string) {
+	sql := `
+		SELECT size
+		FROM consign
+		WHERE	customer_no IN ('11112', '11111')
+		AND style = ?
+		AND color = ?
+		AND gender = ?
+		AND quantity > 0
+	`
+	_, err := db.Query(&sizes, sql, product.Model, product.Color, product.Gender)
+	if err != nil {
+		glog.Error(err)
+	}
+	return sizes
+}
+
+// Filter for stock available products
+func (db *DB) filterProducts(products []model.Product) []model.Product {
+	avaiableProductIdMap := db.avaiableProductIdMap()
+	for k, v := range products {
+		if _, ok := avaiableProductIdMap[v.ID]; !ok {
+			products = append(products[:k], products[k+1:]...)
+		}
+	}
 	return products
 }
 
@@ -50,6 +103,9 @@ func (db *DB) ModelProducts(params map[string]string) (products []model.Product)
 		query.Where("gender = ?", params["gender"])
 	}
 	logError(query.Where("model_path = ?", params["model_path"]).Select())
+	for k, v := range products {
+		products[k].Sizes = db.availableProductSizes(v)
+	}
 	return products
 }
 
