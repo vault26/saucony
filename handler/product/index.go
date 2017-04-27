@@ -16,12 +16,13 @@ type IndexHelper struct {
 
 type Products struct {
 	model.Tmpl
-	T        IndexHelper
-	Genders  []string
-	Features []string
-	Sizes    []string
-	Types    []string
-	Products []model.Product
+	T           IndexHelper
+	Genders     []string
+	Features    []string
+	Sizes       []string
+	Types       []string
+	Collections []string
+	Products    []model.Product
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -36,6 +37,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	queryMap["sizes"] = r.Form["size[]"]
 	queryMap["types"] = r.Form["types[]"]
 	queryMap["features"] = r.Form["features[]"]
+	queryMap["collections"] = r.Form["collections[]"]
 	query := r.URL.Query().Get("query")
 	if query == "" {
 		queryMap["query"] = r.Form["query"]
@@ -50,11 +52,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 				"10", "10.5", "11", "11.5", "12", "12.5", "13",
 			},
 		},
-		Genders:  queryMap["genders"],
-		Features: queryMap["features"],
-		Sizes:    queryMap["sizes"],
-		Types:    queryMap["types"],
-		Products: db.Products(queryMap),
+		Genders:     queryMap["genders"],
+		Features:    queryMap["features"],
+		Sizes:       queryMap["sizes"],
+		Types:       queryMap["types"],
+		Collections: queryMap["collections"],
+		Products:    db.Products(queryMap),
 	}
 	td.Title = "All Products"
 	td.QueryText = query

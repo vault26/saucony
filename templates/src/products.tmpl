@@ -81,66 +81,61 @@
               <div><b>TYPE</b></div>
               <ul class="mt-3">
                 <li>
-                  <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
-                      value="running" id="type-running"
-                      {{ if contains $.Types "running" }}checked{{end}}>
-                    <label for="type-running"><b>RUNNING</b></label>
-                  </div>
+                  <label class="mb-0" for="type-running"><b>RUNNING</b></label>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
+                    <input type="checkbox" name="collections[]"
                       value="neutral" id="type-neutral"
-                      {{ if contains $.Types "neutral" }}checked{{end}}>
+                      {{ if contains $.Collections "neutral" }}checked{{end}}>
                     <label for="type-neutral" class="ml-1">- Neutral</label>
                   </div>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
+                    <input type="checkbox" name="collections[]"
                       value="guidance" id="type-guidance"
-                      {{ if contains $.Types "guidance" }}checked{{end}}>
+                      {{ if contains $.Collections "guidance" }}checked{{end}}>
                     <label for="type-guidance" class="ml-1">- Guidance</label>
                   </div>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
+                    <input type="checkbox" name="collections[]"
                       value="natural" id="type-natural"
-                      {{ if contains $.Types "natural" }}checked{{end}}>
+                      {{ if contains $.Collections "natural" }}checked{{end}}>
                     <label for="type-natural" class="ml-1">- Natural</label>
                   </div>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
+                    <input type="checkbox" name="collections[]"
                       value="trail" id="type-trail"
-                      {{ if contains $.Types "trail" }}checked{{end}}>
+                      {{ if contains $.Collections "trail" }}checked{{end}}>
                     <label for="type-trail" class="ml-1">- Trail</label>
                   </div>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
+                    <input type="checkbox" name="collections[]"
                       value="racing" id="type-racing"
-                      {{ if contains $.Types "racing" }}checked{{end}}>
+                      {{ if contains $.Collections "racing" }}checked{{end}}>
                     <label for="type-racing" class="ml-1">- Racing</label>
                   </div>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
+                    <input type="checkbox" name="collections[]"
                       value="originals" id="type-originals"
-                      {{ if contains $.Types "originals" }}checked{{end}}>
+                      {{ if contains $.Collections "originals" }}checked{{end}}>
                     <label for="type-originals"><b>ORIGINALS</b></label>
                   </div>
                 </li>
                 <li>
                   <div class="checkbox-link">
-                    <input type="checkbox" name="type[]"
-                      value="life-on-the-run" id="type-life-on-the-run"
-                      {{ if contains $.Types "life-on-the-run" }}checked{{end}}>
+                    <input type="checkbox" name="collections[]"
+                      value="runlife" id="type-life-on-the-run"
+                      {{ if contains $.Collections "runlife" }}checked{{end}}>
                     <label for="type-life-on-the-run"><b>LIFE ON THE RUN</b></label>
                   </div>
                 </li>

@@ -14,6 +14,14 @@ import (
 )
 
 func (db *DB) Products(params map[string][]string) (products []model.Product) {
+
+	// query for products by collections and exit
+	if collections, ok := paramsValue(params, "collections"); ok {
+		if genders, ok := paramsValue(params, "genders"); ok {
+			return db.productsByCollections(genders, collections)
+		}
+	}
+
 	query := db.Model(&products)
 	if queryText, ok := paramsValue(params, "query"); ok {
 		setProductSearchQuery(query, queryText[0])
@@ -40,6 +48,28 @@ func (db *DB) Products(params map[string][]string) (products []model.Product) {
 	}
 	logError(query.Order("model").Select())
 	products = db.filterProducts(products)
+	return products
+}
+
+func (db *DB) productsByCollections(
+	genders []string,
+	collections []string) (products []model.Product) {
+
+	sql := `
+		SELECT DISTINCT products.*
+		FROM products
+		LEFT JOIN consign
+		ON consign.style = products.model
+		WHERE consign.customer_no IN ('11112', '11111')
+		AND consign.quantity > 0
+		AND products.gender IN (?)
+		AND LOWER(consign.collection) IN (?)
+		ORDER BY products.model;
+	`
+	_, err := db.Query(&products, sql, pg.In(genders), pg.In(collections))
+	if err != nil {
+		glog.Error(err)
+	}
 	return products
 }
 
