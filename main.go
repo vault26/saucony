@@ -26,15 +26,15 @@ import (
 func main() {
 	db := database.DB{
 		pg.Connect(&pg.Options{
-			User:     "saucony_admin",
-			Password: "sauconyrocks",
-			Database: "saucony",
+			User:     os.Getenv("DB_ADMIN"),
+			Password: os.Getenv("DB_PASSWORD"),
+			Database: os.Getenv("DB_NAME"),
 		}),
 	}
 	defer db.Close()
 	publicParams := map[string]interface{}{
 		"database":     db,
-		"cookie-store": sessions.NewCookieStore([]byte("an-awesome-website")),
+		"cookie-store": sessions.NewCookieStore([]byte(os.Getenv("COOKIE_KEY"))),
 	}
 
 	port := flag.Int("port", 8080, "port")

@@ -80,3 +80,12 @@ DUMP & RESTORE
 Gulp
 ====
 $ gulp build --production
+
+ALLOW REMOTE POSTGRES CONNECTION
+================================
+1. edit /etc/postgresql/9.5/main/postgresql.conf, modify listen_address to
+  listen_addresses = '*'
+2. edit /etc/postgresql/9.5/main/pg_hba.conf, add this line
+  host  all  all 0.0.0.0/0 md5
+3. restart server
+  $ sudo /etc/init.d/postgresql restart

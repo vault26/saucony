@@ -26,6 +26,9 @@ func GetSession(r *http.Request) *model.Session {
 
 func GetFlash(w http.ResponseWriter, r *http.Request) (flash model.Flash) {
 	session := GetSession(r)
+	if session == nil {
+		return flash
+	}
 	if flashes := session.Flashes(); len(flashes) > 0 {
 		flash = flashes[0].(model.Flash)
 		session.Save(r, w)
