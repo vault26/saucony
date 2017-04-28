@@ -11,6 +11,7 @@
   .products {
     height: 60px;
     pointer-events: none;
+    display: none;
     .cart-wrapper {
       padding: 12px;
       background-color: white;
@@ -83,6 +84,7 @@
     }
 
     &.with-items{
+      display: block;
       pointer-events: initial;
       .number-wrapper {
         display: block;
