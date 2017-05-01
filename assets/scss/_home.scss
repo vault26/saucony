@@ -11,6 +11,12 @@
       background-size: cover;
       height: 300px;
     }
+    @media (max-width: 414px) {
+      background-size: 140%;
+      background-position-x: -3em;
+      height: 300px;
+      background-position-y: 3em;
+    }
     .content {
       font-size: 0.5em;
       margin-top: 15em;
