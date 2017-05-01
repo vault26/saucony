@@ -1,6 +1,6 @@
 #stores {
   h2 {
-    margin-top: 3em;
+    margin-top: 2em;
   }
   .search-result {
     letter-spacing: 1px;
@@ -11,6 +11,16 @@
     }
     td {
       vertical-align: middle;
+    }
+  }
+  form {
+    background-color: $grey200;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+  #product-color {
+    .color {
+      display: none;
     }
   }
   .form-group {
