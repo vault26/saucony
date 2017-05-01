@@ -71,6 +71,7 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 	// get customer directly from session as it is not in request's context yet
 	customer, _ := session.GetData("customer")
 	promotion, _ := session.GetData("promotion")
+	promo, _ := promotion.(model.Promotion)
 	session.ClearData(w, r, "cart")
 
 	go (func() {
@@ -78,7 +79,7 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 			orderRef,
 			cart,
 			customer.(model.Customer),
-			promotion.(model.Promotion),
+			promo,
 		)
 		if err != nil {
 			glog.Error(err)
@@ -90,7 +91,7 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 		Tmpl: model.Tmpl{
 			Cart:      cart,
 			Customer:  customer.(model.Customer),
-			Promotion: promotion.(model.Promotion),
+			Promotion: promo,
 		},
 		OrderRef: orderRef,
 	}
