@@ -48,7 +48,7 @@ func (db *DB) ProductOptions() (productOptionMap map[string][]string) {
 	return productOptionMap
 }
 
-func (db *DB) FindStores(queryText string) (stores []model.Store) {
+func (db *DB) FindStores(model string, color string, size string) (stores []model.Store) {
 	sql := `
 		SELECT salers.customer_no,
 		stores.name,
@@ -67,9 +67,14 @@ func (db *DB) FindStores(queryText string) (stores []model.Store) {
 		LEFT JOIN products
 		ON salers.style = products.model AND salers.color = products.color
 		WHERE salers.style ~* ?
-		ORDER BY stores.id;
 	`
-	_, err := db.Query(&stores, sql, queryText)
+	sql = sql + " AND salers.color ~* ? "
+	if size != "" {
+		sql = sql + " AND salers.size = ? "
+	}
+	sql = sql + " ORDER BY stores.id; "
+
+	_, err := db.Query(&stores, sql, model, color, size)
 	if err != nil {
 		glog.Error(err)
 	}

@@ -1,7 +1,6 @@
 package store
 
 import (
-	"fmt"
 	"net/http"
 	"sort"
 	"strconv"
@@ -28,7 +27,9 @@ type Customer struct {
 
 type StoresIndex struct {
 	model.Tmpl
-	Query            string
+	Model            string
+	Color            string
+	Size             float64
 	Stores           []model.Store
 	CustomerMap      map[string]Customer
 	ProductOptionMap map[string][]string
@@ -51,20 +52,25 @@ func Stores(w http.ResponseWriter, r *http.Request) {
 }
 
 func Search(w http.ResponseWriter, r *http.Request) {
-	queryText := r.URL.Query().Get("query")
-	fmt.Println(r.URL.Query().Get("model"))
-	if queryText == "" {
+	model := r.URL.Query().Get("model")
+	color := r.URL.Query().Get("color")
+	size := r.URL.Query().Get("size")
+
+	if model == "" {
 		http.Redirect(w, r, "/stores", http.StatusMovedPermanently)
 	}
 	ctx := helper.GetContext(w, r)
 	db := ctx["db"].(database.DB)
-	storeResults := db.FindStores(queryText)
+	storeResults := db.FindStores(model, color, size)
 	customerMap := reduceStoreProducts(storeResults)
 
 	tmpl := helper.InitTemplate(w, r)
+	floatSize, _ := strconv.ParseFloat(size, 64)
 	stores := &StoresIndex{
 		Tmpl:             tmpl,
-		Query:            queryText,
+		Model:            model,
+		Color:            color,
+		Size:             floatSize,
 		Stores:           db.Stores(),
 		ProductOptionMap: db.ProductOptions(),
 		ShoeSizes:        shoeSizes(),

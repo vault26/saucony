@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strings"
 
 	"github.com/ekkapob/saucony/model"
 	"github.com/leekchan/accounting"
@@ -57,6 +58,12 @@ func BaseFuncMap() template.FuncMap {
 				return fmt.Sprint(host, "?wid=", v)
 			}
 			return host
+		},
+		"lowerCase": func(text string) string {
+			return strings.ToLower(text)
+		},
+		"upperCase": func(text string) string {
+			return strings.ToUpper(text)
 		},
 	}
 }

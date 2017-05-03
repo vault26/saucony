@@ -14,6 +14,7 @@
     }
   }
   form {
+    display: none;
     background-color: $grey200;
     padding-top: 2em;
     padding-bottom: 2em;
@@ -103,6 +104,21 @@
     box-shadow: 0px 2px 8px 0px $grey100;
     &:hover {
       background-color: initial;
+    }
+  }
+  #find-shoes-in-stores {
+    background: none;
+    border: 2px solid black;
+    padding: 0.25em 1.5em;
+    font-size: 0.7em;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 2px 3px 0px $grey300;
+    cursor: pointer;
+    margin: 0 auto;
+    img {
+      width: 40px;
+      margin-right: 1em;
     }
   }
 }

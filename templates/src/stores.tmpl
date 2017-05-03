@@ -1,77 +1,66 @@
 {{define "content"}}
 <div id="stores">
   <div class="container">
-    <div class="alert alert-warning mt-5 text-center" role="alert">
-      <div>
-        สินค้าในร้านค้ามีการเปลี่ยนแปลงตลอดเวลา กรุณาโทรเช็คกับทางร้านค้าเพื่อข้อมูลที่แน่นอน
-      </div>
-      <div>Products in stores changes frequently. Please call the stores for accurate information.</div>
-    </div>
     <h2 class="text-center">
       <div class="fit-text mb-3">SAUCONY STORES</div>
       <small>ร้านค้า</small>
     </h2>
-    <form class="mt-5" action="/stores/search">
+    <button id="find-shoes-in-stores" class="mt-5">
+      <img src="/assets/images/sneaker.png" alt="shoe">FIND SHOES IN STORES</button>
+    <form class="mt-3" action="/stores/search#search-results" {{if .Model}}style="display:block"{{end}}>
       <div class="form-group">
-        <label for="find-shoes-in-stores" class="fit-text">FIND SHOES IN STORES</label>
+        <div class="fit-text">FIND SHOES IN STORES</div>
       </div>
       <div class="form-group mt-3">
         <label for="product-model">MODEL</label>
         <select class="form-control" name="model" id="product-model">
           {{range $key, $value := .ProductOptionMap}}
-            <option value="{{$key}}">{{$key}}</option>
+            {{/* need to convert value to lower case otherwise, the first
+            selection value cannot be sent with form*/}}
+            <option value="{{lowerCase $key}}" {{if eq $.Model (lowerCase $key)}}selected{{end}}>{{$key}}</option>
           {{end}}
         </select>
       </div>
       <div class="form-group mt-3">
         <label for="product-color">COLOR</label>
-        <select class="form-control" id="product-color">
+        <select class="form-control" name="color" id="product-color">
           <option value="">ALL COLORS - สีทั้งหมด</option>
           {{range $key, $value := .ProductOptionMap}}
             {{range $value}}
-              <option class="color" data-model="{{$key}}"
-                value="{{.}}">{{.}}</option>
+              <option class="color"
+                data-model="{{lowerCase $key}}"
+                value="{{lowerCase .}}" {{if eq $.Color (lowerCase .)}}selected{{end}}>{{.}}</option>
             {{end}}
           {{end}}
         </select>
       </div>
       <div class="form-group mt-3">
         <label for="product-size">SIZE</label>
-        <select class="form-control" id="product-size">
-          <option>ALL SIZES - ไซส์ทั้งหมด</option>
+        <select class="form-control" name="size" id="product-size">
+          <option value="">ALL SIZES - ไซส์ทั้งหมด</option>
           {{range .ShoeSizes}}
-            <option value={{.}}>{{.}}</option>
+            <option value="{{.}}" {{if eq $.Size .}}selected{{end}}>{{.}}</option>
           {{end}}
         </select>
       </div>
-      <div class="form-group text-center mt-3">
-        <button type="submit" class="fit-text btn btn-primary">
-          FIND
-        </button>
+      <div class="form-group text-center mt-5">
+        <button type="submit" class="fit-text btn btn-primary">FIND</button>
       </div>
-      <!-- <div class="form-group"> -->
-      <!--   <div class="input-group"> -->
-      <!--     <div class="input-group-addon"> -->
-      <!--       <img src="/assets/images/sneaker.png" alt="shoe"> -->
-      <!--     </div> -->
-      <!--     <input id="find-shoes-in-stores" type="text" name="query" -->
-      <!--                                                  class="form-control" -->
-      <!--                                                  placeholder="shoe model name" -->
-      <!--                                                  value="{{.Query}}"> -->
-      <!--     <button type="submit" class="input-group-addon fit-text btn btn-primary"> -->
-      <!--       FIND -->
-      <!--     </button> -->
-      <!--   </div> -->
-      <!-- </div> -->
     </form>
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-md-10 offset-md-1">
-        <div class="search-result">
+        <div id="search-results" class="search-result mt-3">
           {{if .CustomerMap}}
             <div class="text-center">
-              <div>found products&nbsp;<span class="fit-text">{{.Query}}</span>&nbsp;in stores below</div>
+              <div>found products&nbsp;<span class="fit-text">{{upperCase .Model}}</span>&nbsp;in stores below</div>
             </div>
-          {{else if ne .Query ""}}
+            <div class="alert alert-warning mt-3 text-center" role="alert">
+              <div>
+                สินค้าในร้านค้ามีการเปลี่ยนแปลงตลอดเวลา กรุณาโทรเช็คกับทางร้านค้าเพื่อข้อมูลที่แน่นอน
+              </div>
+              <div>Products in stores changes frequently. Please call the stores for accurate information.</div>
+            </div>
+          {{else if ne .Model ""}}
             <div class="text-center red">
               <div>Counldn't find the product name in any stores. Please contact the stores.</div>
               <div>ไม่พบสินค้าที่ระบุในร้านค้า กรุณาติดต่อร้านค้าใกล้เคียงเพื่อสอบถาม</div>
