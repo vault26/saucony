@@ -6,7 +6,7 @@ import (
 )
 
 func (db *DB) Stores() (stores []model.Store) {
-	query := db.Model(&stores)
+	query := db.Model(&stores).Order("id ASC")
 	logError(query.Column("name", "phone", "city_th").Select())
 	return stores
 }
