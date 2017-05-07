@@ -167,8 +167,56 @@
     <div id="info">
       <hr>
       {{with $product := index .ProductMap .Query.Color}}
-        <h4 class="fit-text">{{.Model}} DETAILS</h4>
+        <h4 class="fit-text mt-5">{{.Model}} DETAILS</h4>
+        <div class="mt-3">
+          {{.Details | markdown}}
+        </div>
       {{end}}
+    </div>
+  </div>
+  <div class="container mt-5 technology">
+    <hr>
+    <h4 class="fit-text mt-5">TECHNOLOGY</h4>
+    <div class="row mt-5">
+
+      <div class="col-md-3">
+        <div class="name mb-3">
+          <div class="tech-icon tech-8mm"></div>
+          <div class="ml-2">8MM</div>
+        </div>
+        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw2e3a1a03/content/core-content/technology/2014/03/8MM-OFFSET.gif" alt="Technology 8MM" class="mb-3">
+        <p>Cushioning is distributed more evenly between the heel and forefoot in shoes with an 8mm offset. The result? Your body stays in a more balanced and comfortable position with every foot strike.</p>
+      </div>
+
+      <div class="col-md-3">
+        <div class="name mb-3">
+          <div class="tech-icon tech-flex-flim"></div>
+          <div class="ml-2">FLEXFILM</div>
+        </div>
+        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw5342e9df/content/core-content/technology/2014/03/FLEXFILM.gif"
+        alt="Technology FlexFlim" class="mb-3">
+        <p>A strong, lightweight material is melded to the upper, which allows for fewer layers in the shoe. The result is a seamless, flexible feel.</p>
+      </div>
+
+      <div class="col-md-3">
+        <div class="name mb-3">
+          <div class="tech-icon tech-ibr-plus"></div>
+          <div class="ml-2">IBR+</div>
+        </div>
+        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwecf1303d/content/core-content/technology/2014/03/iBRplus.gif"
+        alt="Technology IBR+" class="mb-3">
+        <p>iBR+ is a supremely lightweight but durable outsole rubber that enhances your shoe’s other cushioning elements.</p>
+      </div>
+
+      <div class="col-md-3">
+        <div class="name mb-3">
+          <div class="tech-icon tech-tri-flex"></div>
+          <div class="ml-2">IRI-FLEX</div>
+        </div>
+        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw9bd82467/content/seasonal-content/pdp-tabs/2015/11/technologyTab-triFlex-20151104.jpg" alt="Technology Tri-Flex" class="mb-3">
+        <p>Increases force dispersion over a greater surface area while also delivering optimal flexibility and traction.</p>
+      </div>
+
     </div>
   </div>
 

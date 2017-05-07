@@ -179,3 +179,21 @@ a.underline {
 .txt-green {
   color: $green100;
 }
+
+.tech-icon {
+  width: 30px;
+  height: 28px;
+  background-image: url(/assets/images/sprite_technologies.png);
+  &.tech-8mm {
+    background-position: -6px -658px;
+  }
+  &.tech-flex-flim {
+    background-position: -6px -158px;
+  }
+  &.tech-ibr-plus {
+    background-position: -6px -312px;
+  }
+  &.tech-tri-flex {
+    background-position: -6px -1309px;
+  }
+}

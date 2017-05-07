@@ -1,12 +1,8 @@
-hash: 0850be0a2b826bb1eb801db9d439dba419eb3a2399c67dde0709c1cdf797642d
-updated: 2017-04-07T03:43:24.918474249+07:00
+hash: eb4bab8e62b5d79bcc75b6db635faa9110fc98c128c33bd88ba39208f91aa6bb
+updated: 2017-05-07T09:56:43.277465798+07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7b3beb6df3c42abd3509abfc3bcacc0fbfb7c877
-- name: github.com/drhodes/golorem
-  version: ecccc744c2d953a1e13cbe5e5fc5d4cbc9b8daeb
-- name: github.com/fatih/structs
-  version: a720dfa8df582c51dee1b36feabb906bde1588bd
 - name: github.com/golang/glog
   version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
 - name: github.com/google/uuid
@@ -25,16 +21,16 @@ imports:
   version: 1c35d901db3da928c72a72d8458480cc9ade058f
 - name: github.com/leekchan/accounting
   version: a35854c075934d6aa1a6c1ab3ea8a82ee0dc1a93
-- name: github.com/mailgun/log
-  version: 2f35a4607f1abf71f97f77f99b0de8493ef6f4ef
 - name: github.com/mailgun/mailgun-go
   version: a4002e2df2e8ca2da6a6fbb4a72871b504e49f50
 - name: github.com/namsral/flag
   version: 71ceffbeb0ba60fccc853971bb3ed4d7d90bfd04
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
-- name: github.com/thrawn01/args
-  version: e62a4dd391b070282cd689fe920908afbdc310e6
+- name: github.com/russross/blackfriday
+  version: 0b647d0506a698cca42caca173e55559b12a69f2
+- name: github.com/shurcooL/sanitized_anchor_name
+  version: 79c90efaf01eddc01945af5bc1797859189b830b
 - name: gopkg.in/mailgun/mailgun-go.v1
   version: a4002e2df2e8ca2da6a6fbb4a72871b504e49f50
 - name: gopkg.in/pg.v5

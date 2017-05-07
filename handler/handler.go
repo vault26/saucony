@@ -9,6 +9,7 @@ import (
 
 	"github.com/ekkapob/saucony/model"
 	"github.com/leekchan/accounting"
+	"github.com/russross/blackfriday"
 )
 
 type HandleFunc func(http.ResponseWriter, *http.Request)
@@ -64,6 +65,10 @@ func BaseFuncMap() template.FuncMap {
 		},
 		"upperCase": func(text string) string {
 			return strings.ToUpper(text)
+		},
+		"markdown": func(text ...interface{}) template.HTML {
+			output := blackfriday.MarkdownCommon([]byte(fmt.Sprintf("%s", text...)))
+			return template.HTML(output)
 		},
 	}
 }

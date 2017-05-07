@@ -26,3 +26,5 @@ import:
   version: v1.1
 - package: gopkg.in/mailgun/mailgun-go.v1
   version: v1.1.0
+- package: github.com/russross/blackfriday
+  version: v1.4
