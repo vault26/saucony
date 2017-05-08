@@ -133,10 +133,28 @@ func (db *DB) ModelProducts(params map[string]string) (products []model.Product)
 		query.Where("gender = ?", params["gender"])
 	}
 	logError(query.Where("model_path = ?", params["model_path"]).Select())
+
+	productDetails := db.productDetails(params["model_path"])
 	for k, v := range products {
 		products[k].Sizes = db.availableProductSizes(v)
+		products[k].Details = productDetails
 	}
 	return products
+}
+
+func (db *DB) productDetails(modelPath string) string {
+	product := struct{ Details string }{}
+	sql := `
+		SELECT details
+		FROM products
+		WHERE model_path = ?
+		AND details IS NOT NULL LIMIT 1
+	`
+	_, err := db.Query(&product, sql, modelPath)
+	if err != nil {
+		glog.Error(err)
+	}
+	return product.Details
 }
 
 func (db *DB) Product(params map[string]string) (product *model.Product, err error) {

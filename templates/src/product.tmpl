@@ -179,43 +179,141 @@
     <h4 class="fit-text mt-5">TECHNOLOGY</h4>
     <div class="row mt-5">
 
-      <div class="col-md-3">
-        <div class="name mb-3">
-          <div class="tech-icon tech-8mm"></div>
-          <div class="ml-2">8MM</div>
+    {{with $product := index .ProductMap .Query.Color}}
+      {{if contains .Technologies "4mm"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-4mm"></div>
+            <div class="ml-2">4MM</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwb3843834/content/core-content/technology/2014/03/4MM-OFFSET.gif" alt="Technology 4MM" class="mb-3">
+          <p>Shoes with a 4mm heel-to-toe offset deliver a more natural ride, letting your feet and body do more work while relying less on the shoes’ cushioning and stability features.</p>
         </div>
-        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw2e3a1a03/content/core-content/technology/2014/03/8MM-OFFSET.gif" alt="Technology 8MM" class="mb-3">
-        <p>Cushioning is distributed more evenly between the heel and forefoot in shoes with an 8mm offset. The result? Your body stays in a more balanced and comfortable position with every foot strike.</p>
-      </div>
+      {{end}}
 
-      <div class="col-md-3">
-        <div class="name mb-3">
-          <div class="tech-icon tech-flex-flim"></div>
-          <div class="ml-2">FLEXFILM</div>
+      {{if contains .Technologies "8mm"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-8mm"></div>
+            <div class="ml-2">8MM</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw2e3a1a03/content/core-content/technology/2014/03/8MM-OFFSET.gif" alt="Technology 8MM" class="mb-3">
+          <p>Cushioning is distributed more evenly between the heel and forefoot in shoes with an 8mm offset. The result? Your body stays in a more balanced and comfortable position with every foot strike.</p>
         </div>
-        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw5342e9df/content/core-content/technology/2014/03/FLEXFILM.gif"
-        alt="Technology FlexFlim" class="mb-3">
-        <p>A strong, lightweight material is melded to the upper, which allows for fewer layers in the shoe. The result is a seamless, flexible feel.</p>
-      </div>
+      {{end}}
 
-      <div class="col-md-3">
-        <div class="name mb-3">
-          <div class="tech-icon tech-ibr-plus"></div>
-          <div class="ml-2">IBR+</div>
+      {{if contains .Technologies "breathable"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-breathable"></div>
+            <div class="ml-2">BREATHABLE</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwcaab90b1/content/core-content/technology/2015/02/breathable.gif" alt="Technology Breathable" class="mb-3">
+          <p>Breathing is good, whether you’re a human or a piece of running gear. The materials in this product are designed to move moisture away from the skin, to keep you running dry and comfortable.</p>
         </div>
-        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwecf1303d/content/core-content/technology/2014/03/iBRplus.gif"
-        alt="Technology IBR+" class="mb-3">
-        <p>iBR+ is a supremely lightweight but durable outsole rubber that enhances your shoe’s other cushioning elements.</p>
-      </div>
+      {{end}}
 
-      <div class="col-md-3">
-        <div class="name mb-3">
-          <div class="tech-icon tech-tri-flex"></div>
-          <div class="ml-2">IRI-FLEX</div>
+      {{if contains .Technologies "form2u"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-form2u"></div>
+            <div class="ml-2">Form2U</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwb8f51ace/content/core-content/technology/2015/04/form2u.gif" alt="Technology Form2U" class="mb-3">
+          <p>Memory foam footbed provides all-day, ultra-plush comfort.</p>
         </div>
-        <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw9bd82467/content/seasonal-content/pdp-tabs/2015/11/technologyTab-triFlex-20151104.jpg" alt="Technology Tri-Flex" class="mb-3">
-        <p>Increases force dispersion over a greater surface area while also delivering optimal flexibility and traction.</p>
-      </div>
+      {{end}}
+
+      {{if contains .Technologies "ultra_lightweight"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-ultra-lightweight"></div>
+            <div class="ml-2">ULTRA LIGHTWEIGHT</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwd18ba300/content/core-content/technology/2014/03/LIGHTWEIGHT.gif" alt="Technology Ultra Lightweight" class="mb-3">
+          <p>Feather-light materials combine with high-tech performance technologies to keep you moving at the speed of, you guessed it, light.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "all_terrain"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-all-terrain"></div>
+            <div class="ml-2">ALL-TERRAIN</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw88978327/content/core-content/technology/2014/03/AllTerrain.gif" alt="Technology All Terrain" class="mb-3">
+          <p>High traction outsoles, protective overlays and rugged construction take the performance of our RunAnyWhere line to the next level. This is what happens when real runners make trail shoes.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "everun"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-everun"></div>
+            <div class="ml-2">EVERUN</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw6ca39932/content/core-content/technology/2017/02/technologyTile-everun-20170216.gif" alt="Technology everun" class="mb-3">
+          <p>A breakthrough in cushioning. Livelier and more responsive, with smoother landings and stronger takeoff.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "iso_fit"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-iso-fit"></div>
+            <div class="ml-2">ISOFIT</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw7cbfce5c/content/core-content/technology/2014/12/technologyTile-isofit-20141218.jpg" alt="Technology ISOFIT" class="mb-3">
+          <p>Revolutionary fit system that morphs to the foot for a custom feel.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "flex_flim"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-flex-flim"></div>
+            <div class="ml-2">FLEXFILM</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw5342e9df/content/core-content/technology/2014/03/FLEXFILM.gif" alt="Technology FlexFlim" class="mb-3">
+          <p>A strong, lightweight material is melded to the upper, which allows for fewer layers in the shoe. The result is a seamless, flexible feel.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "ibr_plus"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-ibr-plus"></div>
+            <div class="ml-2">IBR+</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dwecf1303d/content/core-content/technology/2014/03/iBRplus.gif"
+          alt="Technology IBR+" class="mb-3">
+          <p>iBR+ is a supremely lightweight but durable outsole rubber that enhances your shoe’s other cushioning elements.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "tri_flex"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-tri-flex"></div>
+            <div class="ml-2">TRI-FLEX</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw9bd82467/content/seasonal-content/pdp-tabs/2015/11/technologyTab-triFlex-20151104.jpg" alt="Technology Tri-Flex" class="mb-3">
+          <p>Increases force dispersion over a greater surface area while also delivering optimal flexibility and traction.</p>
+        </div>
+      {{end}}
+
+      {{if contains .Technologies "pwrtrac"}}
+        <div class="col-md-3">
+          <div class="name mb-3">
+            <div class="tech-icon tech-pwrtrac"></div>
+            <div class="ml-2">PWRTRAC</div>
+          </div>
+          <img src="http://demandware.edgesuite.net/aako_prd/on/demandware.static/-/Sites-saucony_us-Library/default/dw821701bd/content/seasonal-content/pdp-tabs/2015/11/technologyTab-triFlex-PWRTRAC-20151104.jpg" alt="Technology PWRTRAC" class="mb-3">
+          <p>Tacky, durable rubber providing exceptional traction and abrasion resistance.</p>
+        </div>
+      {{end}}
+
+    {{end}}
 
     </div>
   </div>

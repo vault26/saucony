@@ -27,6 +27,7 @@ type Product struct {
 	RemoteImages       []string `pg:",array"`
 	Price              float64
 	Discount           float64
+	Technologies       []string `pg:",array"`
 	CreatedAt          time.Time
 	LastModifiedAt     time.Time
 }

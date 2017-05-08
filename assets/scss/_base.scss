@@ -184,14 +184,38 @@ a.underline {
   width: 30px;
   height: 28px;
   background-image: url(/assets/images/sprite_technologies.png);
+  &.tech-4mm {
+    background-position: -6px -1118px;
+  }
   &.tech-8mm {
     background-position: -6px -658px;
+  }
+  &.tech-all-terrain {
+    background-position: -6px -350px;
+  }
+  &.tech-breathable {
+    background-position: -6px -620px;
+  }
+  &.tech-everun {
+    background-position: -6px -1384px;
+  }
+  &.tech-iso-fit {
+    background-position: -6px -1234px;
   }
   &.tech-flex-flim {
     background-position: -6px -158px;
   }
   &.tech-ibr-plus {
     background-position: -6px -312px;
+  }
+  &.tech-form2u {
+    background-position: -6px -1272px;
+  }
+  &.tech-ultra-lightweight {
+    background-position: -6px -850px;
+  }
+  &.tech-pwrtrac {
+    background-position: -6px -8278px;
   }
   &.tech-tri-flex {
     background-position: -6px -1309px;
