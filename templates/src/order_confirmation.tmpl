@@ -40,8 +40,71 @@
     </div>
   </div>
 </div>
+<div id="payment-info" class="container mt-5">
+  <h3 class="fit-text text-center txt-blue">PAYMENT INFORMATION</h3>
+  <h4 class="text-center mt-3 txt-blue">ขั้นตอนการชำระเงิน</h4>
+  <div class="mt-4 text-center">
+    <div>Send Money Transfer to either bank account below</div>
+    <div>ชำระเงินผ่านช่องทางธนาคารดังนี้</div>
+    <div class="row">
+      <div class="col-md-3 offset-md-3 bank">
+        <img src="/assets/images/banks/kbank.png" alt="Kasikornthai Bank">
+        <div class="info">
+          <div>ธนาคาร กสิกรไทย</div>
+          <div>เลขที่ 664-2-25227-3</div>
+          <div>บริษัท วอล์ท 26 จำกัด</div>
+        </div>
+      </div>
+      <div class="col-md-3 bank">
+        <img src="/assets/images/banks/bangkok_bank.png" alt="Bangkok Bank">
+        <div class="info">
+          <div>ธนาคาร กรุงเทพ</div>
+          <div>เลขที่ 920702193</div>
+          <div>บริษัท วอล์ท 26 จำกัด</div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <p>หลังจากชำระเงินค่าสินค้าแล้ว สามารถติดต่อกลับมายังช่องทางด้านล้าง หรือแนบรูปใบเสร็จด้านล่าง</p>
+      </div>
+    </div>
+    <div class="row contact-info">
+      <div class="col-md-12">
+        <a href="tel:+662-182-0619">
+          <img src="/assets/images/logos/phone.png" alt="Vault26 Phone Number">(66)2 182-0619</a>
+        <a href="mailto:contact@vault-26.com?Subject=Money%20Transfer%20-%20Order%20ID%20{{.OrderRef}}">
+          <img src="/assets/images/logos/email.png" alt="Vault26 Email">contact@vault-26.com</a>
+        <span>
+          <img src="/assets/images/logos/line_green.png" alt="Vault26 Line">@Vault26</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="payment-upload" class="text-center mt-5">
+  <h4>ยืนยันการชำระเงิน</h4>
+  <form enctype="multipart/form-data" method="post" class="mt-2 p-5"
+    action="/payment_transfer_slip">
+    <div class="form-group">
+      <span class="fit-text mr-2">ORDER ID</span>
+      <span>{{.OrderRef}}</span>
+      <input class="pl-2" type="hidden" name="orderId" value="{{.OrderRef}}">
+    </div>
+    <div class="form-group payment-upload-container mb-1">
+      <label for="payment-upload-input">รูปใบเสร็จการโอนเงิน (transfer receipt image)</label>
+      <br>
+      <input id="payment-upload-input" name="file" type="file" accept="image/*"/>
+    </div>
+    <div class="error">สามารถแนบได้เฉพาะรูปภาพ ที่มีขนาดไม่เกิน 3MB</div>
+    <div class="success">เราได้รับเอกสารแล้ว เรากำลังดำเนินการจัดส่งสินค้าให้ท่าน</div>
+    <button class="mt-3 btn btn-primary fit-text">SUBMIT</button>
+  </form>
+</div>
+
 <div class="text-center mt-5">
-  <a class="btn btn-primary" href="/products">
+  <a class="btn btn-secondary" href="/products">
     <div class="fit-text">BACK TO PRODUCTS PAGE</div>
   </a>
 </div>

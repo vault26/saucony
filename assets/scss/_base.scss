@@ -73,8 +73,12 @@ a.primary {
 .btn-primary {
   background-color: black;
   color: white;
+  cursor: pointer;
   &:hover {
     background-color: $red100;
+  }
+  &:disabled {
+    background-color: $grey100;
   }
 }
 .btn-red {
@@ -178,6 +182,10 @@ a.underline {
 
 .txt-green {
   color: $green100;
+}
+
+.txt-blue {
+  color: $blue100;
 }
 
 .tech-icon {

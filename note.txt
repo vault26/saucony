@@ -89,3 +89,8 @@ ALLOW REMOTE POSTGRES CONNECTION
   host  all  all 0.0.0.0/0 md5
 3. restart server
   $ sudo /etc/init.d/postgresql restart
+
+Nginx
+=====
+Mac's location
+$ /usr/local/etc/nginx/servers/default

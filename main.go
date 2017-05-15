@@ -13,6 +13,7 @@ import (
 	mw "github.com/ekkapob/saucony/handler/middleware"
 	"github.com/ekkapob/saucony/handler/order"
 	"github.com/ekkapob/saucony/handler/page"
+	"github.com/ekkapob/saucony/handler/payment"
 	"github.com/ekkapob/saucony/handler/product"
 	"github.com/ekkapob/saucony/handler/promotion"
 	"github.com/ekkapob/saucony/handler/store"
@@ -79,6 +80,10 @@ func main() {
 
 	// Promotion
 	r.HandleFunc("/promotions", mw.PublicPage(publicParams, promotion.ApplyCode)).
+		Methods("POST")
+
+	//
+	r.HandleFunc("/payment_transfer_slip", mw.PublicPage(publicParams, payment.UploadTransferSlip)).
 		Methods("POST")
 
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
