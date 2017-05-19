@@ -58,12 +58,12 @@ func (db *DB) productsByCollections(
 	sql := `
 		SELECT DISTINCT products.*
 		FROM products
-		LEFT JOIN consign
-		ON consign.style = products.model
-		WHERE consign.customer_no IN ('11112', '11111')
-		AND consign.quantity > 0
+		LEFT JOIN warehouse
+		ON waerhouse.style = products.model
+		WHERE waerhouse.customer_no IN ('11112', '11111')
+		AND waerhouse.quantity > 0
 		AND products.gender IN (?)
-		AND LOWER(consign.collection) IN (?)
+		AND LOWER(waerhouse.collection) IN (?)
 		ORDER BY products.model;
 	`
 	_, err := db.Query(&products, sql, pg.In(genders), pg.In(collections))
@@ -78,10 +78,10 @@ func (db *DB) avaiableProductIdMap() (idMap map[int]int) {
 	sql := `
 		SELECT products.id
 		FROM products
-		INNER JOIN consign 
-		ON consign.style = products.model
+		INNER JOIN warehouse
+		ON warehouse.style = products.model
 		WHERE	customer_no IN ('11112', '11111')
-		AND consign.quantity > 0
+		AND warehouse.quantity > 0
 		GROUP BY products.id;
 	`
 	_, err := db.Query(&ids, sql)
@@ -99,12 +99,13 @@ func (db *DB) avaiableProductIdMap() (idMap map[int]int) {
 func (db *DB) availableProductSizes(product model.Product) (sizes []string) {
 	sql := `
 		SELECT size
-		FROM consign
+		FROM warehouse
 		WHERE	customer_no IN ('11112', '11111')
 		AND style = ?
 		AND color = ?
 		AND gender = ?
 		AND quantity > 0
+		ORDER BY CAST(size AS numeric)
 	`
 	_, err := db.Query(&sizes, sql, product.Model, product.Color, product.Gender)
 	if err != nil {
