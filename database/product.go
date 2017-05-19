@@ -80,6 +80,7 @@ func (db *DB) avaiableProductIdMap() (idMap map[int]int) {
 		FROM products
 		INNER JOIN warehouse
 		ON warehouse.style = products.model
+		AND warehouse.color = products.color
 		WHERE	customer_no IN ('11112', '11111')
 		AND warehouse.quantity > 0
 		GROUP BY products.id;
@@ -117,9 +118,10 @@ func (db *DB) availableProductSizes(product model.Product) (sizes []string) {
 // Filter for stock available products
 func (db *DB) filterProducts(products []model.Product) []model.Product {
 	avaiableProductIdMap := db.avaiableProductIdMap()
-	for k, v := range products {
-		if _, ok := avaiableProductIdMap[v.ID]; !ok {
-			products = append(products[:k], products[k+1:]...)
+	// need to loop down as products gets delete and index gets shifted
+	for i := len(products) - 1; i >= 0; i-- {
+		if _, ok := avaiableProductIdMap[products[i].ID]; !ok {
+			products = append(products[:i], products[i+1:]...)
 		}
 	}
 	return products
@@ -140,6 +142,7 @@ func (db *DB) ModelProducts(params map[string]string) (products []model.Product)
 		products[k].Sizes = db.availableProductSizes(v)
 		products[k].Details = productDetails
 	}
+	products = db.filterProducts(products)
 	return products
 }
 
