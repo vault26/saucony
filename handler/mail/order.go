@@ -3,6 +3,7 @@ package mail
 import (
 	"bytes"
 	"html/template"
+	"os"
 
 	"github.com/ekkapob/saucony/handler"
 	"github.com/ekkapob/saucony/model"
@@ -18,7 +19,7 @@ func OrderNotify(
 	mg := mailgun.NewMailgun(DOMAIN, API_KEY, PUBLIC_API_KEY)
 	emails := append(ADMIN_EMAILS, customer.Email)
 	message := mg.NewMessage(
-		"Saucony Thailand <contact@sauconythailand.com>",
+		os.Getenv("EMAIL_SENDER"),
 		"Thank you for Your Order - "+orderID,
 		"We've received your order.",
 		emails...,
