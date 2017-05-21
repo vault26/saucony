@@ -5,8 +5,10 @@ import (
 
 	"github.com/ekkapob/saucony/database"
 	"github.com/ekkapob/saucony/handler"
+	"github.com/ekkapob/saucony/handler/mail"
 	"github.com/ekkapob/saucony/helper"
 	"github.com/ekkapob/saucony/model"
+	"github.com/golang/glog"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {
@@ -24,15 +26,15 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	}
 	session.UpdateCustomerInfo(w, r, formValue)
 
-	// if len(cart.Products) < 1 {
-	// 	session.AddFlash(model.Flash{
-	// 		Type:    "danger",
-	// 		Message: "Cart is empty. กรุณาเลือกสินค้าเพื่อสั่งซื้อ",
-	// 	})
-	// 	session.Save(r, w)
-	// 	http.Redirect(w, r, r.Referer(), http.StatusFound)
-	// 	return
-	// }
+	if len(cart.Products) < 1 {
+		session.AddFlash(model.Flash{
+			Type:    "danger",
+			Message: "Cart is empty. กรุณาเลือกสินค้าเพื่อสั่งซื้อ",
+		})
+		session.Save(r, w)
+		http.Redirect(w, r, r.Referer(), http.StatusFound)
+		return
+	}
 
 	errorMap, customerID, err := db.CreateCustomer(formValue)
 	if err != nil {
@@ -45,16 +47,15 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	orderRef, err := db.CreateOrder(customerID, cart)
-	_ = err
-	// if err != nil {
-	// 	session.AddFlash(model.Flash{
-	// 		Type:    "danger",
-	// 		Message: "Unable to place order please contact Saucony Thailand. ไม่สามารถดำเนินการสั่งซื้อได้ กรุณาติดต่อบริษัท",
-	// 	})
-	// 	session.Save(r, w)
-	// 	http.Redirect(w, r, r.Referer(), http.StatusFound)
-	// 	return
-	// }
+	if err != nil {
+		session.AddFlash(model.Flash{
+			Type:    "danger",
+			Message: "Unable to place order please contact Saucony Thailand. ไม่สามารถดำเนินการสั่งซื้อได้ กรุณาติดต่อบริษัท",
+		})
+		session.Save(r, w)
+		http.Redirect(w, r, r.Referer(), http.StatusFound)
+		return
+	}
 	confirmationPage(w, r, orderRef)
 }
 
@@ -73,17 +74,17 @@ func confirmationPage(w http.ResponseWriter, r *http.Request, orderRef string) {
 	promo, _ := promotion.(model.Promotion)
 	session.ClearData(w, r, "cart")
 
-	// go (func() {
-	// 	_, err := mail.OrderNotify(
-	// 		orderRef,
-	// 		cart,
-	// 		customer.(model.Customer),
-	// 		promo,
-	// 	)
-	// 	if err != nil {
-	// 		glog.Error(err)
-	// 	}
-	// })()
+	go (func() {
+		_, err := mail.OrderNotify(
+			orderRef,
+			cart,
+			customer.(model.Customer),
+			promo,
+		)
+		if err != nil {
+			glog.Error(err)
+		}
+	})()
 
 	t := handler.BaseTemplate("order_confirmation.tmpl", nil)
 	orderConfirmation := OrderConfirmation{
