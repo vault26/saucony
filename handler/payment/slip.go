@@ -42,8 +42,6 @@ func UploadTransferSlip(w http.ResponseWriter, r *http.Request) {
 	}
 
 	t := time.Now()
-	fmt.Println(t.Day(), t.Month(), t.Year())
-	fmt.Println(t.Format("02-01-06"))
 
 	if orderId == "" {
 		orderId = "no-orderid"
