@@ -73,7 +73,8 @@ func UploadTransferSlip(w http.ResponseWriter, r *http.Request) {
 		_, err := mail.TransferSlipUploadNotify(orderId,
 
 			fmt.Sprint(
-				"http://sauconythailand.com/",
+				os.Getenv("HOST"),
+				"/",
 				filePath))
 		if err != nil {
 			glog.Error(err)
