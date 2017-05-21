@@ -82,7 +82,7 @@ func main() {
 	r.HandleFunc("/promotions", mw.PublicPage(publicParams, promotion.ApplyCode)).
 		Methods("POST")
 
-	//
+	// Payment upload
 	r.HandleFunc("/payment_transfer_slip", mw.PublicPage(publicParams, payment.UploadTransferSlip)).
 		Methods("POST")
 
