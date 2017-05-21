@@ -48,7 +48,9 @@ func UploadTransferSlip(w http.ResponseWriter, r *http.Request) {
 	if orderId == "" {
 		orderId = "no-orderid"
 	}
-	filePath := fmt.Sprint("assets/upload/transfer_slips/",
+	filePath := fmt.Sprint(
+		os.Getenv("UPLOAD_TRANSFER_SLIP_PATH"),
+		"/",
 		orderId,
 		"-",
 		t.Format("020106-"),
