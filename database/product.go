@@ -59,11 +59,11 @@ func (db *DB) productsByCollections(
 		SELECT DISTINCT products.*
 		FROM products
 		LEFT JOIN warehouse
-		ON waerhouse.style = products.model
-		WHERE waerhouse.customer_no IN ('11112', '11111')
-		AND waerhouse.quantity > 0
+		ON warehouse.style = products.model
+		WHERE warehouse.customer_no IN ('11112', '11111')
+		AND warehouse.quantity > 0
 		AND products.gender IN (?)
-		AND LOWER(waerhouse.collection) IN (?)
+		AND LOWER(warehouse.collection) IN (?)
 		ORDER BY products.model;
 	`
 	_, err := db.Query(&products, sql, pg.In(genders), pg.In(collections))

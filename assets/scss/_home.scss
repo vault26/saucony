@@ -36,7 +36,6 @@
 
 #card-menu {
   letter-spacing: 1px;
-  background-color: $grey400;
   font-size: 20px;
   margin-top: 2em;
   margin-bottom: 4em;
@@ -179,9 +178,6 @@
     .row.no-gutter {
       & > [class^="col-"] {
         padding-bottom: 2em;
-        &:first-child {
-          border-right: 1px solid $grey400;
-        }
       }
     }
   }
